@@ -50,3 +50,17 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# bear
+*.cache
+*compile_commands.json
+
+# logs
+*.log
+
+# gdb
+.gdb_history
+
+# bin
+bin/
+cub3D
