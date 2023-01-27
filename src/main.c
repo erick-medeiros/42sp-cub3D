@@ -6,13 +6,15 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/26 22:54:33 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/01/27 09:44:25 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft.h>
 #include <stdio.h>
 
 int	main(void)
 {
 	printf("cub3D\n");
+	printf("%lu\n", ft_strlen("cub3D"));
 }
