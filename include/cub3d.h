@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/27 13:56:52 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/01/27 13:58:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-int	main(void)
-{
-	printf("cub3D\n");
-	printf("%lu\n", ft_strlen("cub3D"));
-}
+# include <fcntl.h>  // open
+# include <libft.h>  // lib: libft
+# include <mlx.h>    // lib: minilibx
+# include <stdio.h>  // printf, perror
+# include <stdlib.h> // malloc, free, exit
+# include <string.h> // strerror
+# include <unistd.h> // close, read, write
+
+#endif

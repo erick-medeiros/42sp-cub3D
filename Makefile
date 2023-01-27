@@ -1,5 +1,5 @@
 CFLAGS = -Wall -Wextra -Werror
-CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
+CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -Iinclude/
 CC = cc
 RM = rm -fr
 
