@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -Iinclude/
 CC = cc
 RM = rm -fr
@@ -9,7 +9,7 @@ MINILIBX = $(MINILIBX_DIR)libmlx.a
 MINILIBX_DIR = libs/minilibx/
 
 LDFLAGS = -L$(LIBFT_DIR) -L$(MINILIBX_DIR)
-LDLIBS = -lft -lmlx -lm
+LDLIBS = -lft -lm -lmlx -lXext -lX11
 
 VALGRIND = valgrind -q --leak-check=full --show-leak-kinds=all \
 	--track-fds=yes --track-origins=yes

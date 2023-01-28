@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/27 20:28:03 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/01/27 18:59:47 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/01/27 23:55:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef WINDOW_H
+# define WINDOW_H
 
-# include <fcntl.h>  // open
-# include <libft.h>  // lib: libft
-# include <math.h>   // lib: math
-# include <mlx.h>    // lib: minilibx
-# include <stdio.h>  // printf, perror
-# include <stdlib.h> // malloc, free, exit
-# include <string.h> // strerror
-# include <unistd.h> // close, read, write
+// # include "cub3d.h"
 
-typedef struct s_game
-{
-	void	*mlx;
-	void	*win;
-}	t_game;
+# define WINDOW_NAME	"cub3D"
+# define WINDOW_WIDTH	1280
+# define WINDOW_HEIGHT	720
+
+# define X_KEYPRESS 2
+# define X_KEYPRESSMASK 1L<<0
+# define X_DESTROYNOTIFY 17
+# define X_KEY_ESC 65307
 
 #endif
