@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 18:59:47 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/28 10:53:35 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/01/28 10:51:44 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-# define WINDOW_H
+#include "cub3d.h"
+#include "window.h"
 
-# define WINDOW_NAME	"cub3D"
-# define WINDOW_WIDTH	1280
-# define WINDOW_HEIGHT	720
+int	handle_keypress(int keycode, t_game *game)
+{
+	if (keycode == X_KEY_ESC)
+		mlx_loop_end(game->mlx);
+	printf("keypress: keycode %d\n", keycode);
+	return (1);
+}
 
-# define X_KEY_ESC 65307
-
-#endif
+int	handle_keyrelease(int keycode, t_game *game)
+{
+	if (keycode == X_KEY_ESC)
+		mlx_loop_end(game->mlx);
+	printf("keyrelease: keycode %d\n", keycode);
+	return (1);
+}

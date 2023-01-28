@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   mlx_extra.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 18:59:47 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/28 10:53:35 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/01/28 10:32:07 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/01/28 10:33:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-# define WINDOW_H
+#ifndef MLX_EXTRA_H
+# define MLX_EXTRA_H
 
-# define WINDOW_NAME	"cub3D"
-# define WINDOW_WIDTH	1280
-# define WINDOW_HEIGHT	720
-
-# define X_KEY_ESC 65307
+int	mlx_keypress_hook(void *win_ptr, int (*funct_ptr)(), void *param);
+int	mlx_keyrelease_hook(void *win_ptr, int (*funct_ptr)(), void *param);
+int	mlx_destroynotify_hook(void *win_ptr, int (*funct_ptr)(), void *param);
 
 #endif
