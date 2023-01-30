@@ -20,7 +20,7 @@ BIN_DIR = bin/
 
 NAME = cub3D
 
-FILES = main.c mlx_extra.c handle_events.c
+FILES = main.c handle_events.c
 
 SRC_DIR = src/
 OBJ_DIR = obj/
