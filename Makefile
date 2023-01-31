@@ -1,5 +1,7 @@
+NAME = cub3D
+
 CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -Iinclude/
+CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
 CC = cc
 RM = rm -fr
 
@@ -14,38 +16,38 @@ LDLIBS = -lft -lm -lmlx -lXext -lX11
 VALGRIND = valgrind -q --leak-check=full --show-leak-kinds=all \
 	--track-fds=yes --track-origins=yes
 
-BIN_DIR = bin/
-
 # mandatory
 
-NAME = cub3D
+NAME_MAN = mandatory/cub3D
 
 FILES = main.c handle_events.c
 
-SRC_DIR = src/
-OBJ_DIR = obj/
+INC_DIR = mandatory/include/
+SRC_DIR = mandatory/src/
+OBJ_DIR = mandatory/obj/
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 DIRS = $(sort $(dir $(OBJ)))
 
-all: $(NAME)
+all: $(NAME_MAN)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@ $(LDLIBS)
+	$(CC) $(CFLAGS) -I$(INC_DIR) $(LDFLAGS) -c $< -o $@ $(LDLIBS)
 
-$(NAME): $(DIRS) $(BIN_DIR) $(OBJ) $(LIBFT) $(MINILIBX)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) -o $(BIN_DIR)$(NAME) $(LDLIBS)
-	@cp $(BIN_DIR)$(NAME) $(NAME)
+$(NAME_MAN): $(DIRS) $(OBJ) $(LIBFT) $(MINILIBX)
+	$(CC) $(CFLAGS) -I$(INC_DIR) $(LDFLAGS) $(OBJ) -o $(NAME_MAN) $(LDLIBS)
+	@cp $(NAME_MAN) $(NAME)
 
 $(DIRS):
 	@mkdir -p $@
 
 # bonus
 
-NAME_BONUS = cub3D_bonus
+NAME_BONUS = bonus/cub3D_bonus
 
 FILES_BONUS = main_bonus.c
 
+INC_DIR_BONUS = bonus/
 SRC_DIR_BONUS = bonus/
 OBJ_DIR_BONUS = obj_bonus/
 SRC_BONUS = $(addprefix $(SRC_DIR_BONUS), $(FILES_BONUS))
@@ -55,11 +57,11 @@ DIRS_BONUS = $(sort $(dir $(OBJ_BONUS)))
 bonus: $(NAME_BONUS)
 
 $(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) -c $< -o $@
 
-$(NAME_BONUS): $(DIRS_BONUS) $(BIN_DIR) $(OBJ_BONUS) $(LIBFT) $(MINILIBX)
-	$(CC) $(CFLAGS) $(OBJ_BONUS) -o $(BIN_DIR)$(NAME_BONUS)
-	@cp $(BIN_DIR)$(NAME_BONUS) $(NAME)
+$(NAME_BONUS): $(DIRS_BONUS) $(OBJ_BONUS) $(LIBFT) $(MINILIBX)
+	$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) $(OBJ_BONUS) -o $(NAME_BONUS)
+	@cp $(NAME_BONUS) $(NAME)
 
 $(DIRS_BONUS):
 	@mkdir -p $@
@@ -72,14 +74,11 @@ $(LIBFT):
 $(MINILIBX):
 	make -C $(MINILIBX_DIR)
 
-$(BIN_DIR):
-	@mkdir -p $@
-
 clean:
 	$(RM) $(OBJ_DIR) $(OBJ_DIR_BONUS)
 
 fclean: clean
-	$(RM) $(BIN_DIR) $(NAME)
+	$(RM) $(NAME) $(NAME_MAN) $(NAME_BONUS)
 
 re: fclean all
 
