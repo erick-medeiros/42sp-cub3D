@@ -47,9 +47,9 @@ NAME_BONUS = bonus/cub3D_bonus
 
 FILES_BONUS = main_bonus.c
 
-INC_DIR_BONUS = bonus/
-SRC_DIR_BONUS = bonus/
-OBJ_DIR_BONUS = obj_bonus/
+INC_DIR_BONUS = bonus/include/
+SRC_DIR_BONUS = bonus/src/
+OBJ_DIR_BONUS = bonus/obj/
 SRC_BONUS = $(addprefix $(SRC_DIR_BONUS), $(FILES_BONUS))
 OBJ_BONUS = $(addprefix $(OBJ_DIR_BONUS), $(FILES_BONUS:.c=.o))
 DIRS_BONUS = $(sort $(dir $(OBJ_BONUS)))
@@ -89,7 +89,7 @@ relibs:
 	make re -C $(MINILIBX_DIR)
 
 norm:
-	norminette src/ include/ bonus/ libs/libft/ | grep Error | cat
+	norminette mandatory/ bonus/ libs/libft/ | grep Error | cat
 
 leaks:
 	$(VALGRIND) ./$(NAME)
