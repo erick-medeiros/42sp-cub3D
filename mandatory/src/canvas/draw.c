@@ -6,13 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:33:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 20:43:28 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:41:43 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_background(t_mlx_img *img, int argb_color)
+void	draw_background(t_img *img, int argb_color)
 {
 	int	pixel_x;
 	int	pixel_y;
@@ -30,7 +30,7 @@ void	draw_background(t_mlx_img *img, int argb_color)
 	}
 }
 
-void	draw_rectangle(t_mlx_img *img, t_rect rect, int argb_color)
+void	draw_rectangle(t_img *img, t_rect rect, int argb_color)
 {
 	int	pixel_x;
 	int	pixel_y;

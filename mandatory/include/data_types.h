@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 21:18:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:27:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # define MLX_ERROR 1
 
-typedef struct s_mlx_img {
+typedef struct s_img
+{
 	void	*ptr;
 	void	*addr;
 	int		bits_per_pixel;
@@ -23,7 +24,7 @@ typedef struct s_mlx_img {
 	int		endian;
 	int		width;
 	int		height;
-}	t_mlx_img;
+}	t_img;
 
 typedef struct s_argb
 {
@@ -36,9 +37,9 @@ typedef struct s_argb
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*win;
-	t_mlx_img	img;
+	void	*mlx;
+	void	*win;
+	t_img	*canvas;
 }	t_game;
 
 typedef struct s_rect

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 21:26:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:53:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@
 int		handle_keypress(int keycode, t_game *game);
 int		handle_keyrelease(int keycode, t_game *game);
 
-// mlx images
-int		init_mlx_image(void *mlx, t_mlx_img *img, int width, int height);
-char	*mlx_get_image_pixel(t_mlx_img *img, int x, int y);
-void	mlx_put_image_pixel(t_mlx_img *img, int x, int y, int argb_color);
+// canvas
+t_img	*create_canvas(void *mlx, int width, int height);
+t_img	*create_canvas_texture(void *mlx, char *filename);
+void	mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
+t_argb	mlx_get_argb_image_pixel(t_img *img, int x, int y);
 
 // draw
-void	draw_background(t_mlx_img *img, int color);
-void	draw_rectangle(t_mlx_img *img, t_rect rect, int argb_color);
+void	draw_background(t_img *img, int color);
+void	draw_rectangle(t_img *img, t_rect rect, int argb_color);
 
 // color
-
 t_argb	create_argb_color(int a, int r, int g, int b);
 
 #endif

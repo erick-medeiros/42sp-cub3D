@@ -1,45 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_image.c                                        :+:      :+:    :+:   */
+/*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:15:15 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 20:23:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:00:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	init_mlx_image(void *mlx, t_mlx_img *img, int width, int height)
+static char	*mlx_get_image_pixel(t_img *img, int x, int y)
 {
-	img->ptr = mlx_new_image(mlx, width, height);
-	if (!img->ptr)
-		return (MLX_ERROR);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->size_line, &img->endian);
-	img->width = width;
-	img->height = height;
-	return (0);
-}
-
-char	*mlx_get_image_pixel(t_mlx_img *img, int x, int y)
-{
+	if (x < 0 || x >= img->width)
+		return (NULL);
+	if (y < 0 || y >= img->height)
+		return (NULL);
 	return (img->addr + (y * img->size_line + x * (img->bits_per_pixel / 8)));
 }
 
-void	mlx_put_image_pixel(t_mlx_img *img, int x, int y, int argb_color)
+void	mlx_put_image_pixel(t_img *img, int x, int y, int argb_color)
 {
 	char	*pixel;
 	char	byte_color;
 	int		bytes;
 
-	if (x < 0 || x >= img->width)
-		return ;
-	if (y < 0 || y >= img->height)
-		return ;
 	pixel = mlx_get_image_pixel(img, x, y);
+	if (!pixel)
+		return ;
 	bytes = img->bits_per_pixel / 8;
 	while (bytes-- > 0)
 	{
@@ -49,4 +39,32 @@ void	mlx_put_image_pixel(t_mlx_img *img, int x, int y, int argb_color)
 		else
 			pixel[bytes] = byte_color;
 	}
+}
+
+t_argb	mlx_get_argb_image_pixel(t_img *img, int x, int y)
+{
+	char	*pixel;
+	int		argb[4];
+	int		i;
+	int		bytes;
+
+	argb[0] = 0;
+	argb[1] = 0;
+	argb[2] = 0;
+	argb[3] = 0;
+	pixel = mlx_get_image_pixel(img, x, y);
+	bytes = img->bits_per_pixel / 8;
+	if (pixel)
+	{
+		i = 0;
+		while (i < bytes)
+		{
+			if (img->endian)
+				argb[4 - bytes + i] = pixel[i];
+			else
+				argb[3 - i] = pixel[i];
+			++i;
+		}
+	}
+	return (create_argb_color(argb[0], argb[1], argb[2], argb[3]));
 }
