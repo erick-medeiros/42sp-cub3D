@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 09:18:18 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/01/31 21:18:24 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,18 @@ typedef struct s_mlx_img {
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
+	int		width;
+	int		height;
 }	t_mlx_img;
+
+typedef struct s_argb
+{
+	int	a;
+	int	r;
+	int	g;
+	int	b;
+	int	argb;
+}	t_argb;
 
 typedef struct s_game
 {
@@ -29,5 +40,13 @@ typedef struct s_game
 	void		*win;
 	t_mlx_img	img;
 }	t_game;
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_rect;
 
 #endif

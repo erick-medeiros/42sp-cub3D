@@ -21,6 +21,7 @@ VALGRIND = valgrind -q --leak-check=full --show-leak-kinds=all \
 NAME_MAN = mandatory/cub3D
 
 FILES = main.c handle_events.c
+FILES += canvas/color.c canvas/draw.c canvas/mlx_image.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
