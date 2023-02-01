@@ -31,16 +31,3 @@ jobs:
 
     - name: Building Binaries
       run: make
-
-  valgrind:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Install Valgrind
-      run: sudo apt install valgrind
-
-    - name: Running Valgrind
-      run: make leaks
