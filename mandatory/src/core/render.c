@@ -6,20 +6,38 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/02 09:54:02 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:02:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static t_rect	get_ceiling_area(t_game *game)
+{
+	t_rect	rect;
+
+	rect.x = 0;
+	rect.y = 0;
+	rect.width = game->canvas->width;
+	rect.height = game->canvas->height / 2;
+	return (rect);
+}
+
+static t_rect	get_floor_area(t_game *game)
+{
+	t_rect	rect;
+
+	rect.x = 0;
+	rect.y = game->canvas->height / 2;
+	rect.width = game->canvas->width;
+	rect.height = game->canvas->height;
+	return (rect);
+}
+
 int	render(t_game *game)
 {
-	const t_rect	ceilling = (t_rect){
-		0, 0, game->canvas->width, game->canvas->height / 2
-	};
-	const t_rect	floor = (t_rect){
-		0, game->canvas->height / 2, game->canvas->width, game->canvas->height
-	};
+	const t_rect	ceilling = get_ceiling_area(game);
+	const t_rect	floor = get_floor_area(game);
 
 	draw_rectangle(game->canvas, ceilling, game->ceilling_color.argb);
 	draw_rectangle(game->canvas, floor, game->floor_color.argb);
