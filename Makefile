@@ -92,7 +92,7 @@ relibs:
 	make re -C $(MINILIBX_DIR)
 
 norm:
-	norminette mandatory/ bonus/ libs/libft/ | grep Error | cat
+	norminette mandatory/ bonus/ libs/libft/
 
 leaks:
 	$(VALGRIND) ./$(NAME)
