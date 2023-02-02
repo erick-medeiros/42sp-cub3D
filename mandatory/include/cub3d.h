@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/01 19:53:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/02 09:25:40 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 # include <stdlib.h>     // malloc, free, exit
 # include <string.h>     // strerror
 # include <unistd.h>     // close, read, write
+
+// core
+int		game_setup(t_game *game);
+int		game_loop(t_game *game);
+int		destroy_game(t_game *game);
+
+int		render(t_game *game);
 
 int		handle_keypress(int keycode, t_game *game);
 int		handle_keyrelease(int keycode, t_game *game);

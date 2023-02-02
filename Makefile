@@ -20,8 +20,9 @@ VALGRIND = valgrind -q --leak-check=full --show-leak-kinds=all \
 
 NAME_MAN = mandatory/cub3D
 
-FILES = main.c handle_events.c
+FILES = main.c
 FILES += canvas/canvas.c canvas/color.c canvas/draw.c canvas/pixel.c
+FILES += core/game.c core/handle_events.c core/render.c
 FILES += debug/print_bits.c
 
 INC_DIR = mandatory/include/
