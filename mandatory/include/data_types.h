@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/01 19:27:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/02 09:15:42 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	t_img	*canvas;
+	t_img	*north_texture;
+	t_img	*south_texture;
+	t_img	*west_texture;
+	t_img	*east_texture;
+	t_argb	floor_color;
+	t_argb	ceilling_color;
 }	t_game;
 
 typedef struct s_rect
