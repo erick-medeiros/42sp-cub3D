@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 21:18:11 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:37:04 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ int	finish_game(t_game *game)
 	return (0);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_game	game;
 
+	if (!input_validation(ac, av))
+		return (1);
+	if (!init_map(&game, av))
+		return (1);
 	game_setup(&game);
 	game_loop(&game);
 	finish_game(&game);

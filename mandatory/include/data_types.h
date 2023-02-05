@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_types.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 21:18:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:03:45 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,23 @@ typedef struct s_argb
 	int	argb;
 }	t_argb;
 
+// HINT: we will probably need something like this
+typedef struct s_params
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		ceil;
+	int		floor;
+}	t_params;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	t_mlx_img	img;
+	char		**map;
 }	t_game;
 
 typedef struct s_rect
