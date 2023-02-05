@@ -2,7 +2,7 @@ NAME = cub3D
 
 CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
-CC = cc
+CC = clang
 RM = rm -fr
 
 LIBFT = $(LIBFT_DIR)libft.a
@@ -22,6 +22,9 @@ NAME_MAN = mandatory/cub3D
 
 FILES = main.c handle_events.c
 FILES += canvas/color.c canvas/draw.c canvas/mlx_image.c
+FILES += utils/utils.c utils/debug.c
+FILES += validation/validation.c
+FILES += parser/parser.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
@@ -33,7 +36,7 @@ DIRS = $(sort $(dir $(OBJ)))
 all: $(NAME_MAN)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) $(CFLAGS) -I$(INC_DIR) $(LDFLAGS) -c $< -o $@ $(LDLIBS)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 $(NAME_MAN): $(DIRS) $(OBJ) $(LIBFT) $(MINILIBX)
 	$(CC) $(CFLAGS) -I$(INC_DIR) $(LDFLAGS) $(OBJ) -o $(NAME_MAN) $(LDLIBS)
