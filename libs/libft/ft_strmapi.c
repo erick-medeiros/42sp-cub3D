@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/14 11:02:49 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 12:00:28 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	i;
+	char			*buff;
+	unsigned int	i;
 
-	if (!s)
-		return (0);
+	buff = (char *)ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!buff)
+		return (NULL);
 	i = 0;
 	while (s[i])
+	{
+		buff[i] = f(i, s[i]);
 		i++;
-	return (i);
+	}
+	return (buff);
 }

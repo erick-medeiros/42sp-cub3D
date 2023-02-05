@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/04 11:16:09 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 14:17:48 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;
+	unsigned char	*p1;
+	unsigned char	*p2;
 
-	if (!s)
+	if (n == 0)
 		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	while (*p1 == *p2 && *p1 && *p2 && --n)
+	{
+		p1++;
+		p2++;
+	}
+	return (*p1 - *p2);
 }

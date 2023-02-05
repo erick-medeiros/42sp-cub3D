@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
+/*   Updated: 2023/02/05 15:04:12 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-size_t	ft_strlen(const char *s)
+int	is_reserved_ch(char c, const char *set)
 {
-	size_t	i;
+	while (*set)
+		if (c == *set++)
+			return (1);
+	return (0);
+}
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+int	perr(const char *str)
+{
+	if (str)
+		printf("%s\n", str);
+	return (0);
 }

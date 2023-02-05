@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strjoins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/05/21 11:23:13 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/05/27 20:49:54 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strjoins(char *s1, char const *s2)
 {
-	size_t	i;
+	char	*buff;
+	size_t	size;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (!s1 || !*s1)
+		return (ft_strdup(s2));
+	size = ft_strlen(s1) + ft_strlen(s2);
+	buff = (char *)malloc(size + 1);
+	if (!buff)
+		return (NULL);
+	ft_strlcpy(buff, s1, -1);
+	ft_strlcat(buff, s2, -1);
+	free(s1);
+	return (buff);
 }

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/08/21 21:29:43 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/08/21 21:49:27 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+long long	ft_atoll(const char *s)
 {
-	size_t	i;
+	long long	result;
+	int			sign;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	while (ft_isspace(*s))
+		s++;
+	sign = 1;
+	if (*s == '-' || *s == '+')
+		if (*s++ == '-')
+			sign = -1;
+	result = 0;
+	while (*s >= '0' && *s <= '9')
+		result = (result * 10) + (*s++ - '0');
+	return (result * sign);
 }

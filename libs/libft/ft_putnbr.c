@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/05/16 14:36:18 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/05/18 14:39:28 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_putnbr(int n)
 {
-	size_t	i;
+	char	*int_min;
+	int		bw;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	bw = 0;
+	if (n == -2147483648)
+	{
+		int_min = ft_strdup("-2147483648");
+		bw += ft_putstr(int_min);
+		free(int_min);
+		return (bw);
+	}
+	if (n < 0)
+	{
+		bw += ft_putchar('-');
+		n *= -1;
+	}
+	if (n > 9)
+		bw += ft_putnbr(n / 10);
+	bw += ft_putchar((n % 10) + '0');
+	return (bw);
 }
