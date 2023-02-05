@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_dlstadd_front.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/08/17 23:20:45 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/08/21 21:43:00 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_dlstadd_front(t_dlist **lst, t_dlist *new)
 {
-	size_t	i;
+	t_dlist	*node;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	node = *lst;
+	*lst = new;
+	new->next = node;
+	node->prev = new;
 }

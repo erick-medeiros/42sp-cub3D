@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   zero.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/05/24 03:35:52 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/05/27 19:08:31 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+int	__zero(int n, const char **fmt, va_list ap)
 {
-	size_t	i;
+	int		bw;
+	char	*buff;
 
-	if (!s)
+	bw = 0;
+	buff = ft_calloc(n + 1, sizeof(char));
+	if (!buff)
 		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (**fmt == '0')
+		ft_memset(buff, '0', n);
+	else
+		ft_memset(buff, ' ', n);
+	while (!ft_strchr("cspdiuxX%", **fmt))
+		++(*fmt);
+	if (ft_strchr("cspdiuxX", **fmt))
+		bw += __zero_dispatch(**fmt, buff, ap);
+	free(buff);
+	return (bw);
 }
