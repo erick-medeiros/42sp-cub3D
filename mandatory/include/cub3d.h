@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/01/31 21:26:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:16:41 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,17 @@ void	draw_background(t_mlx_img *img, int color);
 void	draw_rectangle(t_mlx_img *img, t_rect rect, int argb_color);
 
 // color
-
 t_argb	create_argb_color(int a, int r, int g, int b);
+
+// validation
+int		input_validation(int ac, char **av);
+
+// parsing
+int		init_map(t_game *game, char **av);
+
+// debug - utils
+int		perr(const char *str);
+void	debug_map(char **map);
+int		is_reserved_ch(char c, const char *set);
 
 #endif
