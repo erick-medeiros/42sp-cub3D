@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/05 17:45:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:04:52 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ int		init_map(t_game *game, char **av);
 int		perr(const char *str);
 void	debug_map(char **map);
 int		is_reserved_ch(char c, const char *set);
-
 
 #endif

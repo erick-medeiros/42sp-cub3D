@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/05 17:45:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:04:45 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_game
 	t_img	*east_texture;
 	t_argb	floor_color;
 	t_argb	ceilling_color;
-	char		**map;
+	char	**map;
 }	t_game;
 
 typedef struct s_rect
