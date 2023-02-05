@@ -2,7 +2,7 @@ NAME = cub3D
 
 CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
-CC = cc
+CC = gcc
 RM = rm -fr
 
 LIBFT = $(LIBFT_DIR)libft.a
