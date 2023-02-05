@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 17:12:17 by frosa-ma          #+#    #+#              #
-#    Updated: 2022/08/21 21:53:43 by frosa-ma         ###   ########.fr        #
+#    Updated: 2023/02/05 17:51:04 by eandre-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY	= all clean fclean re bonus
 
 NAME	= libft.a
-CC		= clang
+CC		= cc
 INC		= -Ift_printf
 CFLAGS	= -Wall -Wextra -Werror
 

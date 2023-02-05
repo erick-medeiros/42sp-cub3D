@@ -2,7 +2,7 @@ NAME = cub3D
 
 CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
-CC = clang
+CC = cc
 RM = rm -fr
 
 LIBFT = $(LIBFT_DIR)libft.a
@@ -98,7 +98,7 @@ norm:
 	norminette mandatory/ bonus/ libs/libft/
 
 leaks:
-	$(VALGRIND) ./$(NAME)
+	$(VALGRIND) ./$(NAME) maps/exemple.cub
 
 install:
 	sudo apt install bear

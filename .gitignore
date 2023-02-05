@@ -18,6 +18,7 @@
 
 # Libraries
 *.lib
+*.a
 *.la
 *.lo
 
@@ -63,3 +64,6 @@ dkms.conf
 # bin
 cub3D
 cub3D_bonus
+
+# mlx
+!libs/minilibx/libmlx.a
