@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/05 15:16:41 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:45:24 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,31 @@
 # include <string.h>     // strerror
 # include <unistd.h>     // close, read, write
 
+// core
+int		game_setup(t_game *game);
+int		game_loop(t_game *game);
+int		destroy_game(t_game *game);
+
+int		render(t_game *game);
+
 int		handle_keypress(int keycode, t_game *game);
 int		handle_keyrelease(int keycode, t_game *game);
 
-// mlx images
-int		init_mlx_image(void *mlx, t_mlx_img *img, int width, int height);
-char	*mlx_get_image_pixel(t_mlx_img *img, int x, int y);
-void	mlx_put_image_pixel(t_mlx_img *img, int x, int y, int argb_color);
+// canvas
+t_img	*create_canvas(void *mlx, int width, int height);
+t_img	*create_canvas_texture(void *mlx, char *filename);
+void	*destroy_canvas(void *mlx, t_img *canvas);
+void	mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
+t_argb	mlx_get_argb_image_pixel(t_img *img, int x, int y);
 
 // draw
-void	draw_background(t_mlx_img *img, int color);
-void	draw_rectangle(t_mlx_img *img, t_rect rect, int argb_color);
+void	draw_background(t_img *img, int color);
+void	draw_rectangle(t_img *img, t_rect rect, int argb_color);
+void	draw_texture_on_canvas(t_game *game, t_img *texture);
 
 // color
 t_argb	create_argb_color(int a, int r, int g, int b);
+t_argb	separate_argb_color(int argb);
 
 // validation
 int		input_validation(int ac, char **av);
@@ -50,5 +61,6 @@ int		init_map(t_game *game, char **av);
 int		perr(const char *str);
 void	debug_map(char **map);
 int		is_reserved_ch(char c, const char *set);
+
 
 #endif
