@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/04 22:51:03 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/23 19:15:09 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	const unsigned char	*p1;
+	const unsigned char	*p2;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
+	p1 = s1;
+	p2 = s2;
+	while (n--)
+	{
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		p1++;
+		p2++;
+	}
 	return (0);
 }

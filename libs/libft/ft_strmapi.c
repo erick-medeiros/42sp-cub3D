@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/14 11:02:49 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 12:00:28 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	char			*buff;
+	unsigned int	i;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	buff = (char *)ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!buff)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		buff[i] = f(i, s[i]);
+		i++;
+	}
+	return (buff);
 }

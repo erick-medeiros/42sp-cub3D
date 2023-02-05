@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/04 09:31:10 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 13:27:59 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+int	ft_tolower(int c)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
-
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }

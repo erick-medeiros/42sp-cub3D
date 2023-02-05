@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/07 15:28:36 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/06/18 20:26:12 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+char	*ft_strdup(const char *s)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	char	*buff;
+	char	*pb;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	buff = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	pb = buff;
+	while (*s)
+		*buff++ = *(char *)s++;
+	*buff = '\0';
+	return (pb);
 }

@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:48:48 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/20 15:44:12 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 14:13:04 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	debug_map(char **map)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	while (map[++i])
+	if (lst)
 	{
-		j = -1;
-		while (map[i][++j])
+		while (lst)
 		{
-			if (is_reserved_ch(map[i][j], "NSEW"))
-				printf("\e[46m%c\e[0m", map[i][j]);
-			else if (map[i][j] == ' ')
-				printf("%c", ' ');
-			else if (!is_reserved_ch(map[i][j], "0123 NSEW"))
-				printf("\e[45m%c\e[0m", map[i][j]);
-			else
-				printf("\e[41m%c\e[0m", map[i][j]);
+			if (lst->content)
+				f(lst->content);
+			lst = lst->next;
 		}
-		printf("\n");
 	}
 }

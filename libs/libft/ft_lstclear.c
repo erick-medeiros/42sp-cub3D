@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/19 19:36:37 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 11:17:43 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	t_list	*store;
+	t_list	*p;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	p = *lst;
+	if (!p)
+		return ;
+	while (p)
+	{
+		store = p->next;
+		ft_lstdelone(p, del);
+		p = store;
+	}
+	*lst = NULL;
 }

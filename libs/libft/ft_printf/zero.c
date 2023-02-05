@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   zero.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/05/24 03:35:52 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/05/27 19:08:31 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "ft_printf.h"
 
-int	is_reserved_ch(char c, const char *set)
+int	__zero(int n, const char **fmt, va_list ap)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	int		bw;
+	char	*buff;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	bw = 0;
+	buff = ft_calloc(n + 1, sizeof(char));
+	if (!buff)
+		return (0);
+	if (**fmt == '0')
+		ft_memset(buff, '0', n);
+	else
+		ft_memset(buff, ' ', n);
+	while (!ft_strchr("cspdiuxX%", **fmt))
+		++(*fmt);
+	if (ft_strchr("cspdiuxX", **fmt))
+		bw += __zero_dispatch(**fmt, buff, ap);
+	free(buff);
+	return (bw);
 }

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/05 20:12:27 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/23 20:39:32 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
-
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	if ((ft_strlen(src) + 1) < n)
+		ft_memcpy(dest, src, (ft_strlen(src) + 1));
+	else if (n != 0)
+	{
+		ft_memcpy(dest, src, n - 1);
+		dest[n - 1] = '\0';
+	}
+	return (ft_strlen(src));
 }

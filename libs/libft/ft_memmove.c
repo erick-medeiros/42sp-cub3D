@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 08:26:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/06/18 20:21:55 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/04 20:32:46 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 11:35:47 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t	i;
+	const unsigned char	*ps;
+	unsigned char		*pd;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (src == dest || n == 0)
+		return (dest);
+	if (dest < src)
+	{
+		ps = (unsigned char *)src;
+		pd = (unsigned char *)dest;
+		while (n--)
+			*pd++ = *ps++;
+	}
+	else
+	{
+		ps = (unsigned char *)src + (n - 1);
+		pd = (unsigned char *)dest + (n - 1);
+		while (n--)
+			*pd-- = *ps--;
+	}
+	return (dest);
 }

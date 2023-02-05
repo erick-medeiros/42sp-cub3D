@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstpop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/08/10 00:44:54 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/08/10 00:50:14 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+t_list	*ft_lstpop(t_list **head)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	t_list	*last;
+	t_list	*node;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	if (!head)
+		return (NULL);
+	node = *head;
+	last = ft_lstlast(node);
+	while (node->next->next)
+		node = node->next;
+	node->next = NULL;
+	return (last);
 }

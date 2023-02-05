@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strjoins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/05/21 11:23:13 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/05/27 20:49:54 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+char	*ft_strjoins(char *s1, char const *s2)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	char	*buff;
+	size_t	size;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	if (!s1 || !*s1)
+		return (ft_strdup(s2));
+	size = ft_strlen(s1) + ft_strlen(s2);
+	buff = (char *)malloc(size + 1);
+	if (!buff)
+		return (NULL);
+	ft_strlcpy(buff, s1, -1);
+	ft_strlcat(buff, s2, -1);
+	free(s1);
+	return (buff);
 }

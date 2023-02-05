@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/19 13:55:22 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/08/10 04:22:32 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	t_list	*last;
+	t_list	*node;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	node = *lst;
+	if (!node)
+	{
+		node = new;
+		return ;
+	}
+	last = ft_lstlast(node);
+	last->next = new;
 }

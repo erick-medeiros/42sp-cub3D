@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/07 15:06:15 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/08/21 21:33:45 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	is_reserved_ch(char c, const char *set)
+int	ft_atoi(const char *s)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	int	result;
+	int	sign;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	while (ft_isspace(*s))
+		s++;
+	sign = 1;
+	if (*s == '-' || *s == '+')
+		if (*s++ == '-')
+			sign = -1;
+	result = 0;
+	while (*s >= '0' && *s <= '9')
+		result = (result * 10) + (*s++ - '0');
+	return (result * sign);
 }

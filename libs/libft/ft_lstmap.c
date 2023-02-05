@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:48:48 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/20 15:47:55 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 11:23:28 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	debug_map(char **map)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	i;
-	int	j;
+	t_list	*buff;
+	t_list	*node;
 
-	i = -1;
-	while (map[++i])
+	if (!lst)
+		return (NULL);
+	buff = NULL;
+	while (lst)
 	{
-		j = -1;
-		while (map[i][++j])
+		node = ft_lstnew(f(lst->content));
+		if (!node)
 		{
-			if (is_reserved_ch(map[i][j], "NSEW"))
-				printf("\e[46m%c\e[0m", map[i][j]);
-			else if (map[i][j] == ' ')
-				printf("%c", ' ');
-			else if (!is_reserved_ch(map[i][j], "0123 NSEW"))
-				printf("\e[45m%c\e[0m", map[i][j]);
-			else
-				printf("\e[41m%c\e[0m", map[i][j]);
+			ft_lstclear(&buff, del);
+			return (NULL);
 		}
-		printf("\n");
+		ft_lstadd_back(&buff, node);
+		lst = lst->next;
 	}
+	return (buff);
 }

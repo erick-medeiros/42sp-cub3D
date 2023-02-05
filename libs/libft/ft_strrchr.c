@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:48:48 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/04/04 10:05:29 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/04/27 12:12:17 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	debug_map(char **map)
+char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
-	int	j;
 
-	i = -1;
-	while (map[++i])
+	i = 0;
+	while (s[i])
+		i++;
+	while (i >= 0)
 	{
-		j = -1;
-		while (map[i][++j])
-		{
-			if (is_reserved_ch(map[i][j], "NSEW"))
-				printf("\e[46m%c\e[0m", map[i][j]);
-			else if (map[i][j] == ' ')
-				printf("%c", ' ');
-			else if (!is_reserved_ch(map[i][j], "0123 NSEW"))
-				printf("\e[45m%c\e[0m", map[i][j]);
-			else
-				printf("\e[41m%c\e[0m", map[i][j]);
-		}
-		printf("\n");
+		if ((unsigned char)s[i] == (unsigned char)c)
+			return ((char *)&s[i]);
+		i--;
 	}
+	return (NULL);
 }

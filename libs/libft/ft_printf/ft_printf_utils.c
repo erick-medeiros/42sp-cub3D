@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Created: 2022/05/25 18:39:46 by frosa-ma          #+#    #+#             */
+/*   Updated: 2022/05/29 02:02:04 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "ft_printf.h"
 
-int	is_reserved_ch(char c, const char *set)
+char	*__getstr(char spec, va_list ap)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+	char	*s;
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
+	if (spec == 'p')
+		s = ft_ultoa(va_arg(ap, unsigned long), "0123456789abcdef");
+	if (spec == 'x')
+		s = ft_utoab(va_arg(ap, unsigned int), "0123456789abcdef");
+	if (spec == 'X')
+		s = ft_utoab(va_arg(ap, unsigned int), "0123456789ABCDEF");
+	return (s);
 }
