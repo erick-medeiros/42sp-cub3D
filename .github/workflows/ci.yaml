@@ -44,6 +44,40 @@ jobs:
           find /usr/local -type f | grep mlx | sudo xargs cp --parents --target-directory ~/cache-apt/
         fi
 
+  build:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: cache apt
+      uses: actions/cache@v3
+      id: cache-apt
+      with:
+        path: "~/cache-apt"
+        key: cache-apt
+    - name: install dependencies
+      env:
+        CACHE_HIT: ${{steps.cache-apt.outputs.cache-hit}}
+      run: |
+          if [[ "$CACHE_HIT" == 'true' ]]; then
+            sudo cp --verbose --force --recursive ~/cache-apt/* /
+          else
+            false
+          fi
+    - name: make
+      run: make
+    - name: run
+      env:
+        DISPLAY: ":99"
+        WINDOW_NAME: "cub3D"
+      run: |
+        Xvfb $DISPLAY -screen 0 1080x720x24 &
+        valgrind -q --error-exitcode=1 --leak-check=full --show-leak-kinds=all --track-origins=yes ./program.out &
+        PID=$!
+        until xdotool search --name $WINDOW_NAME windowfocus &> /dev/null; do echo "trying to find window"; sleep 1; done
+        xdotool key Escape
+        wait $PID
+
   norminette:
 
     runs-on: ubuntu-latest
@@ -57,13 +91,3 @@ jobs:
 
     - name: Running Norminette
       run: make norm
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Building Binaries
-      run: make
