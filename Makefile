@@ -7,6 +7,7 @@ RM = rm -fr
 
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = libs/libft/
+MLX_DIR = libs/minilibx/
 
 LDFLAGS = -L$(LIBFT_DIR)
 LDLIBS = -lft -lm -lmlx -lXext -lX11
@@ -96,6 +97,11 @@ leaks:
 
 install:
 	sudo apt install bear
+
+install_mlx:
+	cp scripts/install_mlx $(MLX_DIR)
+	make -C $(MLX_DIR)
+	cd $(MLX_DIR) && sudo bash ./install_mlx && rm install_mlx
 
 bear:
 	bear -- make re || bear make re
