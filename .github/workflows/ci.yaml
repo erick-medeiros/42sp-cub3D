@@ -43,10 +43,17 @@ jobs:
           cd $MLX_PATH && make && sudo bash ./install_mlx
           find /usr/local -type f | grep mlx | sudo xargs cp --parents --target-directory ~/cache-apt/
         fi
+    - uses: actions/setup-python@v4
+    - name: install norminette
+      run: |
+        python3 -m pip install --upgrade pip setuptools && python3 -m pip install norminette
+        mkdir -p ~/cache-apt/usr/local/bin/
+        sudo cp ~/.local/bin/norminette ~/cache-apt/usr/local/bin/
 
   build:
     timeout-minutes: 5
     runs-on: ubuntu-latest
+    needs: install
     steps:
     - uses: actions/checkout@v3
     - name: cache apt
@@ -79,15 +86,25 @@ jobs:
         wait $PID
 
   norminette:
-
+    timeout-minutes: 5
     runs-on: ubuntu-latest
-
+    needs: install
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-
-    - name: Install norminette
-      run: python3 -m pip install --upgrade pip setuptools && python3 -m pip install norminette
-
+    - name: cache apt
+      uses: actions/cache@v3
+      id: cache-apt
+      with:
+        path: "~/cache-apt"
+        key: cache-apt
+    - name: install dependencies
+      env:
+        CACHE_HIT: ${{steps.cache-apt.outputs.cache-hit}}
+      run: |
+          if [[ "$CACHE_HIT" == 'true' ]]; then
+            sudo cp --verbose --force --recursive ~/cache-apt/* /
+          else
+            false
+          fi
     - name: Running Norminette
       run: make norm
