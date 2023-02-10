@@ -7,6 +7,42 @@ on:
     branches: [ "main" ]
 
 jobs:
+  installl:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: cache apt
+      uses: actions/cache@v3
+      id: cache-apt
+      with:
+        path: "~/cache-apt"
+        key: cache-apt
+    - name: check folder
+      run: mkdir -p ~/cache-apt
+    - name: install packages
+      env:
+        CACHE_HIT: ${{steps.cache-apt.outputs.cache-hit}}
+      run: |
+        if [[ ! "$CACHE_HIT" == 'true' ]]; then
+          sudo apt-get update -qq -y
+          sudo apt-get install -qq gcc make xorg libxext-dev libbsd-dev xvfb valgrind xdotool
+          for dep in gcc make xorg libxext-dev libbsd-dev xvfb valgrind xdotool libmd-dev libc6-dbg libxdo3; do
+              sudo dpkg -L $dep |
+              while IFS= read -r f; do if test -f $f; then echo $f; fi; done |
+              sudo xargs cp --parents --target-directory ~/cache-apt/
+          done
+        fi
+    - name: install mlx
+      env:
+        CACHE_HIT: ${{steps.cache-apt.outputs.cache-hit}}
+        MLX_PATH: ./libs/minilibx
+      run: |
+        if [[ ! "$CACHE_HIT" == 'true' ]]; then
+          cp ./scripts/install_mlx $MLX_PATH
+          cd $MLX_PATH && make && sudo bash ./install_mlx
+          find /usr/local -type f | grep mlx | sudo xargs cp --parents --target-directory ~/cache-apt/
+        fi
 
   norminette:
 
