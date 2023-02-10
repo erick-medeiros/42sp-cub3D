@@ -63,6 +63,7 @@ static char	**get_map(int fd)
 	char	**map;
 	char	*row;
 	char	*buff;
+	char	*tmp;
 
 	row = ft_gnl(fd);
 	while (is_reserved_ch(*row, "NSEWCF\n"))
@@ -75,7 +76,9 @@ static char	**get_map(int fd)
 	buff = ft_strdup("");
 	while (row)
 	{
+		tmp = buff;
 		buff = ft_strjoin(buff, row);
+		free(tmp);
 		free(row);
 		row = ft_gnl(fd);
 	}
