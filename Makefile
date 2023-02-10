@@ -22,7 +22,7 @@ NAME_MAN = mandatory/cub3D
 
 FILES = main.c
 FILES += canvas/canvas.c canvas/color.c canvas/draw.c canvas/pixel.c
-FILES += core/game.c core/handle_events.c core/render.c
+FILES += core/game.c core/handle_events.c core/render.c core/render_map.c
 FILES += debug/print_bits.c
 FILES += utils/utils.c utils/debug.c
 FILES += validation/validation.c
