@@ -47,7 +47,7 @@ jobs:
     - name: install norminette
       run: |
         python3 -m pip install --upgrade pip setuptools && python3 -m pip install norminette
-        mkdir -p ~/cache-apt/usr/local/bin/
+        sudo mkdir -p ~/cache-apt/usr/local/bin/
         sudo cp ~/.local/bin/norminette ~/cache-apt/usr/local/bin/
 
   build:
