@@ -7,27 +7,85 @@ on:
     branches: [ "main" ]
 
 jobs:
+  install:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: cache apt
+      uses: actions/cache@v3
+      id: cache-apt
+      with:
+        path: "~/cache-apt"
+        key: cache-apt
+    - name: check folder
+      run: mkdir -p ~/cache-apt
+    - name: install packages
+      env:
+        CACHE_HIT: ${{steps.cache-apt.outputs.cache-hit}}
+      run: |
+        if [[ ! "$CACHE_HIT" == 'true' ]]; then
+          sudo apt-get update -qq -y
+          sudo apt-get install -qq gcc make xorg libxext-dev libbsd-dev xvfb valgrind xdotool
+          for dep in gcc make xorg libxext-dev libbsd-dev xvfb valgrind xdotool libmd-dev libc6-dbg libxdo3; do
+              sudo dpkg -L $dep |
+              while IFS= read -r f; do if test -f $f; then echo $f; fi; done |
+              sudo xargs cp --parents --target-directory ~/cache-apt/
+          done
+        fi
+    - name: install mlx
+      env:
+        CACHE_HIT: ${{steps.cache-apt.outputs.cache-hit}}
+        MLX_PATH: ./libs/minilibx
+      run: |
+        if [[ ! "$CACHE_HIT" == 'true' ]]; then
+          cp ./scripts/install_mlx $MLX_PATH
+          cd $MLX_PATH && make && sudo bash ./install_mlx
+          find /usr/local -type f | grep mlx | sudo xargs cp --parents --target-directory ~/cache-apt/
+        fi
+
+  build:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+    - uses: actions/checkout@v3
+    - name: cache apt
+      uses: actions/cache@v3
+      id: cache-apt
+      with:
+        path: "~/cache-apt"
+        key: cache-apt
+    - name: install dependencies
+      env:
+        CACHE_HIT: ${{steps.cache-apt.outputs.cache-hit}}
+      run: |
+          if [[ "$CACHE_HIT" == 'true' ]]; then
+            sudo cp --verbose --force --recursive ~/cache-apt/* /
+          else
+            false
+          fi
+    - name: make
+      run: make
+    - name: run
+      env:
+        DISPLAY: ":99"
+        WINDOW_NAME: "cub3D"
+      run: |
+        Xvfb $DISPLAY -screen 0 1080x720x24 &
+        make leaks &
+        PID=$!
+        until xdotool search --name $WINDOW_NAME windowfocus &> /dev/null; do echo "trying to find window"; sleep 1; done
+        xdotool key Escape
+        wait $PID
 
   norminette:
-
+    timeout-minutes: 5
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
-
     - name: Install norminette
       run: python3 -m pip install --upgrade pip setuptools && python3 -m pip install norminette
-
     - name: Running Norminette
       run: make norm
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Building Binaries
-      run: make

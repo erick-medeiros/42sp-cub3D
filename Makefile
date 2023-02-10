@@ -13,8 +13,8 @@ MINILIBX_DIR = libs/minilibx/
 LDFLAGS = -L$(LIBFT_DIR) -L$(MINILIBX_DIR)
 LDLIBS = -lft -lm -lmlx -lXext -lX11
 
-VALGRIND = valgrind -q --leak-check=full --show-leak-kinds=all \
-	--track-fds=yes --track-origins=yes
+VALGRIND = valgrind -q --error-exitcode=1 --leak-check=full \
+	--show-leak-kinds=all --track-origins=yes
 
 # mandatory
 
