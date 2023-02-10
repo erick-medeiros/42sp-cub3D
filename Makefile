@@ -1,16 +1,14 @@
 NAME = cub3D
 
 CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS += -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
+CFLAGS += -I$(LIBFT_DIR)
 CC = gcc
 RM = rm -fr
 
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = libs/libft/
-MINILIBX = $(MINILIBX_DIR)libmlx.a
-MINILIBX_DIR = libs/minilibx/
 
-LDFLAGS = -L$(LIBFT_DIR) -L$(MINILIBX_DIR)
+LDFLAGS = -L$(LIBFT_DIR)
 LDLIBS = -lft -lm -lmlx -lXext -lX11
 
 VALGRIND = valgrind -q --error-exitcode=1 --leak-check=full \
@@ -40,7 +38,7 @@ all: $(NAME_MAN)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-$(NAME_MAN): $(DIRS) $(OBJ) $(LIBFT) $(MINILIBX)
+$(NAME_MAN): $(DIRS) $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -I$(INC_DIR) $(LDFLAGS) $(OBJ) -o $(NAME_MAN) $(LDLIBS)
 	@cp $(NAME_MAN) $(NAME)
 
@@ -65,7 +63,7 @@ bonus: $(NAME_BONUS)
 $(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c
 	$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) -c $< -o $@
 
-$(NAME_BONUS): $(DIRS_BONUS) $(OBJ_BONUS) $(LIBFT) $(MINILIBX)
+$(NAME_BONUS): $(DIRS_BONUS) $(OBJ_BONUS) $(LIBFT)
 	$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) $(OBJ_BONUS) -o $(NAME_BONUS)
 	@cp $(NAME_BONUS) $(NAME)
 
@@ -76,9 +74,6 @@ $(DIRS_BONUS):
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
-
-$(MINILIBX):
-	make -C $(MINILIBX_DIR)
 
 clean:
 	$(RM) $(OBJ_DIR) $(OBJ_DIR_BONUS)
@@ -92,7 +87,6 @@ rebonus: fclean bonus
 
 relibs:
 	make re -C $(LIBFT_DIR)
-	make re -C $(MINILIBX_DIR)
 
 norm:
 	norminette mandatory/ bonus/ libs/libft/
