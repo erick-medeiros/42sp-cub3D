@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/07 09:17:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:00:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,11 @@ typedef struct s_rect
 	int	width;
 	int	height;
 }	t_rect;
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
 
 #endif
