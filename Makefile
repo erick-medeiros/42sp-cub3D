@@ -26,6 +26,7 @@ FILES += debug/print_bits.c
 FILES += utils/utils.c utils/debug.c
 FILES += validation/validation.c
 FILES += parser/parser.c
+FILES += raycaster/raycaster.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/

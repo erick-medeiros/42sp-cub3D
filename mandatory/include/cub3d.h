@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/10 15:24:46 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:51:37 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	draw_texture_on_canvas(t_game *game, t_img *texture);
 // color
 t_argb	create_argb_color(int a, int r, int g, int b);
 t_argb	separate_argb_color(int argb);
+
+// raycaster
+void	raycaster(t_game *game);
 
 // validation
 int		input_validation(int ac, char **av);

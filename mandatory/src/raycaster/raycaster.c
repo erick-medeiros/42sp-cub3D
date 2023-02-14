@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   feature_flags.h                                    :+:      :+:    :+:   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 10:28:53 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/14 18:55:22 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/02/14 18:55:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FEATURE_FLAGS_H
-# define FEATURE_FLAGS_H
+#include "cub3d.h"
 
-# ifndef FEATURE_FLAG_RENDER_MAP
-#  define FEATURE_FLAG_RENDER_MAP 0
-# endif
-
-# ifndef FEATURE_FLAG_RAYCASTER
-#  define FEATURE_FLAG_RAYCASTER 1
-# endif
-
-#endif
+void	raycaster(t_game *game)
+{
+	draw_background(game->canvas, 0x000000);
+}
