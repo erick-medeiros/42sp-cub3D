@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:15:15 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/01 20:00:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:30:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_argb	mlx_get_argb_image_pixel(t_img *img, int x, int y)
 		while (i < bytes)
 		{
 			if (img->endian)
-				argb[4 - bytes + i] = pixel[i];
+				argb[4 - bytes + i] = pixel[i] & 0xFF;
 			else
-				argb[3 - i] = pixel[i];
+				argb[3 - i] = pixel[i] & 0xFF;
 			++i;
 		}
 	}
