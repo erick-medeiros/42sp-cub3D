@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:33:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/07 10:11:26 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/15 13:36:12 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	draw_rectangle(t_img *img, t_rect rect, int argb_color)
 	int	pixel_y;
 
 	pixel_y = rect.y;
-	while (pixel_y < rect.y + rect.height)
+	while (pixel_y <= rect.y + rect.height)
 	{
 		pixel_x = rect.x;
-		while (pixel_x < rect.x + rect.width)
+		while (pixel_x <= rect.x + rect.width)
 		{
 			mlx_put_image_pixel(img, pixel_x, pixel_y, argb_color);
 			pixel_x++;
