@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/16 10:32:42 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:44:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	canvas_remap_border(t_img *img, t_rect rect, double scale)
 	draw_rectangle(img, rect, 0x000000);
 }
 
-void	canvas_remap(t_img *img, t_img *remap, bool border)
+void	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
 {
 	double	scale;
 	int		pixel_x;
@@ -34,8 +34,8 @@ void	canvas_remap(t_img *img, t_img *remap, bool border)
 	t_rect	rect;
 	t_argb	color;
 
-	scale = fmin((double)img->width / remap->width,
-			(double)img->height / remap->height);
+	scale = fmin((double)(coord.width - coord.x) / remap->width,
+			(double)(coord.height - coord.y) / remap->height);
 	pixel_x = -1;
 	while (++pixel_x < remap->width)
 	{
@@ -55,10 +55,11 @@ void	canvas_remap(t_img *img, t_img *remap, bool border)
 	}
 }
 
-void	draw_map(t_game *game)
+static void	draw_map(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_rect	coord;
 
 	x = 0;
 	while (x < game->_minimap->width)
@@ -74,6 +75,11 @@ void	draw_map(t_game *game)
 		}
 		x++;
 	}
+	coord.x = 0;
+	coord.y = 0;
+	coord.width = game->canvas->width * 0.45;
+	coord.height = game->canvas->height;
+	canvas_remap(game->canvas, game->_minimap, coord, true);
 }
 
 void	raycaster(t_game *game)
@@ -85,13 +91,11 @@ void	raycaster(t_game *game)
 	draw_background(game->canvas, 0x000000);
 	draw_background(game->_raycast, 0x00FFFF);
 	draw_background(game->_minimap, 0x000FFF);
-	draw_map(game);
 	pos = create_vector(5, 5);
 	dir = create_vector(0, -1);
 	plane = create_vector(FPS_FOV, 0);
 	(void)pos;
 	(void)dir;
 	(void)plane;
-	canvas_remap(game->_raycast, game->_minimap, true);
-	canvas_remap(game->canvas, game->_raycast, false);
+	draw_map(game);
 }

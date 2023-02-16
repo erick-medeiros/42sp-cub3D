@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/16 10:28:40 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:41:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	if (FEATURE_FLAG_RAYCASTER)
-	{
-		argc = 2;
-		argv[1] = "maps/square_10x10.cub";
-	}
 	if (!input_validation(argc, argv))
 		return (1);
 	if (!init_map(&game, argv))
