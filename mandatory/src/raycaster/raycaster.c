@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/15 11:30:31 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:32:42 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,21 @@ void	canvas_remap(t_img *img, t_img *remap, bool border)
 	}
 }
 
-void	draw_map(t_img *img)
+void	draw_map(t_game *game)
 {
-	const char	gamemap[RAYCASTER_MAP_BLOCK][RAYCASTER_MAP_BLOCK] = {
-		"1111111111", "1100100011", "1000000001", "1000000001", "1000000001",
-		"1100000011", "1000000001", "1000000001", "1100100011", "1111111111"
-	};
-	int			x;
-	int			y;
+	int	x;
+	int	y;
 
 	x = 0;
-	while (x < RAYCASTER_MAP_BLOCK)
+	while (x < game->_minimap->width)
 	{
 		y = 0;
-		while (y < RAYCASTER_MAP_BLOCK)
+		while (y < game->_minimap->height)
 		{
-			if (gamemap[y][x] == '1')
-				mlx_put_image_pixel(img, x, y, 0xFAAFFF);
+			if (game->map[y][x] == '1')
+				mlx_put_image_pixel(game->_minimap, x, y, 0xFAAFFF);
 			else
-				mlx_put_image_pixel(img, x, y, 0xFFFFFF);
+				mlx_put_image_pixel(game->_minimap, x, y, 0xFFFFFF);
 			y++;
 		}
 		x++;
@@ -82,21 +78,20 @@ void	draw_map(t_img *img)
 
 void	raycaster(t_game *game)
 {
-	t_img		*img_map;
-	t_img		*img_screen;
 	t_vector	pos;
 	t_vector	dir;
+	t_vector	plane;
 
-	img_map = game->west_texture;
-	img_screen = game->south_texture;
 	draw_background(game->canvas, 0x000000);
-	draw_background(img_screen, 0x00FFFF);
-	draw_background(img_map, 0x000FFF);
+	draw_background(game->_raycast, 0x00FFFF);
+	draw_background(game->_minimap, 0x000FFF);
+	draw_map(game);
 	pos = create_vector(5, 5);
 	dir = create_vector(0, -1);
+	plane = create_vector(FPS_FOV, 0);
 	(void)pos;
 	(void)dir;
-	draw_map(img_map);
-	canvas_remap(img_screen, img_map, true);
-	canvas_remap(game->canvas, img_screen, false);
+	(void)plane;
+	canvas_remap(game->_raycast, game->_minimap, true);
+	canvas_remap(game->canvas, game->_raycast, false);
 }

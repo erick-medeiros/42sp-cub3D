@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/14 19:00:36 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:54:15 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_game
 	char	**map;
 	int		map_width;
 	int		map_height;
+	t_img	*_minimap;
+	t_img	*_raycast;
 }	t_game;
 
 typedef struct s_rect
