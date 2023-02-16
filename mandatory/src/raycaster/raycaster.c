@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/16 10:44:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:50:28 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
 	t_rect	rect;
 	t_argb	color;
 
-	scale = fmin((double)(coord.width - coord.x) / remap->width,
-			(double)(coord.height - coord.y) / remap->height);
+	scale = fmin((double)coord.width / remap->width,
+			(double)coord.height / remap->height);
 	pixel_x = -1;
 	while (++pixel_x < remap->width)
 	{
 		pixel_y = -1;
 		while (++pixel_y < remap->height)
 		{
-			rect.x = pixel_x * scale;
-			rect.y = pixel_y * scale;
+			rect.x = coord.x + (pixel_x * scale);
+			rect.y = coord.y + (pixel_y * scale);
 			rect.width = scale;
 			rect.height = scale;
 			color = mlx_get_argb_image_pixel(remap, pixel_x, pixel_y);
@@ -55,12 +55,13 @@ void	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
 	}
 }
 
-static void	draw_map(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	int		x;
 	int		y;
 	t_rect	coord;
 
+	draw_background(game->canvas, 0x000000);
 	x = 0;
 	while (x < game->_minimap->width)
 	{
@@ -75,11 +76,23 @@ static void	draw_map(t_game *game)
 		}
 		x++;
 	}
-	coord.x = 0;
+	coord.x = 10;
 	coord.y = 0;
 	coord.width = game->canvas->width * 0.45;
 	coord.height = game->canvas->height;
 	canvas_remap(game->canvas, game->_minimap, coord, true);
+}
+
+void	draw_engine(t_game *game)
+{
+	t_rect	coord;
+
+	coord.x = game->canvas->width / 2;
+	coord.y = 0;
+	coord.width = game->canvas->width / 2 - 10;
+	coord.height = game->canvas->height;
+	draw_background(game->_engine, 0x00FFFF);
+	canvas_remap(game->canvas, game->_engine, coord, false);
 }
 
 void	raycaster(t_game *game)
@@ -89,13 +102,12 @@ void	raycaster(t_game *game)
 	t_vector	plane;
 
 	draw_background(game->canvas, 0x000000);
-	draw_background(game->_raycast, 0x00FFFF);
-	draw_background(game->_minimap, 0x000FFF);
 	pos = create_vector(5, 5);
 	dir = create_vector(0, -1);
 	plane = create_vector(FPS_FOV, 0);
 	(void)pos;
 	(void)dir;
 	(void)plane;
-	draw_map(game);
+	draw_minimap(game);
+	draw_engine(game);
 }

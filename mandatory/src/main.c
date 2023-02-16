@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/16 10:41:36 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:51:03 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 	{
 		game._minimap = create_canvas(game.mlx, game.map_width,
 				game.map_height);
-		game._raycast = create_canvas(game.mlx, 320, 200);
+		game._engine = create_canvas(game.mlx, 320, 200);
 	}
 	game.floor_color = separate_argb_color(COLOR_2);
 	game.ceilling_color = separate_argb_color(COLOR_3);
