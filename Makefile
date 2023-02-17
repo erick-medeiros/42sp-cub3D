@@ -27,6 +27,7 @@ FILES += utils/utils.c utils/debug.c utils/vector1.c utils/vector2.c
 FILES += validation/validation.c
 FILES += parser/parser.c
 FILES += raycaster/raycaster.c
+FILES += raycaster/bresenham_octantes.c raycaster/bresenham.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
