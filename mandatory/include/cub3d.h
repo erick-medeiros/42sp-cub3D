@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/14 19:49:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:03:13 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_vector	mult_vector_scalar(t_vector v1, double scalar);
 double		mag_vector(t_vector v);
 t_vector	normalize_vector(t_vector v1);
 double		dot_product_of_vector(t_vector v1, t_vector v2);
+double		angle_between_vectors(t_vector v1, t_vector v2);
+t_vector	rotate_vector(t_vector v, double angle_radian);
 
 // debug - utils
 int			perr(const char *str);

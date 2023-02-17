@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/17 11:21:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:01:38 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	handle_keyrelease(int keycode, t_game *game)
 		game->pos.y = game->pos.y - 0.1;
 	else if (keycode == 115)
 		game->pos.y = game->pos.y + 0.1;
+	else if (keycode == 65361)
+		game->dir = rotate_vector(game->dir, -0.1);
+	else if (keycode == 65363)
+		game->dir = rotate_vector(game->dir, 0.1);
 	printf("keyrelease: keycode %d\n", keycode);
 	return (1);
 }

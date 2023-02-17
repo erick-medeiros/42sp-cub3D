@@ -6,13 +6,15 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/17 11:21:05 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:12:24 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "debug.h"
 #include <stdbool.h>
 #include "feature_flags.h"
+#include "bresenham.h"
 
 #define FPS_FOV 0.66
 #define IMAGE_PIXELS 320
@@ -56,6 +58,24 @@ double	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
 	return (scale);
 }
 
+void	draw_player(t_game *game, t_rect coord, double scale)
+{
+	t_vector	dir;
+
+	coord.x += game->pos.x * scale;
+	coord.y += game->pos.y * scale;
+	coord.width = 5;
+	coord.height = coord.width;
+	draw_rectangle(game->canvas, coord, 0xFF0000);
+	dir = game->dir;
+	dir = add_vector(game->pos, dir);
+	dir = mult_vector_scalar(dir, scale);
+	bresenham(game->canvas,
+		&((t_point){coord.x, coord.y}),
+		&((t_point){dir.x, dir.y}),
+		0xFF0000);
+}
+
 void	draw_minimap(t_game *game)
 {
 	int		x;
@@ -83,11 +103,7 @@ void	draw_minimap(t_game *game)
 	coord.width = game->canvas->width * 0.45;
 	coord.height = game->canvas->height;
 	scale = canvas_remap(game->canvas, game->_minimap, coord, true);
-	coord.x += game->pos.x * scale;
-	coord.y += game->pos.y * scale;
-	coord.width = 10;
-	coord.height = 10;
-	draw_rectangle(game->canvas, coord, 0xFF0000);
+	draw_player(game, coord, scale);
 }
 
 void	draw_engine(t_game *game)
@@ -108,7 +124,6 @@ void	raycaster(t_game *game)
 	t_vector	plane;
 
 	draw_background(game->canvas, 0x000000);
-	dir = create_vector(0, -1);
 	plane = create_vector(FPS_FOV, 0);
 	(void)dir;
 	(void)plane;
