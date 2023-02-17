@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/16 18:50:28 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:21:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	canvas_remap_border(t_img *img, t_rect rect, double scale)
 	draw_rectangle(img, rect, 0x000000);
 }
 
-void	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
+double	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
 {
 	double	scale;
 	int		pixel_x;
@@ -53,6 +53,7 @@ void	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
 				canvas_remap_border(img, rect, scale);
 		}
 	}
+	return (scale);
 }
 
 void	draw_minimap(t_game *game)
@@ -60,6 +61,7 @@ void	draw_minimap(t_game *game)
 	int		x;
 	int		y;
 	t_rect	coord;
+	double	scale;
 
 	draw_background(game->canvas, 0x000000);
 	x = 0;
@@ -80,7 +82,12 @@ void	draw_minimap(t_game *game)
 	coord.y = 0;
 	coord.width = game->canvas->width * 0.45;
 	coord.height = game->canvas->height;
-	canvas_remap(game->canvas, game->_minimap, coord, true);
+	scale = canvas_remap(game->canvas, game->_minimap, coord, true);
+	coord.x += game->pos.x * scale;
+	coord.y += game->pos.y * scale;
+	coord.width = 10;
+	coord.height = 10;
+	draw_rectangle(game->canvas, coord, 0xFF0000);
 }
 
 void	draw_engine(t_game *game)
@@ -97,15 +104,12 @@ void	draw_engine(t_game *game)
 
 void	raycaster(t_game *game)
 {
-	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
 
 	draw_background(game->canvas, 0x000000);
-	pos = create_vector(5, 5);
 	dir = create_vector(0, -1);
 	plane = create_vector(FPS_FOV, 0);
-	(void)pos;
 	(void)dir;
 	(void)plane;
 	draw_minimap(game);

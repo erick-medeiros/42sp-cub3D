@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/16 10:51:03 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:12:06 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char *argv[])
 	game.north_texture = create_canvas_texture(game.mlx, IMG_XPM);
 	if (FEATURE_FLAG_RAYCASTER)
 	{
+		game.pos = create_vector(5, 5);
 		game._minimap = create_canvas(game.mlx, game.map_width,
 				game.map_height);
 		game._engine = create_canvas(game.mlx, 320, 200);

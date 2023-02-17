@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/16 10:50:53 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:07:53 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,29 @@ typedef struct s_params
 	int		floor;
 }	t_params;
 
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
+
 typedef struct s_game
 {
-	void	*mlx;
-	void	*win;
-	t_img	*canvas;
-	t_img	*north_texture;
-	t_img	*south_texture;
-	t_img	*west_texture;
-	t_img	*east_texture;
-	t_argb	floor_color;
-	t_argb	ceilling_color;
-	char	**map;
-	int		map_width;
-	int		map_height;
-	t_img	*_minimap;
-	t_img	*_engine;
+	void		*mlx;
+	void		*win;
+	t_img		*canvas;
+	t_img		*north_texture;
+	t_img		*south_texture;
+	t_img		*west_texture;
+	t_img		*east_texture;
+	t_argb		floor_color;
+	t_argb		ceilling_color;
+	char		**map;
+	int			map_width;
+	int			map_height;
+	t_img		*_minimap;
+	t_img		*_engine;
+	t_vector	pos;
 }	t_game;
 
 typedef struct s_rect
@@ -71,11 +78,5 @@ typedef struct s_rect
 	int	width;
 	int	height;
 }	t_rect;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}	t_vector;
 
 #endif
