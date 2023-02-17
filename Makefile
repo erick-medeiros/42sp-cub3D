@@ -98,7 +98,8 @@ leaks:
 	$(VALGRIND) ./$(NAME) maps/exemple.cub
 
 install:
-	sudo apt install bear
+#	sudo apt install bear
+	sudo apt install libcriterion-dev
 
 install_mlx:
 	cp scripts/install_mlx $(MLX_DIR)
