@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/17 18:45:37 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/18 21:01:50 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_game
 	t_img		*_engine;
 	t_vector	pos;
 	t_vector	dir;
+	t_vector	plane;
 }	t_game;
 
 typedef struct s_rect

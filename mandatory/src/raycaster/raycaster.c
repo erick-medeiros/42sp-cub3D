@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/17 19:12:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/19 20:15:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ void	draw_player(t_game *game, t_rect coord, double scale)
 	coord.width = 5;
 	coord.height = coord.width;
 	draw_rectangle(game->canvas, coord, 0xFF0000);
-	dir = game->dir;
-	dir = add_vector(game->pos, dir);
+	dir = add_vector(game->pos, game->dir);
 	dir = mult_vector_scalar(dir, scale);
 	bresenham(game->canvas,
 		&((t_point){coord.x, coord.y}),
@@ -98,7 +97,7 @@ void	draw_minimap(t_game *game)
 		}
 		x++;
 	}
-	coord.x = 10;
+	coord.x = 0;
 	coord.y = 0;
 	coord.width = game->canvas->width * 0.45;
 	coord.height = game->canvas->height;
@@ -114,19 +113,122 @@ void	draw_engine(t_game *game)
 	coord.y = 0;
 	coord.width = game->canvas->width / 2 - 10;
 	coord.height = game->canvas->height;
-	draw_background(game->_engine, 0x00FFFF);
 	canvas_remap(game->canvas, game->_engine, coord, false);
 }
 
 void	raycaster(t_game *game)
 {
-	t_vector	dir;
-	t_vector	plane;
+	int			pixel;
+	t_vector	camera_pixel;
+	t_vector	ray_dir;
+	double		mult;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	t_vector	map_pos;
+	double		dist_to_side_x;
+	double		dist_to_side_y;
+	int			step_x;
+	int			step_y;
 
+	game->dir = rotate_vector(game->dir, -0.03);
+	game->plane = rotate_vector(game->plane, -0.03);
 	draw_background(game->canvas, 0x000000);
-	plane = create_vector(FPS_FOV, 0);
-	(void)dir;
-	(void)plane;
+	draw_background(game->_engine, 0x000000);
+	pixel = 0;
+	while (pixel < game->_engine->width)
+	{
+		mult = 2 * ((double)pixel / game->_engine->width) - 1;
+		camera_pixel = mult_vector_scalar(game->plane, mult);
+		ray_dir = add_vector(game->dir, camera_pixel);
+		if (ray_dir.x == 0)
+		{
+			delta_dist_x = 1;
+			delta_dist_y = 0;
+		}
+		else if (ray_dir.y)
+			delta_dist_x = fabs(1 / ray_dir.x);
+		if (ray_dir.y == 0)
+		{
+			delta_dist_x = 0;
+			delta_dist_y = 1;
+		}
+		else if (ray_dir.x)
+			delta_dist_y = fabs(1 / ray_dir.y);
+		map_pos = create_vector((int)game->pos.x, (int)game->pos.y);
+		if (ray_dir.x < 0)
+		{
+			dist_to_side_x = (game->pos.x - map_pos.x) * delta_dist_x;
+			step_x = -1;
+		}
+		else
+		{
+			dist_to_side_x = (map_pos.x + 1 - game->pos.x) * delta_dist_x;
+			step_x = 1;
+		}
+		if (ray_dir.y < 0)
+		{
+			dist_to_side_y = (game->pos.y - map_pos.y) * delta_dist_y;
+			step_y = -1;
+		}
+		else
+		{
+			dist_to_side_y = (map_pos.y + 1 - game->pos.y) * delta_dist_y;
+			step_y = 1;
+		}
+		int	hit = 0;
+		double dda_line_size_x = dist_to_side_x;
+		double dda_line_size_y = dist_to_side_y;
+		t_vector	wall_map_pos = map_pos;
+		int	hit_side;
+		double perpendicularDist;
+		while (hit == 0)
+		{
+			if (dda_line_size_x < dda_line_size_y)
+			{
+				wall_map_pos.x += step_x;
+				dda_line_size_x += delta_dist_x;
+				if (step_x == 1)
+					hit_side = 1;
+				else
+					hit_side = 2;
+			}
+			else
+			{
+				wall_map_pos.y += step_y;
+				dda_line_size_y += delta_dist_y;
+				if (step_y == 1)
+					hit_side = 3;
+				else
+					hit_side = 4;
+			}
+			if (game->map[(int)wall_map_pos.x][(int)wall_map_pos.y] == '1')
+				hit = 1;
+		}
+		if (hit_side == 1 || hit_side == 2)
+			perpendicularDist = fabs(wall_map_pos.x - game->pos.x + (((double)1 - step_x) / 2)) / ray_dir.x;
+		else
+			perpendicularDist = fabs(wall_map_pos.y - game->pos.y + (((double)1 - step_y) / 2)) / ray_dir.y;
+		
+		double wall_line_height = game->_engine->height / perpendicularDist;
+
+		int line_start_y = ((double)game->_engine->height / 2) - (wall_line_height / 2);
+		int line_end_y = ((double)game->_engine->height / 2) + (wall_line_height / 2);
+		double color;
+		color = 0x000000;
+		if (hit_side == 1)
+			color = 0x00FFFF;
+		else if (hit_side == 2)
+			color = 0x00FF00;
+		else if (hit_side == 3)
+			color = 0xFF0000;
+		else if (hit_side == 4)
+			color = 0xFFFF00;
+		bresenham(game->_engine,
+			&((t_point){pixel, line_start_y}),
+			&((t_point){pixel, line_end_y}),
+			color);
+		pixel++;
+	}
 	draw_minimap(game);
 	draw_engine(game);
 }
