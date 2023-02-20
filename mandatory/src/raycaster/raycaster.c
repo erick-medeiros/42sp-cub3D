@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/19 21:03:50 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:45:23 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,33 @@
 #include "bresenham.h"
 
 #define FPS_FOV 0.66
-#define IMAGE_PIXELS 320
+
+enum e_hit
+{
+	HIT_NORTH,
+	HIT_SOUTH,
+	HIT_EAST,
+	HIT_WEST
+};
+
+typedef struct e_dda
+{
+	double		delta_dist_x;
+	double		delta_dist_y;
+	t_vector	map_pos;
+	double		dist_to_side_x;
+	double		dist_to_side_y;
+	int			step_x;
+	int			step_y;
+	int			hit_side;
+}	t_dda;
+
+typedef struct s_ray_line
+{
+	int	start_y;
+	int	end_y;
+	int	hit_side;
+}	t_ray_line;
 
 void	canvas_remap_border(t_img *img, t_rect rect, double scale)
 {
@@ -116,117 +142,156 @@ void	draw_engine(t_game *game)
 	canvas_remap(game->canvas, game->_engine, coord, false);
 }
 
+t_vector	raycaster_get_ray_dir(t_img *img, t_player player, int pixel)
+{
+	double		mult;
+	t_vector	camera_pixel;
+	t_vector	ray_dir;
+
+	mult = 2 * ((double)pixel / img->width) - 1;
+	camera_pixel = mult_vector_scalar(player.plane, mult);
+	ray_dir = add_vector(player.dir, camera_pixel);
+	return (ray_dir);
+}
+
+t_dda	raycaster_dda_variables(t_player player, t_vector ray_dir)
+{
+	t_dda	dda;
+
+	if (ray_dir.x == 0)
+	{
+		dda.delta_dist_x = 1;
+		dda.delta_dist_y = 0;
+	}
+	else if (ray_dir.y)
+		dda.delta_dist_x = fabs(1 / ray_dir.x);
+	if (ray_dir.y == 0)
+	{
+		dda.delta_dist_x = 0;
+		dda.delta_dist_y = 1;
+	}
+	else if (ray_dir.x)
+		dda.delta_dist_y = fabs(1 / ray_dir.y);
+	dda.map_pos = create_vector((int)player.pos.x, (int)player.pos.y);
+	if (ray_dir.x < 0)
+	{
+		dda.dist_to_side_x = (player.pos.x - dda.map_pos.x) * dda.delta_dist_x;
+		dda.step_x = -1;
+	}
+	else
+	{
+		dda.dist_to_side_x = (dda.map_pos.x + 1 - player.pos.x)
+			* dda.delta_dist_x;
+		dda.step_x = 1;
+	}
+	if (ray_dir.y < 0)
+	{
+		dda.dist_to_side_y = (player.pos.y - dda.map_pos.y) * dda.delta_dist_y;
+		dda.step_y = -1;
+	}
+	else
+	{
+		dda.dist_to_side_y = (dda.map_pos.y + 1 - player.pos.y)
+			* dda.delta_dist_y;
+		dda.step_y = 1;
+	}
+	return (dda);
+}
+
+t_vector	raycaster_run_dda(t_game *game, t_dda *dda)
+{
+	int			hit;
+	double		dda_line_size_x;
+	double		dda_line_size_y;
+	t_vector	wall_map_pos;
+
+	hit = 0;
+	dda_line_size_x = dda->dist_to_side_x;
+	dda_line_size_y = dda->dist_to_side_y;
+	wall_map_pos = dda->map_pos;
+	while (hit == 0)
+	{
+		if (dda_line_size_x < dda_line_size_y)
+		{
+			wall_map_pos.x += dda->step_x;
+			dda_line_size_x += dda->delta_dist_x;
+			if (dda->step_x == 1)
+				dda->hit_side = HIT_EAST;
+			else
+				dda->hit_side = HIT_WEST;
+		}
+		else
+		{
+			wall_map_pos.y += dda->step_y;
+			dda_line_size_y += dda->delta_dist_y;
+			if (dda->step_y == 1)
+				dda->hit_side = HIT_SOUTH;
+			else
+				dda->hit_side = HIT_NORTH;
+		}
+		if (game->map[(int)wall_map_pos.x][(int)wall_map_pos.y] == '1')
+			hit = 1;
+	}
+	return (wall_map_pos);
+}
+
+t_ray_line	raycaster_get_line(t_game *game, t_vector wall, t_dda dda,
+		t_vector ray_dir)
+{
+	t_ray_line	line;
+	double		perpendicular_dist;
+	double		wall_line_height;
+
+	if (dda.hit_side == HIT_EAST || dda.hit_side == HIT_WEST)
+		perpendicular_dist = fabs(wall.x - game->player.pos.x
+				+ (((double)1 - dda.step_x) / 2)) / ray_dir.x;
+	else
+		perpendicular_dist = fabs(wall.y - game->player.pos.y
+				+ (((double)1 - dda.step_y) / 2)) / ray_dir.y;
+	wall_line_height = game->_engine->height / perpendicular_dist;
+	line.start_y = ((double)game->_engine->height / 2) - (wall_line_height / 2);
+	line.end_y = ((double)game->_engine->height / 2) + (wall_line_height / 2);
+	return (line);
+}
+
+void	raycaster_draw(t_game *game, t_ray_line line, int pixel, t_dda dda)
+{
+	double		color;
+
+	color = 0x000000;
+	if (dda.hit_side == HIT_EAST)
+		color = 0x0000FF;
+	else if (dda.hit_side == HIT_WEST)
+		color = 0xFF0000;
+	else if (dda.hit_side == HIT_SOUTH)
+		color = 0x00FF00;
+	else if (dda.hit_side == HIT_NORTH)
+		color = 0xFFFF00;
+	bresenham(game->_engine,
+		&((t_point){pixel, line.start_y}),
+		&((t_point){pixel, line.end_y}),
+		color);
+}
+
 void	raycaster(t_game *game)
 {
 	int			pixel;
-	t_vector	camera_pixel;
 	t_vector	ray_dir;
-	double		mult;
-	double		delta_dist_x;
-	double		delta_dist_y;
-	t_vector	map_pos;
-	double		dist_to_side_x;
-	double		dist_to_side_y;
-	int			step_x;
-	int			step_y;
+	t_dda		dda;
+	t_vector	wall;
+	t_ray_line	line;
 
-	game->player.dir = rotate_vector(game->player.dir, -0.03);
-	game->player.plane = rotate_vector(game->player.plane, -0.03);
+	rotate_player(&game->player, -0.03);
 	draw_background(game->canvas, 0x000000);
 	draw_background(game->_engine, 0x000000);
 	pixel = 0;
 	while (pixel < game->_engine->width)
 	{
-		mult = 2 * ((double)pixel / game->_engine->width) - 1;
-		camera_pixel = mult_vector_scalar(game->player.plane, mult);
-		ray_dir = add_vector(game->player.dir, camera_pixel);
-		if (ray_dir.x == 0)
-		{
-			delta_dist_x = 1;
-			delta_dist_y = 0;
-		}
-		else if (ray_dir.y)
-			delta_dist_x = fabs(1 / ray_dir.x);
-		if (ray_dir.y == 0)
-		{
-			delta_dist_x = 0;
-			delta_dist_y = 1;
-		}
-		else if (ray_dir.x)
-			delta_dist_y = fabs(1 / ray_dir.y);
-		map_pos = create_vector((int)game->player.pos.x, (int)game->player.pos.y);
-		if (ray_dir.x < 0)
-		{
-			dist_to_side_x = (game->player.pos.x - map_pos.x) * delta_dist_x;
-			step_x = -1;
-		}
-		else
-		{
-			dist_to_side_x = (map_pos.x + 1 - game->player.pos.x) * delta_dist_x;
-			step_x = 1;
-		}
-		if (ray_dir.y < 0)
-		{
-			dist_to_side_y = (game->player.pos.y - map_pos.y) * delta_dist_y;
-			step_y = -1;
-		}
-		else
-		{
-			dist_to_side_y = (map_pos.y + 1 - game->player.pos.y) * delta_dist_y;
-			step_y = 1;
-		}
-		int	hit = 0;
-		double dda_line_size_x = dist_to_side_x;
-		double dda_line_size_y = dist_to_side_y;
-		t_vector	wall_map_pos = map_pos;
-		int	hit_side;
-		double perpendicularDist;
-		while (hit == 0)
-		{
-			if (dda_line_size_x < dda_line_size_y)
-			{
-				wall_map_pos.x += step_x;
-				dda_line_size_x += delta_dist_x;
-				if (step_x == 1)
-					hit_side = 1;
-				else
-					hit_side = 2;
-			}
-			else
-			{
-				wall_map_pos.y += step_y;
-				dda_line_size_y += delta_dist_y;
-				if (step_y == 1)
-					hit_side = 3;
-				else
-					hit_side = 4;
-			}
-			if (game->map[(int)wall_map_pos.x][(int)wall_map_pos.y] == '1')
-				hit = 1;
-		}
-		if (hit_side == 1 || hit_side == 2)
-			perpendicularDist = fabs(wall_map_pos.x - game->player.pos.x + (((double)1 - step_x) / 2)) / ray_dir.x;
-		else
-			perpendicularDist = fabs(wall_map_pos.y - game->player.pos.y + (((double)1 - step_y) / 2)) / ray_dir.y;
-		
-		double wall_line_height = game->_engine->height / perpendicularDist;
-
-		int line_start_y = ((double)game->_engine->height / 2) - (wall_line_height / 2);
-		int line_end_y = ((double)game->_engine->height / 2) + (wall_line_height / 2);
-		double color;
-		color = 0x000000;
-		if (hit_side == 1)
-			color = 0x0000FF;
-		else if (hit_side == 2)
-			color = 0xFF0000;
-		else if (hit_side == 3)
-			color = 0x00FF00;
-		else if (hit_side == 4)
-			color = 0xFFFF00;
-		bresenham(game->_engine,
-			&((t_point){pixel, line_start_y}),
-			&((t_point){pixel, line_end_y}),
-			color);
+		ray_dir = raycaster_get_ray_dir(game->_engine, game->player, pixel);
+		dda = raycaster_dda_variables(game->player, ray_dir);
+		wall = raycaster_run_dda(game, &dda);
+		line = raycaster_get_line(game, wall, dda, ray_dir);
+		raycaster_draw(game, line, pixel, dda);
 		pixel++;
 	}
 	draw_minimap(game);
