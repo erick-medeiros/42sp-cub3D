@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/19 21:02:31 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:07:35 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,10 @@ int	main(int argc, char *argv[])
 	game.floor_color = separate_argb_color(COLOR_2);
 	game.ceilling_color = separate_argb_color(COLOR_3);
 	game_loop(&game);
+	if (FEATURE_FLAG_RAYCASTER)
+	{
+		destroy_canvas(game.mlx, game._minimap);
+		destroy_canvas(game.mlx, game._engine);
+	}
 	destroy_game(&game);
 }

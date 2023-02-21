@@ -96,7 +96,7 @@ norm:
 	norminette mandatory/ bonus/ libs/libft/
 
 leaks:
-	$(VALGRIND) ./$(NAME) maps/exemple.cub
+	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
 
 install:
 #	sudo apt install bear
