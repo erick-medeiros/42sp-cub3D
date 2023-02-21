@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/20 15:34:32 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:59:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
 t_argb		mlx_get_argb_image_pixel(t_img *img, int x, int y);
 
 // draw
+void		draw_line(t_img *img, t_vector p1, t_vector p2, int color);
 void		draw_background(t_img *img, int color);
 void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
 void		draw_texture_on_canvas(t_game *game, t_img *texture);

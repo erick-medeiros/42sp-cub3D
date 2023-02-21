@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/20 15:45:23 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:02:00 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "debug.h"
 #include <stdbool.h>
 #include "feature_flags.h"
-#include "bresenham.h"
 
 #define FPS_FOV 0.66
 
@@ -95,9 +94,9 @@ void	draw_player(t_game *game, t_rect coord, double scale)
 	draw_rectangle(game->canvas, coord, 0xFF0000);
 	dir = add_vector(game->player.pos, game->player.dir);
 	dir = mult_vector_scalar(dir, scale);
-	bresenham(game->canvas,
-		&((t_point){coord.x, coord.y}),
-		&((t_point){dir.x, dir.y}),
+	draw_line(game->canvas,
+		((t_vector){coord.x, coord.y}),
+		((t_vector){dir.x, dir.y}),
 		0xFF0000);
 }
 
@@ -256,7 +255,7 @@ t_ray_line	raycaster_get_line(t_game *game, t_vector wall, t_dda dda,
 
 void	raycaster_draw(t_game *game, t_ray_line line, int pixel, t_dda dda)
 {
-	double		color;
+	double	color;
 
 	color = 0x000000;
 	if (dda.hit_side == HIT_EAST)
@@ -267,9 +266,9 @@ void	raycaster_draw(t_game *game, t_ray_line line, int pixel, t_dda dda)
 		color = 0x00FF00;
 	else if (dda.hit_side == HIT_NORTH)
 		color = 0xFFFF00;
-	bresenham(game->_engine,
-		&((t_point){pixel, line.start_y}),
-		&((t_point){pixel, line.end_y}),
+	draw_line(game->_engine,
+		((t_vector){pixel, line.start_y}),
+		((t_vector){pixel, line.end_y}),
 		color);
 }
 
@@ -281,7 +280,6 @@ void	raycaster(t_game *game)
 	t_vector	wall;
 	t_ray_line	line;
 
-	rotate_player(&game->player, -0.03);
 	draw_background(game->canvas, 0x000000);
 	draw_background(game->_engine, 0x000000);
 	pixel = 0;

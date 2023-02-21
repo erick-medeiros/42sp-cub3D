@@ -6,11 +6,41 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:33:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/15 13:36:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:01:09 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bresenham.h"
 #include "cub3d.h"
+
+void	draw_line(t_img *img, t_vector p1, t_vector p2, int color)
+{
+	t_bresenham	b;
+
+	b.p1.x = p1.x;
+	b.p1.y = p1.y;
+	b.p2.x = p2.x;
+	b.p2.y = p2.y;
+	if (b.p1.x > b.p2.x || (b.p1.x == b.p2.x && b.p1.y > b.p2.y))
+	{
+		b.p1.x = p2.x;
+		b.p1.y = p2.y;
+		b.p2.x = p1.x;
+		b.p2.y = p1.y;
+	}
+	b.delta_x = b.p2.x - b.p1.x;
+	b.delta_y = b.p2.y - b.p1.y;
+	if (b.delta_x == 0 || b.delta_y == 0 || abs(b.delta_x) == abs(b.delta_y))
+		bresenham_axis(&b, img, color);
+	else if ((abs(b.delta_x) > abs(b.delta_y)) && (b.delta_y > 0))
+		bresenham_octante_1_5(&b, img, color);
+	else if ((abs(b.delta_x) > abs(b.delta_y)) && (b.delta_y < 0))
+		bresenham_octante_8_4(&b, img, color);
+	else if ((abs(b.delta_x) < abs(b.delta_y)) && (b.delta_y > 0))
+		bresenham_octante_2_6(&b, img, color);
+	else if ((abs(b.delta_x) < abs(b.delta_y)) && (b.delta_y < 0))
+		bresenham_octante_7_3(&b, img, color);
+}
 
 void	draw_background(t_img *img, int argb_color)
 {

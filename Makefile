@@ -21,6 +21,7 @@ NAME_MAN = mandatory/cub3D
 
 FILES = main.c
 FILES += canvas/canvas.c canvas/color.c canvas/draw.c canvas/pixel.c
+FILES += canvas/bresenham.c
 FILES += core/game.c core/handle_events.c core/render.c core/render_map.c
 FILES += core/player.c
 FILES += debug/print_bits.c debug/vector.c
@@ -28,7 +29,6 @@ FILES += utils/utils.c utils/debug.c utils/vector1.c utils/vector2.c
 FILES += validation/validation.c
 FILES += parser/parser.c
 FILES += raycaster/raycaster.c
-FILES += raycaster/bresenham_octantes.c raycaster/bresenham.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
