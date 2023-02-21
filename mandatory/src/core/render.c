@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/14 18:51:13 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 03:00:52 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	render(t_game *game)
 {
 	render_ceiling(game);
 	render_floor(game);
-	draw_texture_on_canvas(game, game->north_texture);
+	draw_layer_on_canvas(game->canvas, game->north_texture,
+		(t_vector){0, 0}, 1);
 	if (FEATURE_FLAG_RENDER_MAP)
 		render_map(game);
 	if (FEATURE_FLAG_RAYCASTER)

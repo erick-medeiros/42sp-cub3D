@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 01:02:00 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 03:02:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,45 +43,6 @@ typedef struct s_ray_line
 	int	end_y;
 	int	hit_side;
 }	t_ray_line;
-
-void	canvas_remap_border(t_img *img, t_rect rect, double scale)
-{
-	rect.height = 1;
-	draw_rectangle(img, rect, 0x000000);
-	rect.width = 1;
-	rect.height = scale;
-	draw_rectangle(img, rect, 0x000000);
-}
-
-double	canvas_remap(t_img *img, t_img *remap, t_rect coord, bool border)
-{
-	double	scale;
-	int		pixel_x;
-	int		pixel_y;
-	t_rect	rect;
-	t_argb	color;
-
-	scale = fmin((double)coord.width / remap->width,
-			(double)coord.height / remap->height);
-	pixel_x = -1;
-	while (++pixel_x < remap->width)
-	{
-		pixel_y = -1;
-		while (++pixel_y < remap->height)
-		{
-			rect.x = coord.x + (pixel_x * scale);
-			rect.y = coord.y + (pixel_y * scale);
-			rect.width = scale;
-			rect.height = scale;
-			color = mlx_get_argb_image_pixel(remap, pixel_x, pixel_y);
-			if (color.a == 0)
-				draw_rectangle(img, rect, color.argb);
-			if (border)
-				canvas_remap_border(img, rect, scale);
-		}
-	}
-	return (scale);
-}
 
 void	draw_player(t_game *game, t_rect coord, double scale)
 {
@@ -126,7 +87,11 @@ void	draw_minimap(t_game *game)
 	coord.y = 0;
 	coord.width = game->canvas->width * 0.45;
 	coord.height = game->canvas->height;
-	scale = canvas_remap(game->canvas, game->_minimap, coord, true);
+	scale = calculate_scale(game->_minimap, coord.width, coord.height);
+	draw_layer_on_canvas(game->canvas, game->_minimap,
+		(t_vector){coord.x, coord.y}, scale);
+	draw_grid(game->canvas, game->_minimap,
+		(t_vector){coord.x, coord.y}, scale);
 	draw_player(game, coord, scale);
 }
 
@@ -138,7 +103,9 @@ void	draw_engine(t_game *game)
 	coord.y = 0;
 	coord.width = game->canvas->width / 2 - 10;
 	coord.height = game->canvas->height;
-	canvas_remap(game->canvas, game->_engine, coord, false);
+	draw_layer_on_canvas(game->canvas, game->_engine,
+		(t_vector){coord.x, coord.y},
+		calculate_scale(game->_engine, coord.width, coord.height));
 }
 
 t_vector	raycaster_get_ray_dir(t_img *img, t_player player, int pixel)

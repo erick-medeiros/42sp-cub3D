@@ -6,13 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:24:08 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/10 15:45:50 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 02:07:30 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	calculate_scale(t_game *game)
+static int	calculate_scale_map(t_game *game)
 {
 	int	scale;
 
@@ -54,7 +54,7 @@ void	render_map(t_game *game)
 	int		j;
 
 	draw_background(game->canvas, 0x000000);
-	scale = calculate_scale(game);
+	scale = calculate_scale_map(game);
 	i = -1;
 	while (++i < game->map_height)
 	{
