@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   feature_flags.h                                    :+:      :+:    :+:   */
+/*   vector3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 10:28:53 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:32:43 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/02/21 13:42:29 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/02/21 13:44:24 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FEATURE_FLAGS_H
-# define FEATURE_FLAGS_H
+#include "cub3d.h"
 
-// render penquin
-# ifndef FEATURE_FLAG_PENGUIN
-#  define FEATURE_FLAG_PENGUIN 0
-# endif
+t_vector	set_mag_vector(t_vector v, double new_mag)
+{
+	double	mag;
 
-// render minimap
-# ifndef FEATURE_FLAG_MINIMAP
-#  define FEATURE_FLAG_MINIMAP 1
-# endif
-
-#endif
+	mag = mag_vector(v);
+	v.x = v.x * new_mag / mag;
+	v.y = v.y * new_mag / mag;
+	return (v);
+}

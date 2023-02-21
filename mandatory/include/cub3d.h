@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 09:53:19 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:27:03 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int			game_loop(t_game *game);
 int			destroy_game(t_game *game);
 
 int			render(t_game *game);
-void		render_map(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
@@ -55,7 +54,9 @@ void		draw_line(t_img *img, t_vector p1, t_vector p2, int color);
 void		draw_background(t_img *img, int color);
 void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
 double		calculate_scale(t_img *layer, double new_width, double new_height);
-void		draw_layer(t_game *game, t_img *layer, t_vector init, double scale);
+void		draw_layer(t_game *game, t_img *layer, t_vector init);
+void		draw_layer_scale(t_game *game, t_img *layer, t_vector init,
+				double scale);
 void		draw_layer_fullscreen(t_game *game, t_img *layer);
 void		draw_grid(t_img *canvas, t_img *layer, t_vector init, double scale);
 
@@ -65,6 +66,7 @@ t_argb		separate_argb_color(int argb);
 
 // raycaster
 t_img		*raycaster(t_game *game);
+void		init_minimap(t_game *game);
 
 // validation
 int			input_validation(int ac, char **av);
@@ -83,6 +85,7 @@ t_vector	normalize_vector(t_vector v1);
 double		dot_product_of_vector(t_vector v1, t_vector v2);
 double		angle_between_vectors(t_vector v1, t_vector v2);
 t_vector	rotate_vector(t_vector v, double angle_radian);
+t_vector	set_mag_vector(t_vector v, double new_mag);
 
 // debug - utils
 int			perr(const char *str);

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 09:57:41 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:31:23 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,12 @@ int	main(int argc, char *argv[])
 	game_setup(&game);
 	if (FEATURE_FLAG_PENGUIN)
 		game.north_texture = create_canvas_texture(game.mlx, IMG_XPM);
-	if (FEATURE_FLAG_RAYCASTER)
-	{
-		game.player.plane = create_vector(0.66, 0);
-		game.player.pos = create_vector(5, 5);
-		game.player.dir = create_vector(0, -1);
-		game.player.speed = 0.04;
-		game._minimap = create_canvas(game.mlx, game.map_width,
-				game.map_height);
-	}
+	if (FEATURE_FLAG_MINIMAP)
+		init_minimap(&game);
 	game.floor_color = separate_argb_color(COLOR_2);
 	game.ceilling_color = separate_argb_color(COLOR_3);
 	game_loop(&game);
-	if (FEATURE_FLAG_RAYCASTER)
-		destroy_canvas(game.mlx, game._minimap);
+	if (FEATURE_FLAG_MINIMAP)
+		destroy_canvas(game.mlx, game.minimap.frame);
 	destroy_game(&game);
 }

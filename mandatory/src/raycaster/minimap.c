@@ -6,65 +6,106 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 10:08:38 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:15:53 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "raycaster.h"
 
-void	draw_player(t_game *game, t_rect coord, double scale)
+void	init_minimap(t_game *game)
 {
-	t_vector	dir;
+	t_rect	coord;
 
-	coord.x += game->player.pos.x * scale;
-	coord.y += game->player.pos.y * scale;
-	coord.width = 5;
-	coord.height = coord.width;
-	draw_rectangle(game->canvas, coord, 0xFF0000);
-	dir = add_vector(game->player.pos, game->player.dir);
-	dir = mult_vector_scalar(dir, scale);
-	draw_line(game->canvas,
-		((t_vector){coord.x, coord.y}),
-		((t_vector){dir.x, dir.y}),
-		0xFF0000);
+	coord.width = game->canvas->width * 0.10;
+	coord.height = game->canvas->height * 0.20;
+	coord.x = game->canvas->width - coord.width - 100;
+	coord.y = 100;
+	game->minimap.frame = create_canvas(game->mlx, coord.width, coord.height);
+	game->minimap.scale = fmin((double)coord.width / game->map_width,
+			(double)coord.height / game->map_height);
+	game->minimap.pos = create_vector(coord.x, coord.y);
 }
 
-t_img	*raycaster_minimap(t_game *game)
+void	draw_minimap_ray(t_game *game, t_dda *dda, t_vector ray_dir)
 {
-	int	x;
-	int	y;
+	t_vector	start;
+	t_vector	end;
+	double		euclidian_dist;
 
-	draw_background(game->canvas, 0x000000);
-	x = 0;
-	while (x < game->_minimap->width)
-	{
-		y = 0;
-		while (y < game->_minimap->height)
-		{
-			if (game->map[y][x] == '1')
-				mlx_put_image_pixel(game->_minimap, x, y, 0xFAAFFF);
-			else
-				mlx_put_image_pixel(game->_minimap, x, y, 0xFFFFFF);
-			y++;
-		}
-		x++;
-	}
-	return (game->_minimap);
+	start = mult_vector_scalar(game->player.pos, game->minimap.scale);
+	if (dda->hit_side == HIT_EAST || dda->hit_side == HIT_WEST)
+		euclidian_dist = (fabs(dda->wall_hit.x - game->player.pos.x
+					+ (((double)1 - dda->step_x) / 2))) * mag_vector(ray_dir)
+			/ ray_dir.x;
+	else
+		euclidian_dist = (fabs(dda->wall_hit.y - game->player.pos.y
+					+ (((double)1 - dda->step_y) / 2))) * mag_vector(ray_dir)
+			/ ray_dir.y;
+	end = ray_dir;
+	end = set_mag_vector(ray_dir, fabs(euclidian_dist));
+	end = mult_vector_scalar(end, game->minimap.scale);
+	end = add_vector(end, start);
+	draw_line(game->minimap.frame, start, end, 0xFF9F00);
+}
+
+void	draw_player(t_game *game, t_minimap *minimap)
+{
+	t_rect		coord;
+	t_vector	start;
+	t_vector	end;
+
+	start = mult_vector_scalar(game->player.pos, minimap->scale);
+	coord.x = start.x - 3;
+	coord.y = start.y - 3;
+	coord.width = 6;
+	coord.height = 6;
+	draw_rectangle(game->minimap.frame, coord, 0xFF0000);
+	end = mult_vector_scalar(game->player.dir, minimap->scale);
+	end = add_vector(start, end);
+	draw_line(game->minimap.frame, start, end, 0xFF0000);
+}
+
+static void	minimap_border(t_game *game, t_rect *rect)
+{
+	t_vector	p1;
+	t_vector	p2;
+
+	p1.x = rect->x;
+	p1.y = rect->y;
+	p2.x = p1.x + game->minimap.scale;
+	p2.y = p1.y;
+	draw_line(game->minimap.frame, p1, p2, 0x000000);
+	p2.x = p1.x;
+	p2.y = p1.y + game->minimap.scale;
+	draw_line(game->minimap.frame, p1, p2, 0x000000);
 }
 
 void	draw_minimap(t_game *game)
 {
-	t_rect	coord;
-	double	scale;
+	t_rect		rect;
+	int			x;
+	int			y;
 
-	coord.x = 0;
-	coord.y = 0;
-	coord.width = game->canvas->width * 0.45;
-	coord.height = game->canvas->height;
-	scale = calculate_scale(game->_minimap, coord.width, coord.height);
-	draw_layer(game, game->_minimap,
-		(t_vector){coord.x, coord.y}, scale);
-	draw_grid(game->canvas, game->_minimap,
-		(t_vector){coord.x, coord.y}, scale);
-	draw_player(game, coord, scale);
+	draw_background(game->minimap.frame, 0xFF000000);
+	x = 0;
+	while (x < game->map_width)
+	{
+		y = 0;
+		while (y < game->map_height)
+		{
+			rect.x = (x * game->minimap.scale);
+			rect.y = (y * game->minimap.scale);
+			rect.width = game->minimap.scale;
+			rect.height = game->minimap.scale;
+			if (game->map[y][x] == '1')
+				draw_rectangle(game->minimap.frame, rect, 0xFAAFFF);
+			else
+				draw_rectangle(game->minimap.frame, rect, 0xFFFFFF);
+			minimap_border(game, &rect);
+			y++;
+		}
+		x++;
+	}
+	draw_player(game, &game->minimap);
 }

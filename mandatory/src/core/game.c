@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 10:01:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:31:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ static void	calculate_map_size(t_game *game)
 	}
 }
 
+static void	init_player(t_game *game)
+{
+	game->player.plane = create_vector(0.66, 0);
+	game->player.pos = create_vector(5, 5);
+	game->player.dir = create_vector(0, -1);
+	game->player.speed = 0.04;
+}
+
 int	game_setup(t_game *game)
 {
 	game->mlx = NULL;
@@ -55,8 +63,9 @@ int	game_setup(t_game *game)
 		return (MLX_ERROR);
 	game->frame_3d = create_canvas(game->mlx,
 			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	if (!game->canvas)
+	if (!game->frame_3d)
 		return (MLX_ERROR);
+	init_player(game);
 	return (0);
 }
 

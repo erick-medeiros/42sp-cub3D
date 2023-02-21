@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 09:55:34 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:10:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ typedef struct s_player
 	double		speed;
 }	t_player;
 
+typedef struct s_minimap
+{
+	t_vector	pos;
+	double		scale;
+	t_img		*frame;
+}	t_minimap;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -74,9 +81,9 @@ typedef struct s_game
 	char		**map;
 	int			map_width;
 	int			map_height;
-	t_img		*_minimap;
 	t_img		*frame_3d;
 	t_player	player;
+	t_minimap	minimap;
 }	t_game;
 
 typedef struct s_rect
