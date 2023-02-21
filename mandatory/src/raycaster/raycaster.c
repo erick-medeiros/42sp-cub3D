@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:33:42 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:00:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ t_img	*raycaster(t_game *game)
 		line = raycaster_get_line(game, dda, ray_dir);
 		raycaster_draw_line(game,
 			((t_vector){pixel, line.start_y}),
-			((t_vector){pixel, line.end_y}),
-			dda.hit_side);
+			((t_vector){pixel, line.end_y}), dda.hit_side);
 		if (FEATURE_FLAG_MINIMAP)
 			draw_minimap_ray(game, &dda, ray_dir);
 		pixel++;
