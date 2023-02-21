@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   vector3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 12:09:29 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/17 13:11:10 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/02/21 13:42:29 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/02/21 13:44:24 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "cub3d.h"
 
-# include "cub3d.h"
-# include <stddef.h>
-# include <stdio.h>
+t_vector	set_mag_vector(t_vector v, double new_mag)
+{
+	double	mag;
 
-void	print_bits(char *bytes, size_t num_bytes);
-void	print_bits_nl(char *bytes, size_t num_bytes);
-void	debug_vector(char *name, t_vector vector);
-
-#endif
+	mag = mag_vector(v);
+	v.x = v.x * new_mag / mag;
+	v.y = v.y * new_mag / mag;
+	return (v);
+}

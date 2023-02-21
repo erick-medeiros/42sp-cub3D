@@ -85,7 +85,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
-    - name: Install norminette
-      run: python3 -m pip install --upgrade pip setuptools && python3 -m pip install norminette
+      with:
+        python-version: '3.9'
+    - run: python3 -m pip install --upgrade pip setuptools && python3 -m pip install norminette
     - name: Running Norminette
       run: make norm

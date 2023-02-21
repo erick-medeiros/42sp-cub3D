@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/10 15:24:46 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:27:03 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,70 @@
 # include <unistd.h>     // close, read, write
 
 // core
-int		game_setup(t_game *game);
-int		game_loop(t_game *game);
-int		destroy_game(t_game *game);
+int			game_setup(t_game *game);
+int			game_loop(t_game *game);
+int			destroy_game(t_game *game);
 
-int		render(t_game *game);
-void	render_map(t_game *game);
+int			render(t_game *game);
 
-int		handle_keypress(int keycode, t_game *game);
-int		handle_keyrelease(int keycode, t_game *game);
+int			handle_keypress(int keycode, t_game *game);
+int			handle_keyrelease(int keycode, t_game *game);
+
+// player
+void		rotate_player(t_player *player, double angle_radian);
+void		walk_up_player(t_player *player);
+void		walk_down_player(t_player *player);
+void		strafe_left_player(t_player *player);
+void		strafe_right_player(t_player *player);
 
 // canvas
-t_img	*create_canvas(void *mlx, int width, int height);
-t_img	*create_canvas_texture(void *mlx, char *filename);
-void	*destroy_canvas(void *mlx, t_img *canvas);
-void	mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
-t_argb	mlx_get_argb_image_pixel(t_img *img, int x, int y);
+t_img		*create_canvas(void *mlx, int width, int height);
+t_img		*create_canvas_texture(void *mlx, char *filename);
+void		*destroy_canvas(void *mlx, t_img *canvas);
+void		mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
+t_argb		mlx_get_argb_image_pixel(t_img *img, int x, int y);
 
 // draw
-void	draw_background(t_img *img, int color);
-void	draw_rectangle(t_img *img, t_rect rect, int argb_color);
-void	draw_texture_on_canvas(t_game *game, t_img *texture);
+void		draw_line(t_img *img, t_vector p1, t_vector p2, int color);
+void		draw_background(t_img *img, int color);
+void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
+double		calculate_scale(t_img *layer, double new_width, double new_height);
+void		draw_layer(t_game *game, t_img *layer, t_vector init);
+void		draw_layer_scale(t_game *game, t_img *layer, t_vector init,
+				double scale);
+void		draw_layer_fullscreen(t_game *game, t_img *layer);
+void		draw_grid(t_img *canvas, t_img *layer, t_vector init, double scale);
 
 // color
-t_argb	create_argb_color(int a, int r, int g, int b);
-t_argb	separate_argb_color(int argb);
+t_argb		create_argb_color(int a, int r, int g, int b);
+t_argb		separate_argb_color(int argb);
+
+// raycaster
+t_img		*raycaster(t_game *game);
+void		init_minimap(t_game *game);
 
 // validation
-int		input_validation(int ac, char **av);
+int			input_validation(int ac, char **av);
 
 // parsing
-int		init_map(t_game *game, char **av);
+int			init_map(t_game *game, char **av);
+
+// utils - vector
+t_vector	create_vector(double x, double y);
+t_vector	add_vector(t_vector v1, t_vector v2);
+t_vector	sub_vector(t_vector v1, t_vector v2);
+t_vector	mult_vector_vector(t_vector v1, t_vector v2);
+t_vector	mult_vector_scalar(t_vector v1, double scalar);
+double		mag_vector(t_vector v);
+t_vector	normalize_vector(t_vector v1);
+double		dot_product_of_vector(t_vector v1, t_vector v2);
+double		angle_between_vectors(t_vector v1, t_vector v2);
+t_vector	rotate_vector(t_vector v, double angle_radian);
+t_vector	set_mag_vector(t_vector v, double new_mag);
 
 // debug - utils
-int		perr(const char *str);
-void	debug_map(char **map);
-int		is_reserved_ch(char c, const char *set);
+int			perr(const char *str);
+void		debug_map(char **map);
+int			is_reserved_ch(char c, const char *set);
 
 #endif

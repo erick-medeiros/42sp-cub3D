@@ -21,11 +21,15 @@ NAME_MAN = mandatory/cub3D
 
 FILES = main.c
 FILES += canvas/canvas.c canvas/color.c canvas/draw.c canvas/pixel.c
-FILES += core/game.c core/handle_events.c core/render.c core/render_map.c
-FILES += debug/print_bits.c
-FILES += utils/utils.c utils/debug.c
+FILES += canvas/bresenham.c canvas/layer.c
+FILES += core/game.c core/handle_events.c core/render.c
+FILES += core/player.c
+FILES += debug/print_bits.c debug/vector.c
+FILES += utils/utils.c utils/debug.c utils/vector1.c utils/vector2.c utils/vector3.c
 FILES += validation/validation.c
 FILES += parser/parser.c
+FILES += raycaster/raycaster.c raycaster/minimap.c raycaster/texture.c
+FILES += raycaster/dda_algorithm.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
@@ -93,10 +97,11 @@ norm:
 	norminette mandatory/ bonus/ libs/libft/
 
 leaks:
-	$(VALGRIND) ./$(NAME) maps/exemple.cub
+	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
 
 install:
-	sudo apt install bear
+#	sudo apt install bear
+	sudo apt install libcriterion-dev
 
 install_mlx:
 	cp scripts/install_mlx $(MLX_DIR)
