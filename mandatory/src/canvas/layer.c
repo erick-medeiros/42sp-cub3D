@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:32:57 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 02:56:13 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 09:53:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ double	calculate_scale(t_img *layer, double new_width, double new_height)
 	return (scale);
 }
 
-void	draw_layer_on_canvas(t_img *canvas, t_img *layer, t_vector init,
-		double scale)
+void	draw_layer(t_game *game, t_img *layer, t_vector init, double scale)
 {
 	t_argb	color;
 	int		pixel_x;
@@ -41,11 +40,19 @@ void	draw_layer_on_canvas(t_img *canvas, t_img *layer, t_vector init,
 			scaled_pixel.height = scale;
 			color = mlx_get_argb_image_pixel(layer, pixel_x, pixel_y);
 			if (color.a == 0)
-				draw_rectangle(canvas, scaled_pixel, color.argb);
+				draw_rectangle(game->canvas, scaled_pixel, color.argb);
 			pixel_x++;
 		}
 		pixel_y++;
 	}
+}
+
+void	draw_layer_fullscreen(t_game *game, t_img *layer)
+{
+	double	scale;
+
+	scale = calculate_scale(layer, game->canvas->width, game->canvas->height);
+	draw_layer(game, layer, (t_vector){0, 0}, scale);
 }
 
 void	draw_grid(t_img *canvas, t_img *layer, t_vector init, double scale)

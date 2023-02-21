@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/10 16:02:16 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 10:01:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ int	game_setup(t_game *game)
 	game->canvas = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->canvas)
 		return (MLX_ERROR);
+	game->frame_3d = create_canvas(game->mlx,
+			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	if (!game->canvas)
+		return (MLX_ERROR);
 	return (0);
 }
 
@@ -75,6 +79,7 @@ int	destroy_game(t_game *game)
 	game->south_texture = destroy_canvas(game->mlx, game->south_texture);
 	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
 	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
+	game->frame_3d = destroy_canvas(game->mlx, game->frame_3d);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 03:55:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 09:53:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void		draw_line(t_img *img, t_vector p1, t_vector p2, int color);
 void		draw_background(t_img *img, int color);
 void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
 double		calculate_scale(t_img *layer, double new_width, double new_height);
-void		draw_layer_on_canvas(t_img *canvas, t_img *layer, t_vector init,
-				double scale);
+void		draw_layer(t_game *game, t_img *layer, t_vector init, double scale);
+void		draw_layer_fullscreen(t_game *game, t_img *layer);
 void		draw_grid(t_img *canvas, t_img *layer, t_vector init, double scale);
 
 // color
@@ -64,7 +64,7 @@ t_argb		create_argb_color(int a, int r, int g, int b);
 t_argb		separate_argb_color(int argb);
 
 // raycaster
-void		raycaster(t_game *game);
+t_img		*raycaster(t_game *game);
 
 // validation
 int			input_validation(int ac, char **av);

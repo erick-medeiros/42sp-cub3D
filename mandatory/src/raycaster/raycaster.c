@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 03:02:11 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 10:02:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,24 +88,11 @@ void	draw_minimap(t_game *game)
 	coord.width = game->canvas->width * 0.45;
 	coord.height = game->canvas->height;
 	scale = calculate_scale(game->_minimap, coord.width, coord.height);
-	draw_layer_on_canvas(game->canvas, game->_minimap,
+	draw_layer(game, game->_minimap,
 		(t_vector){coord.x, coord.y}, scale);
 	draw_grid(game->canvas, game->_minimap,
 		(t_vector){coord.x, coord.y}, scale);
 	draw_player(game, coord, scale);
-}
-
-void	draw_engine(t_game *game)
-{
-	t_rect	coord;
-
-	coord.x = game->canvas->width / 2;
-	coord.y = 0;
-	coord.width = game->canvas->width / 2 - 10;
-	coord.height = game->canvas->height;
-	draw_layer_on_canvas(game->canvas, game->_engine,
-		(t_vector){coord.x, coord.y},
-		calculate_scale(game->_engine, coord.width, coord.height));
 }
 
 t_vector	raycaster_get_ray_dir(t_img *img, t_player player, int pixel)
@@ -214,9 +201,9 @@ t_ray_line	raycaster_get_line(t_game *game, t_vector wall, t_dda dda,
 	else
 		perpendicular_dist = fabs(wall.y - game->player.pos.y
 				+ (((double)1 - dda.step_y) / 2)) / ray_dir.y;
-	wall_line_height = game->_engine->height / perpendicular_dist;
-	line.start_y = ((double)game->_engine->height / 2) - (wall_line_height / 2);
-	line.end_y = ((double)game->_engine->height / 2) + (wall_line_height / 2);
+	wall_line_height = game->frame_3d->height / perpendicular_dist;
+	line.start_y = ((double)game->frame_3d->height / 2) - (wall_line_height / 2);
+	line.end_y = ((double)game->frame_3d->height / 2) + (wall_line_height / 2);
 	return (line);
 }
 
@@ -233,13 +220,13 @@ void	raycaster_draw(t_game *game, t_ray_line line, int pixel, t_dda dda)
 		color = 0x00FF00;
 	else if (dda.hit_side == HIT_NORTH)
 		color = 0xFFFF00;
-	draw_line(game->_engine,
+	draw_line(game->frame_3d,
 		((t_vector){pixel, line.start_y}),
 		((t_vector){pixel, line.end_y}),
 		color);
 }
 
-void	raycaster(t_game *game)
+t_img	*raycaster(t_game *game)
 {
 	int			pixel;
 	t_vector	ray_dir;
@@ -248,17 +235,19 @@ void	raycaster(t_game *game)
 	t_ray_line	line;
 
 	draw_background(game->canvas, 0x000000);
-	draw_background(game->_engine, 0x000000);
+	draw_background(game->frame_3d, game->floor_color.argb);
+	draw_rectangle(game->frame_3d,
+		(t_rect){0, 0, game->frame_3d->width, game->frame_3d->height / 2},
+		game->ceilling_color.argb);
 	pixel = 0;
-	while (pixel < game->_engine->width)
+	while (pixel < game->frame_3d->width)
 	{
-		ray_dir = raycaster_get_ray_dir(game->_engine, game->player, pixel);
+		ray_dir = raycaster_get_ray_dir(game->frame_3d, game->player, pixel);
 		dda = raycaster_dda_variables(game->player, ray_dir);
 		wall = raycaster_run_dda(game, &dda);
 		line = raycaster_get_line(game, wall, dda, ray_dir);
 		raycaster_draw(game, line, pixel, dda);
 		pixel++;
 	}
-	draw_minimap(game);
-	draw_engine(game);
+	return (game->frame_3d);
 }
