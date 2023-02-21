@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 03:01:29 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/21 03:55:09 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ void		render_map(t_game *game);
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
 
+// player
 void		rotate_player(t_player *player, double angle_radian);
+void		walk_up_player(t_player *player);
+void		walk_down_player(t_player *player);
+void		strafe_left_player(t_player *player);
+void		strafe_right_player(t_player *player);
 
 // canvas
 t_img		*create_canvas(void *mlx, int width, int height);
