@@ -28,7 +28,8 @@ FILES += debug/print_bits.c debug/vector.c
 FILES += utils/utils.c utils/debug.c utils/vector1.c utils/vector2.c
 FILES += validation/validation.c
 FILES += parser/parser.c
-FILES += raycaster/raycaster.c
+FILES += raycaster/raycaster.c raycaster/minimap.c raycaster/texture.c
+FILES += raycaster/dda_algorithm.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
