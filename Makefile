@@ -103,6 +103,7 @@ leaks:
 	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
 
 tests:
+	make
 	@make -C tests/
 	@echo
 	./tests/tests.out
