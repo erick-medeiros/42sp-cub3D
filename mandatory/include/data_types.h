@@ -6,12 +6,20 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 12:10:27 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:12:03 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_TYPES_H
 # define DATA_TYPES_H
+
+# define XKEY_ESC 65307
+# define XKEY_W 119
+# define XKEY_A 97
+# define XKEY_S 115
+# define XKEY_D 100
+# define XKEY_LEFT_ARROW 65361
+# define XKEY_RIGHT_ARROW 65363
 
 # define MLX_ERROR 1
 
