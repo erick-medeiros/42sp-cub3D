@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:31:32 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:25:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,7 @@ static void	calculate_map_size(t_game *game)
 	}
 }
 
-static void	init_player(t_game *game)
-{
-	game->player.plane = create_vector(0.66, 0);
-	game->player.pos = create_vector(5, 5);
-	game->player.dir = create_vector(0, -1);
-	game->player.speed = 0.04;
-}
-
-int	game_setup(t_game *game)
+static void	game_init(t_game *game)
 {
 	game->mlx = NULL;
 	game->win = NULL;
@@ -49,6 +41,17 @@ int	game_setup(t_game *game)
 	game->south_texture = NULL;
 	game->west_texture = NULL;
 	game->east_texture = NULL;
+	game->control.strafe_right = FALSE;
+	game->control.strafe_left = FALSE;
+	game->control.walk_up = FALSE;
+	game->control.walk_down = FALSE;
+	game->control.rotate_left = FALSE;
+	game->control.rotate_right = FALSE;
+}
+
+int	game_setup(t_game *game)
+{
+	game_init(game);
 	calculate_map_size(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
@@ -65,7 +68,11 @@ int	game_setup(t_game *game)
 			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	if (!game->frame_3d)
 		return (MLX_ERROR);
-	init_player(game);
+	game->player.plane = create_vector(0.66, 0);
+	game->player.pos = create_vector(5, 5);
+	game->player.dir = create_vector(0, -1);
+	game->player.speed = 0.04;
+	mlx_do_key_autorepeatoff(game->mlx);
 	return (0);
 }
 
@@ -93,6 +100,7 @@ int	destroy_game(t_game *game)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
 	{
+		mlx_do_key_autorepeaton(game->mlx);
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}

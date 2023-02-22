@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 13:12:03 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:43:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # define XKEY_RIGHT_ARROW 65363
 
 # define MLX_ERROR 1
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef struct s_img
 {
@@ -60,6 +66,16 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+typedef struct s_control
+{
+	t_bool	walk_up;
+	t_bool	walk_down;
+	t_bool	strafe_left;
+	t_bool	strafe_right;
+	t_bool	rotate_left;
+	t_bool	rotate_right;
+}	t_control;
+
 typedef struct s_player
 {
 	t_vector	pos;
@@ -89,6 +105,7 @@ typedef struct s_game
 	char		**map;
 	int			map_width;
 	int			map_height;
+	t_control	control;
 	t_img		*frame_3d;
 	t_player	player;
 	t_minimap	minimap;
