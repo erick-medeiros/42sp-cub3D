@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:27:03 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:59:52 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "data_types.h"
 # include <X11/X.h>      // X11 events
-# include <X11/keysym.h> // X11 keys
 # include <fcntl.h>      // open
 # include <libft.h>      // lib: libft
 # include <math.h>       // lib: math

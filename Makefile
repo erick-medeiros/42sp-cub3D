@@ -99,9 +99,14 @@ norm:
 leaks:
 	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
 
+tests:
+	@make -C tests/
+	@echo
+	./tests/tests.out
+
 install:
 #	sudo apt install bear
-	sudo apt install libcriterion-dev
+	sudo apt install libcriterion-dev clang-format
 
 install_mlx:
 	cp scripts/install_mlx $(MLX_DIR)
@@ -111,4 +116,4 @@ install_mlx:
 bear:
 	bear -- make re || bear make re
 
-.PHONY: all clean fclean re bonus rebonus norm leaks install bear
+.PHONY: all clean fclean re bonus rebonus norm leaks tests install bear
