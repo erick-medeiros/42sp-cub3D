@@ -1,7 +1,10 @@
 NAME = cub3D
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I$(LIBFT_DIR)
+ifeq ($(DEBUG),1)
+CFLAGS += -g -DDEBUG=1
+endif
 CC = gcc
 RM = rm -fr
 
@@ -103,6 +106,9 @@ tests:
 	@make -C tests/
 	@echo
 	./tests/tests.out
+
+debug:
+	make -e DEBUG=1
 
 install:
 #	sudo apt install bear
