@@ -1,11 +1,16 @@
 NAME = tests.out
+CUB3D = ../cub3D
+CUB3D_DIR = ../mandatory/
+LIBFT_DIR = ../libs/libft/
 
 CC = gcc
-LDLIBS = -lcriterion
+CFLAGS = -I$(CUB3D_DIR)include/ -I$(LIBFT_DIR)
+LDFLAGS = -L$(LIBFT_DIR)
+LDLIBS = -lft -lm -lmlx -lXext -lX11 -lcriterion
 RM = rm -rf
 FORMAT = clang-format -i
 
-SRC = keyboard.c
+SRC = keyboard.c cub.c
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
@@ -16,10 +21,13 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)%.o: %.c
 	@${FORMAT} $<
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LDLIBS)
+$(CUB3D):
+	make -C ..
+
+$(NAME): $(CUB3D) $(OBJ_DIR) $(OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJ) $(wildcard $(CUB3D_DIR)obj/*/*.o) $(LDLIBS)
 
 clean:
 	$(RM) $(OBJ_DIR)
