@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 12:59:52 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:39:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <unistd.h>     // close, read, write
 
 // core
+void		game_init(t_game *game);
 int			game_setup(t_game *game);
 int			game_loop(t_game *game);
 int			destroy_game(t_game *game);

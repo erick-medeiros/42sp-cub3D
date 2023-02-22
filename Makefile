@@ -1,9 +1,9 @@
 NAME = cub3D
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS += -I$(LIBFT_DIR)
 ifeq ($(DEBUG),1)
-CFLAGS += -g -DDEBUG=1
+CFLAGS += -DDEBUG=1
 endif
 CC = gcc
 RM = rm -fr
