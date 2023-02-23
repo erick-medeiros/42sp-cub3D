@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 10:41:00 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:34:01 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_vector	raycaster_run_dda(t_game *game, t_dda *dda)
 	while (hit == 0)
 	{
 		dda_loop(&wall_map_pos, dda, &dda_line_size_x, &dda_line_size_y);
-		if (game->map[(int)wall_map_pos.x][(int)wall_map_pos.y] == '1')
+		if (game->map[(int)wall_map_pos.y][(int)wall_map_pos.x] == '1')
 			hit = 1;
 	}
 	return (wall_map_pos);
