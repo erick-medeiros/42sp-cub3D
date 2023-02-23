@@ -146,3 +146,93 @@ Test(keyboard, right_arrow)
 	cr_assert_not(game.control.rotate_left);
 	cr_assert_not(game.control.rotate_right);
 }
+
+Test(keyboard, walk_up)
+{
+	t_game game;
+
+	game.map = NULL;
+	game_init(&game);
+	game.player.pos = create_vector(10, 10);
+	game.player.dir = create_vector(0, 1);
+	game.player.speed = 2;
+	game.control.walk_up = TRUE;
+	update_input(&game);
+	cr_assert_eq(game.player.pos.x, 10);
+	cr_assert_eq(game.player.pos.y, 12);
+}
+
+Test(keyboard, walk_down)
+{
+	t_game game;
+
+	game.map = NULL;
+	game_init(&game);
+	game.player.pos = create_vector(10, 10);
+	game.player.dir = create_vector(0, 1);
+	game.player.speed = 2;
+	game.control.walk_down = TRUE;
+	update_input(&game);
+	cr_assert_eq(game.player.pos.x, 10);
+	cr_assert_eq(game.player.pos.y, 8);
+}
+
+Test(keyboard, strafe_left)
+{
+	t_game game;
+
+	game.map = NULL;
+	game_init(&game);
+	game.player.pos = create_vector(10, 10);
+	game.player.dir = create_vector(0, 1);
+	game.player.speed = 2;
+	game.control.strafe_left = TRUE;
+	update_input(&game);
+	cr_assert_eq(game.player.pos.x, 12);
+	cr_assert_eq(game.player.pos.y, 10);
+}
+
+Test(keyboard, strafe_right)
+{
+	t_game game;
+
+	game.map = NULL;
+	game_init(&game);
+	game.player.pos = create_vector(10, 10);
+	game.player.dir = create_vector(0, 1);
+	game.player.speed = 2;
+	game.control.strafe_right = TRUE;
+	update_input(&game);
+	cr_assert_eq(game.player.pos.x, 8);
+	cr_assert_eq(game.player.pos.y, 10);
+}
+
+Test(keyboard, rotate_left)
+{
+	t_game game;
+
+	game.map = NULL;
+	game_init(&game);
+	game.player.pos = create_vector(10, 10);
+	game.player.dir = create_vector(0, 1);
+	game.player.speed = M_PI_2;
+	game.control.rotate_left = TRUE;
+	update_input(&game);
+	cr_assert_float_eq(game.player.dir.x, 1.000000, 1e-6);
+	cr_assert_float_eq(game.player.dir.y, 0.000000, 1e-6);
+}
+
+Test(keyboard, rotate_right)
+{
+	t_game game;
+
+	game.map = NULL;
+	game_init(&game);
+	game.player.pos = create_vector(10, 10);
+	game.player.dir = create_vector(0, 1);
+	game.player.speed = M_PI_2;
+	game.control.rotate_right = TRUE;
+	update_input(&game);
+	cr_assert_float_eq(game.player.dir.x, -1.000000, 1e-6);
+	cr_assert_float_eq(game.player.dir.y, 0.000000, 1e-6);
+}

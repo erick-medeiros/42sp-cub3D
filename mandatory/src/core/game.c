@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 20:39:40 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:16:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	game_init(t_game *game)
 	game->control.walk_down = FALSE;
 	game->control.rotate_left = FALSE;
 	game->control.rotate_right = FALSE;
+	game->player.plane = create_vector(0, 0);
+	game->player.pos = create_vector(0, 0);
+	game->player.dir = create_vector(0, 0);
+	game->player.speed = 0;
 }
 
 int	game_setup(t_game *game)
