@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 23:06:29 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/23 02:18:12 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,17 @@
 # include "parser.h"
 
 // core
+void		game_init(t_game *game);
 int			game_setup(t_game *game);
 int			game_loop(t_game *game);
 int			destroy_game(t_game *game);
 
+void		update_input(t_player *player);
 int			render(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
-
-// player
-void		rotate_player(t_player *player, double angle_radian);
-void		walk_up_player(t_player *player);
-void		walk_down_player(t_player *player);
-void		strafe_left_player(t_player *player);
-void		strafe_right_player(t_player *player);
+void		input_handler(t_player *player, t_control *control);
 
 // canvas
 t_img		*create_canvas(void *mlx, int width, int height);
