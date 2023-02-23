@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 01:57:57 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 10:57:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ void	update_input(t_player *player)
 
 int	render(t_game *game)
 {
-	draw_background(game->canvas, 0x000000);
 	update_input(&game->player);
 	if (FEATURE_FLAG_MINIMAP)
 		draw_minimap(game);
+	draw_ceiling(game->frame_3d, game->ceilling_color.argb);
+	draw_floor(game->frame_3d, game->floor_color.argb);
 	raycaster(game);
 	draw_layer_fullscreen(game, game->frame_3d);
 	if (FEATURE_FLAG_MINIMAP)

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 09:19:01 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 10:06:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ void		mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
 t_argb		mlx_get_argb_image_pixel(t_img *img, int x, int y);
 
 // draw
-void		draw_line(t_img *img, t_vector p1, t_vector p2, int color);
+void		draw_line(t_img *img, t_vector p1, t_vector p2, int argb_color);
 void		draw_background(t_img *img, int color);
 void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
+void		draw_ceiling(t_img *img, int argb_color);
+void		draw_floor(t_img *img, int argb_color);
 double		calculate_scale(t_img *layer, double new_width, double new_height);
 void		draw_layer(t_game *game, t_img *layer, t_vector init);
 void		draw_layer_scale(t_game *game, t_img *layer, t_vector init,
