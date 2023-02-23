@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:15:53 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:43:40 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,24 @@ static void	minimap_border(t_game *game, t_rect *rect)
 {
 	t_vector	p1;
 	t_vector	p2;
+	t_vector	p3;
+	t_vector	p4;
 
-	p1.x = rect->x;
-	p1.y = rect->y;
-	p2.x = p1.x + game->minimap.scale;
-	p2.y = p1.y;
+	p1 = create_vector(rect->x, rect->y);
+	p2 = create_vector(p1.x + rect->width, p1.y);
+	p3 = create_vector(p1.x, p1.y + rect->height);
+	p4 = create_vector(p1.x + rect->width, p1.y + rect->height);
 	draw_line(game->minimap.frame, p1, p2, 0x000000);
-	p2.x = p1.x;
-	p2.y = p1.y + game->minimap.scale;
-	draw_line(game->minimap.frame, p1, p2, 0x000000);
+	draw_line(game->minimap.frame, p1, p3, 0x000000);
+	draw_line(game->minimap.frame, p2, p4, 0x000000);
+	draw_line(game->minimap.frame, p3, p4, 0x000000);
 }
 
 void	draw_minimap(t_game *game)
 {
-	t_rect		rect;
-	int			x;
-	int			y;
+	t_rect	rect;
+	int		x;
+	int		y;
 
 	draw_background(game->minimap.frame, 0xFF000000);
 	x = 0;

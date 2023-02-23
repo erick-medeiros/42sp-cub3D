@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 17:20:44 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:41:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_player
 typedef struct s_minimap
 {
 	t_vector	pos;
-	double		scale;
+	int			scale;
 	t_img		*frame;
 }	t_minimap;
 
