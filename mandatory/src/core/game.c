@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 01:37:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 02:02:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	game_setup(t_game *game)
 			WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 	if (!game->win)
 		return (MLX_ERROR);
-	mlx_clear_window(game->mlx, game->win);
 	game->canvas = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->canvas)
 		return (MLX_ERROR);
