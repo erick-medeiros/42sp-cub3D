@@ -6,31 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 02:02:36 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:21:35 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "window.h"
-
-static void	calculate_map_size(t_game *game)
-{
-	int	width;
-
-	if (!game->map)
-		return ;
-	game->map_width = 0;
-	game->map_height = 0;
-	while (game->map[game->map_height])
-	{
-		width = 0;
-		while (game->map[game->map_height][width])
-			width++;
-		if (game->map_width < width)
-			game->map_width = width;
-		game->map_height++;
-	}
-}
 
 void	game_init(t_game *game)
 {
@@ -60,7 +41,6 @@ void	game_init(t_game *game)
 int	game_setup(t_game *game)
 {
 	game_init(game);
-	calculate_map_size(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (MLX_ERROR);
