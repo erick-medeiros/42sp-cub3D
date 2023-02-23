@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:56:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/02 09:51:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:19:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_img	*create_canvas(void *mlx, int width, int height)
 		return (destroy_canvas(mlx, canvas));
 	canvas->width = width;
 	canvas->height = height;
+	canvas->background = NULL;
+	canvas->size = canvas->width * canvas->height * canvas->bits_per_pixel / 8;
 	return (canvas);
 }
 
@@ -45,6 +47,20 @@ t_img	*create_canvas_texture(void *mlx, char *filename)
 	if (!texture->addr)
 		return (destroy_canvas(mlx, texture));
 	return (texture);
+}
+
+void	save_canvas_background(t_img *canvas)
+{
+	canvas->background = ft_calloc(sizeof(char), canvas->size);
+	ft_memcpy(canvas->background, canvas->addr, canvas->size);
+}
+
+void	reset_canvas(t_img *canvas)
+{
+	if (canvas->background)
+		ft_memcpy(canvas->addr, canvas->background, canvas->size);
+	else
+		draw_background(canvas, 0);
 }
 
 void	*destroy_canvas(void *mlx, t_img *canvas)

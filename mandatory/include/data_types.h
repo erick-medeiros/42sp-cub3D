@@ -6,12 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 01:36:48 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:20:44 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_TYPES_H
 # define DATA_TYPES_H
+
+# include "stddef.h"
 
 # define XKEY_ESC 65307
 # define XKEY_W 119
@@ -43,6 +45,8 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		height;
+	size_t	size;
+	void	*background;
 }	t_img;
 
 typedef struct s_argb

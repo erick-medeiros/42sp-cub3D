@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 10:06:48 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:20:21 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void		input_handler(t_player *player, t_control *control);
 // canvas
 t_img		*create_canvas(void *mlx, int width, int height);
 t_img		*create_canvas_texture(void *mlx, char *filename);
+void		save_canvas_background(t_img *canvas);
+void		reset_canvas(t_img *canvas);
 void		*destroy_canvas(void *mlx, t_img *canvas);
 void		mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
 t_argb		mlx_get_argb_image_pixel(t_img *img, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 09:21:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:21:25 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,15 @@ int	game_setup(t_game *game)
 	game->canvas = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->canvas)
 		return (MLX_ERROR);
-	game->frame_3d = create_canvas(game->mlx,
-			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	game->frame_3d = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->frame_3d)
 		return (MLX_ERROR);
 	game->player.pos = create_vector(5, 5);
 	game->player.dir = create_vector(0, -1);
 	mlx_do_key_autorepeatoff(game->mlx);
+	draw_ceiling(game->frame_3d, game->ceilling_color.argb);
+	draw_floor(game->frame_3d, game->floor_color.argb);
+	save_canvas_background(game->frame_3d);
 	return (0);
 }
 
