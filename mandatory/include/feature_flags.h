@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:28:53 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:32:43 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 01:26:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // render minimap
 # ifndef FEATURE_FLAG_MINIMAP
-#  define FEATURE_FLAG_MINIMAP 1
+#  define FEATURE_FLAG_MINIMAP 0
 # endif
 
 #endif

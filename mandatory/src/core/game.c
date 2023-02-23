@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 21:16:05 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 01:37:58 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,14 @@ void	game_init(t_game *game)
 	game->control.walk_down = FALSE;
 	game->control.rotate_left = FALSE;
 	game->control.rotate_right = FALSE;
-	game->player.plane = create_vector(0, 0);
+	game->player.plane = create_vector(FOV_RAD, 0);
 	game->player.pos = create_vector(0, 0);
 	game->player.dir = create_vector(0, 0);
-	game->player.speed = 0;
+	game->player.movement = create_vector(0, 0);
+	game->player.strafe = create_vector(0, 0);
+	game->player.move_speed = MOVEMENT_SPEED;
+	game->player.strafe_speed = STRAFE_SPEED;
+	game->player.rotate_speed = 0;
 }
 
 int	game_setup(t_game *game)
@@ -72,10 +76,8 @@ int	game_setup(t_game *game)
 			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	if (!game->frame_3d)
 		return (MLX_ERROR);
-	game->player.plane = create_vector(0.66, 0);
 	game->player.pos = create_vector(5, 5);
 	game->player.dir = create_vector(0, -1);
-	game->player.speed = 0.04;
 	mlx_do_key_autorepeatoff(game->mlx);
 	return (0);
 }

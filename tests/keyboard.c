@@ -155,9 +155,10 @@ Test(keyboard, walk_up)
 	game_init(&game);
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
-	game.player.speed = 2;
+	game.player.move_speed = 2;
 	game.control.walk_up = TRUE;
-	update_input(&game);
+	input_handler(&game.player, &game.control);
+	update_input(&game.player);
 	cr_assert_eq(game.player.pos.x, 10);
 	cr_assert_eq(game.player.pos.y, 12);
 }
@@ -170,9 +171,10 @@ Test(keyboard, walk_down)
 	game_init(&game);
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
-	game.player.speed = 2;
+	game.player.move_speed = 2;
 	game.control.walk_down = TRUE;
-	update_input(&game);
+	input_handler(&game.player, &game.control);
+	update_input(&game.player);
 	cr_assert_eq(game.player.pos.x, 10);
 	cr_assert_eq(game.player.pos.y, 8);
 }
@@ -185,9 +187,10 @@ Test(keyboard, strafe_left)
 	game_init(&game);
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
-	game.player.speed = 2;
+	game.player.strafe_speed = 2;
 	game.control.strafe_left = TRUE;
-	update_input(&game);
+	input_handler(&game.player, &game.control);
+	update_input(&game.player);
 	cr_assert_eq(game.player.pos.x, 12);
 	cr_assert_eq(game.player.pos.y, 10);
 }
@@ -200,9 +203,10 @@ Test(keyboard, strafe_right)
 	game_init(&game);
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
-	game.player.speed = 2;
+	game.player.strafe_speed = 2;
 	game.control.strafe_right = TRUE;
-	update_input(&game);
+	input_handler(&game.player, &game.control);
+	update_input(&game.player);
 	cr_assert_eq(game.player.pos.x, 8);
 	cr_assert_eq(game.player.pos.y, 10);
 }
@@ -215,9 +219,8 @@ Test(keyboard, rotate_left)
 	game_init(&game);
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
-	game.player.speed = M_PI_2;
-	game.control.rotate_left = TRUE;
-	update_input(&game);
+	game.player.rotate_speed = -M_PI_2;
+	update_input(&game.player);
 	cr_assert_float_eq(game.player.dir.x, 1.000000, 1e-6);
 	cr_assert_float_eq(game.player.dir.y, 0.000000, 1e-6);
 }
@@ -230,9 +233,8 @@ Test(keyboard, rotate_right)
 	game_init(&game);
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
-	game.player.speed = M_PI_2;
-	game.control.rotate_right = TRUE;
-	update_input(&game);
+	game.player.rotate_speed = M_PI_2;
+	update_input(&game.player);
 	cr_assert_float_eq(game.player.dir.x, -1.000000, 1e-6);
 	cr_assert_float_eq(game.player.dir.y, 0.000000, 1e-6);
 }

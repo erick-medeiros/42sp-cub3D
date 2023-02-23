@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 13:07:37 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 01:59:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define RAYCASTER_H
 
 # include "cub3d.h"
-
-# define FPS_FOV 0.66
 
 typedef enum e_hit
 {

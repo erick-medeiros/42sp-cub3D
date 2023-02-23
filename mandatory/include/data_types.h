@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 17:43:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 01:36:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # define XKEY_D 100
 # define XKEY_LEFT_ARROW 65361
 # define XKEY_RIGHT_ARROW 65363
+
+# define FOV_RAD 0.66
+# define MOVEMENT_SPEED 0.04
+# define STRAFE_SPEED 0.04
+# define ROTATE_SPEED_RAD 0.04
 
 # define MLX_ERROR 1
 
@@ -81,7 +86,11 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
-	double		speed;
+	t_vector	movement;
+	t_vector	strafe;
+	double		rotate_speed;
+	double		move_speed;
+	double		strafe_speed;
 }	t_player;
 
 typedef struct s_minimap
