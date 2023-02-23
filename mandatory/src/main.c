@@ -6,12 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:31:23 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:24:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "feature_flags.h"
+#include "parser.h"
 
 #define IMG_XPM "assets/penguin.xpm"
 #define COLOR_1 0xFFFF90

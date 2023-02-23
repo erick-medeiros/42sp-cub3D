@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 02:18:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 09:19:01 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdlib.h>     // malloc, free, exit
 # include <string.h>     // strerror
 # include <unistd.h>     // close, read, write
-# include "parser.h"
 
 // core
 void		game_init(t_game *game);
