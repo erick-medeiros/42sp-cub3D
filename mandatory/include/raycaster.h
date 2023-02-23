@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 01:59:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 03:17:24 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ t_dda		raycaster_dda_variables(t_player player, t_vector ray_dir);
 t_vector	raycaster_run_dda(t_game *game, t_dda *dda);
 void		raycaster_draw_line(t_game *game, t_vector start, t_vector end,
 				int hit_side);
+
+void		raycaster_ceiling(t_img *img, int argb_color);
+void		raycaster_floor(t_img *img, int argb_color);
 
 // minimap
 void		draw_player(t_game *game, t_minimap *minimap);

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 15:00:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 03:18:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,8 @@ t_img	*raycaster(t_game *game)
 	t_dda		dda;
 	t_ray_line	line;
 
-	draw_background(game->canvas, 0x000000);
-	draw_background(game->frame_3d, game->floor_color.argb);
-	draw_rectangle(game->frame_3d,
-		(t_rect){0, 0, game->frame_3d->width, game->frame_3d->height / 2},
-		game->ceilling_color.argb);
+	raycaster_ceiling(game->frame_3d, game->ceilling_color.argb);
+	raycaster_floor(game->frame_3d, game->floor_color.argb);
 	pixel = 0;
 	while (pixel < game->frame_3d->width)
 	{
