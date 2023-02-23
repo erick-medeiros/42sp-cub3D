@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 13:12:03 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 01:36:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,18 @@
 # define XKEY_LEFT_ARROW 65361
 # define XKEY_RIGHT_ARROW 65363
 
+# define FOV_RAD 0.66
+# define MOVEMENT_SPEED 0.04
+# define STRAFE_SPEED 0.04
+# define ROTATE_SPEED_RAD 0.04
+
 # define MLX_ERROR 1
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef struct s_img
 {
@@ -60,12 +71,26 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+typedef struct s_control
+{
+	t_bool	walk_up;
+	t_bool	walk_down;
+	t_bool	strafe_left;
+	t_bool	strafe_right;
+	t_bool	rotate_left;
+	t_bool	rotate_right;
+}	t_control;
+
 typedef struct s_player
 {
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
-	double		speed;
+	t_vector	movement;
+	t_vector	strafe;
+	double		rotate_speed;
+	double		move_speed;
+	double		strafe_speed;
 }	t_player;
 
 typedef struct s_minimap
@@ -89,6 +114,7 @@ typedef struct s_game
 	char		**map;
 	int			map_width;
 	int			map_height;
+	t_control	control;
 	t_img		*frame_3d;
 	t_player	player;
 	t_minimap	minimap;

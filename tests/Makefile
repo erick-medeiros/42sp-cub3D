@@ -4,13 +4,13 @@ CUB3D_DIR = ../mandatory/
 LIBFT_DIR = ../libs/libft/
 
 CC = gcc
-CFLAGS = -I$(CUB3D_DIR)include/ -I$(LIBFT_DIR)
+CFLAGS = -I$(CUB3D_DIR)include/ -I$(LIBFT_DIR) -fsanitize=address -g
 LDFLAGS = -L$(LIBFT_DIR)
 LDLIBS = -lft -lm -lmlx -lXext -lX11 -lcriterion
 RM = rm -rf
 FORMAT = clang-format -i
 
-SRC = keyboard.c cub.c
+SRC = keyboard.c
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
