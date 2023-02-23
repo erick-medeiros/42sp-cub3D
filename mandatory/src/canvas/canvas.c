@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:56:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 17:19:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:36:58 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	*destroy_canvas(void *mlx, t_img *canvas)
 	{
 		if (mlx && canvas->ptr)
 			mlx_destroy_image(mlx, canvas->ptr);
+		if (canvas->background)
+			free(canvas->background);
 		free(canvas);
 	}
 	return (NULL);
