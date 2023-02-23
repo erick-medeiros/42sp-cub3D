@@ -24,10 +24,10 @@ FILES += canvas/canvas.c canvas/color.c canvas/draw.c canvas/pixel.c
 FILES += canvas/bresenham.c canvas/layer.c
 FILES += core/game.c core/handle_events.c core/render.c
 FILES += core/player.c
-FILES += debug/print_bits.c debug/vector.c
-FILES += utils/utils.c utils/debug.c utils/vector1.c utils/vector2.c utils/vector3.c
+FILES += debug/print_bits.c debug/vector.c debug/print_map.c
+FILES += utils/utils.c utils/vector1.c utils/vector2.c utils/vector3.c
 FILES += validation/validation.c
-FILES += parser/parser.c
+FILES += parser/parser.c parser/utils.c
 FILES += raycaster/raycaster.c raycaster/minimap.c raycaster/texture.c
 FILES += raycaster/dda_algorithm.c
 

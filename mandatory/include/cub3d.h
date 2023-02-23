@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 12:59:52 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:06:29 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>     // malloc, free, exit
 # include <string.h>     // strerror
 # include <unistd.h>     // close, read, write
+# include "parser.h"
 
 // core
 int			game_setup(t_game *game);
@@ -70,10 +71,7 @@ void		init_minimap(t_game *game);
 // validation
 int			input_validation(int ac, char **av);
 
-// parsing
-int			init_map(t_game *game, char **av);
-
-// utils - vector
+// utils
 t_vector	create_vector(double x, double y);
 t_vector	add_vector(t_vector v1, t_vector v2);
 t_vector	sub_vector(t_vector v1, t_vector v2);
@@ -85,10 +83,10 @@ double		dot_product_of_vector(t_vector v1, t_vector v2);
 double		angle_between_vectors(t_vector v1, t_vector v2);
 t_vector	rotate_vector(t_vector v, double angle_radian);
 t_vector	set_mag_vector(t_vector v, double new_mag);
-
-// debug - utils
 int			perr(const char *str);
-void		debug_map(char **map);
 int			is_reserved_ch(char c, const char *set);
+
+// debug
+void		print_map(char **map);
 
 #endif
