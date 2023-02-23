@@ -10,7 +10,7 @@ LDLIBS = -lft -lm -lmlx -lXext -lX11 -lcriterion
 RM = rm -rf
 FORMAT = clang-format -i
 
-SRC = keyboard.c validation.c
+SRC = keyboard.c validation_test.c parser_test.c
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
@@ -21,13 +21,13 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)%.o: %.c
 	@${FORMAT} $<
-	$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@
 
 $(CUB3D):
-	make -C ..
+	@make -C ..
 
 $(NAME): $(CUB3D) $(OBJ_DIR) $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJ) $(wildcard $(CUB3D_DIR)obj/*/*.o) $(LDLIBS)
+	@$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJ) $(wildcard $(CUB3D_DIR)obj/*/*.o) $(LDLIBS)
 
 clean:
 	@$(RM) $(OBJ_DIR)
