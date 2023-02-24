@@ -4,7 +4,7 @@ CUB3D_DIR = ../mandatory/
 LIBFT_DIR = ../libs/libft/
 
 CC = gcc
-CFLAGS = -I$(CUB3D_DIR)include/ -I$(LIBFT_DIR) -fsanitize=address -g
+CFLAGS = -I$(CUB3D_DIR)include/ -I$(LIBFT_DIR) -g
 LDFLAGS = -L$(LIBFT_DIR)
 LDLIBS = -lft -lm -lmlx -lXext -lX11 -lcriterion
 RM = rm -rf
