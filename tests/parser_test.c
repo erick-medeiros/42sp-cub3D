@@ -1,4 +1,5 @@
 #include "cub3d.h"
+#include "parser.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 
@@ -34,11 +35,12 @@ Test(init_map, parser, .init = cr_redirect_stdout)
 	};
 	size_t n = sizeof(tt) / sizeof(tt[0]);
 
-	int i = -1;
-	while (++i < n)
+	size_t i = 0;
+	while (i < n)
 	{
 		int got = init_map(&tt[i].game, tt[i].av);
 		cr_expect(got == tt[i].expected, "%s expect %d, but got %d", tt[i].name,
 		          tt[i].expected, got);
+		++i;
 	}
 }
