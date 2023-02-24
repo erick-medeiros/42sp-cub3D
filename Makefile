@@ -105,13 +105,13 @@ tests:
 	make
 	@make -C tests/
 	@echo
-	./tests/tests.out
+	xvfb-run ./tests/tests.out
 
 debug:
 	make -e DEBUG=1
 
 install:
-#	sudo apt install bear
+#	sudo apt install bear xvfb
 	sudo apt install libcriterion-dev clang-format
 
 install_mlx:

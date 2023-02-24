@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 13:13:11 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:07:18 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char *argv[])
 {
 	t_game	game;
 
+	game_init(&game);
 	if (!input_validation(argc, argv))
 		return (1);
 	if (!init_map(&game, argv))

@@ -6,28 +6,15 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 17:21:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:45:40 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "window.h"
 
-void	game_init(t_game *game)
+static void	init_player(t_game *game)
 {
-	game->mlx = NULL;
-	game->win = NULL;
-	game->canvas = NULL;
-	game->north_texture = NULL;
-	game->south_texture = NULL;
-	game->west_texture = NULL;
-	game->east_texture = NULL;
-	game->control.strafe_right = FALSE;
-	game->control.strafe_left = FALSE;
-	game->control.walk_up = FALSE;
-	game->control.walk_down = FALSE;
-	game->control.rotate_left = FALSE;
-	game->control.rotate_right = FALSE;
 	game->player.plane = create_vector(FOV_RAD, 0);
 	game->player.pos = create_vector(0, 0);
 	game->player.dir = create_vector(0, 0);
@@ -38,20 +25,47 @@ void	game_init(t_game *game)
 	game->player.rotate_speed = 0;
 }
 
+void	game_init(t_game *game)
+{
+	game->mlx = NULL;
+	game->win = NULL;
+	game->window_width = WINDOW_WIDTH;
+	game->window_height = WINDOW_HEIGHT;
+	game->canvas = NULL;
+	game->frame_3d = NULL;
+	game->ceilling_color = separate_argb_color(0xFFFFFF);
+	game->floor_color = separate_argb_color(0x000000);
+	game->north_texture = NULL;
+	game->south_texture = NULL;
+	game->west_texture = NULL;
+	game->east_texture = NULL;
+	game->map = NULL;
+	game->map_width = 0;
+	game->map_height = 0;
+	game->control.strafe_right = FALSE;
+	game->control.strafe_left = FALSE;
+	game->control.walk_up = FALSE;
+	game->control.walk_down = FALSE;
+	game->control.rotate_left = FALSE;
+	game->control.rotate_right = FALSE;
+	init_player(game);
+}
+
 int	game_setup(t_game *game)
 {
-	game_init(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (MLX_ERROR);
 	game->win = mlx_new_window(game->mlx,
-			WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
+			game->window_width, game->window_height, WINDOW_NAME);
 	if (!game->win)
 		return (MLX_ERROR);
-	game->canvas = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	game->canvas = create_canvas(game->mlx,
+			game->window_width, game->window_height);
 	if (!game->canvas)
 		return (MLX_ERROR);
-	game->frame_3d = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	game->frame_3d = create_canvas(game->mlx,
+			game->window_width, game->window_height);
 	if (!game->frame_3d)
 		return (MLX_ERROR);
 	game->player.pos = create_vector(5, 5);

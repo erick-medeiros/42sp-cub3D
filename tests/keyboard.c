@@ -160,7 +160,6 @@ Test(keyboard, walk_up)
 	game.control.walk_up = TRUE;
 	input_handler(&game.player, &game.control);
 	update_input(&game.player, 15, 15);
-	debug_vector("pos", game.player.pos);
 	cr_assert_eq(game.player.pos.x, 10);
 	cr_assert_eq(game.player.pos.y, 12);
 }
