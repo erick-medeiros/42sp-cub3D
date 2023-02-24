@@ -23,8 +23,7 @@ Test(floor_and_ceiling, open)
 	game.map[9] = strdup("1111111111");
 	game_setup(&game);
 	game.player.pos = create_vector(5, 8);
-	render(&game);
-	mlx_do_sync(game.mlx);
+	reset_canvas(game.frame_3d);
 	color = mlx_get_argb_image_pixel(game.frame_3d, 0, 0);
 	cr_assert_eq(game.ceilling_color.argb, color.argb);
 	color = mlx_get_argb_image_pixel(game.frame_3d, 0, game.frame_3d->height - 1);
