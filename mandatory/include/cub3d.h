@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 17:20:21 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:02:44 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			game_setup(t_game *game);
 int			game_loop(t_game *game);
 int			destroy_game(t_game *game);
 
-void		update_input(t_player *player);
+void		update_input(t_player *player, int map_width, int map_height);
 int			render(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
@@ -53,11 +53,10 @@ void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
 void		draw_ceiling(t_img *img, int argb_color);
 void		draw_floor(t_img *img, int argb_color);
 double		calculate_scale(t_img *layer, double new_width, double new_height);
-void		draw_layer(t_game *game, t_img *layer, t_vector init);
-void		draw_layer_scale(t_game *game, t_img *layer, t_vector init,
+void		draw_layer(t_img *canvas, t_img *layer, t_vector init);
+void		draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 				double scale);
-void		draw_layer_fullscreen(t_game *game, t_img *layer);
-void		draw_grid(t_img *canvas, t_img *layer, t_vector init, double scale);
+void		draw_layer_fullscreen(t_img *canvas, t_img *layer);
 
 // color
 t_argb		create_argb_color(int a, int r, int g, int b);
