@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 20:41:27 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:42:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	int			window_width;
+	int			window_height;
 	t_img		*canvas;
 	t_img		*north_texture;
 	t_img		*south_texture;
