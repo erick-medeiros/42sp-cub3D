@@ -6,28 +6,15 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 17:21:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:15:26 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "window.h"
 
-void	game_init(t_game *game)
+static void	init_player(t_game *game)
 {
-	game->mlx = NULL;
-	game->win = NULL;
-	game->canvas = NULL;
-	game->north_texture = NULL;
-	game->south_texture = NULL;
-	game->west_texture = NULL;
-	game->east_texture = NULL;
-	game->control.strafe_right = FALSE;
-	game->control.strafe_left = FALSE;
-	game->control.walk_up = FALSE;
-	game->control.walk_down = FALSE;
-	game->control.rotate_left = FALSE;
-	game->control.rotate_right = FALSE;
 	game->player.plane = create_vector(FOV_RAD, 0);
 	game->player.pos = create_vector(0, 0);
 	game->player.dir = create_vector(0, 0);
@@ -38,9 +25,32 @@ void	game_init(t_game *game)
 	game->player.rotate_speed = 0;
 }
 
+void	game_init(t_game *game)
+{
+	game->mlx = NULL;
+	game->win = NULL;
+	game->canvas = NULL;
+	game->frame_3d = NULL;
+	game->ceilling_color = separate_argb_color(0xFFFFFF);
+	game->floor_color = separate_argb_color(0x000000);
+	game->north_texture = NULL;
+	game->south_texture = NULL;
+	game->west_texture = NULL;
+	game->east_texture = NULL;
+	game->map = NULL;
+	game->map_width = 0;
+	game->map_height = 0;
+	game->control.strafe_right = FALSE;
+	game->control.strafe_left = FALSE;
+	game->control.walk_up = FALSE;
+	game->control.walk_down = FALSE;
+	game->control.rotate_left = FALSE;
+	game->control.rotate_right = FALSE;
+	init_player(game);
+}
+
 int	game_setup(t_game *game)
 {
-	game_init(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (MLX_ERROR);

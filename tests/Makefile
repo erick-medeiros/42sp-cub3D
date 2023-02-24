@@ -10,7 +10,7 @@ LDLIBS = -lft -lm -lmlx -lXext -lX11 -lcriterion
 RM = rm -rf
 FORMAT = clang-format -i
 
-SRC = keyboard.c validation_test.c parser_test.c floor_and_ceiling.c
+SRC = keyboard.c validation_test.c parser_test.c render.c
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
