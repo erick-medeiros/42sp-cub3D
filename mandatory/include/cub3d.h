@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 01:38:13 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/24 01:13:17 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,43 +23,41 @@
 # include <stdlib.h>     // malloc, free, exit
 # include <string.h>     // strerror
 # include <unistd.h>     // close, read, write
-# include "parser.h"
 # include "colors.h"
 
 // core
+void		game_init(t_game *game);
 int			game_setup(t_game *game);
 int			game_loop(t_game *game);
 int			destroy_game(t_game *game);
 
+void		update_input(t_player *player, int map_width, int map_height);
 int			render(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
-
-// player
-void		rotate_player(t_player *player, double angle_radian);
-void		walk_up_player(t_player *player);
-void		walk_down_player(t_player *player);
-void		strafe_left_player(t_player *player);
-void		strafe_right_player(t_player *player);
+void		input_handler(t_player *player, t_control *control);
 
 // canvas
 t_img		*create_canvas(void *mlx, int width, int height);
 t_img		*create_canvas_texture(void *mlx, char *filename);
+void		save_canvas_background(t_img *canvas);
+void		reset_canvas(t_img *canvas);
 void		*destroy_canvas(void *mlx, t_img *canvas);
 void		mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
 t_argb		mlx_get_argb_image_pixel(t_img *img, int x, int y);
 
 // draw
-void		draw_line(t_img *img, t_vector p1, t_vector p2, int color);
+void		draw_line(t_img *img, t_vector p1, t_vector p2, int argb_color);
 void		draw_background(t_img *img, int color);
 void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
+void		draw_ceiling(t_img *img, int argb_color);
+void		draw_floor(t_img *img, int argb_color);
 double		calculate_scale(t_img *layer, double new_width, double new_height);
-void		draw_layer(t_game *game, t_img *layer, t_vector init);
-void		draw_layer_scale(t_game *game, t_img *layer, t_vector init,
+void		draw_layer(t_img *canvas, t_img *layer, t_vector init);
+void		draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 				double scale);
-void		draw_layer_fullscreen(t_game *game, t_img *layer);
-void		draw_grid(t_img *canvas, t_img *layer, t_vector init, double scale);
+void		draw_layer_fullscreen(t_img *canvas, t_img *layer);
 
 // color
 t_argb		create_argb_color(int a, int r, int g, int b);

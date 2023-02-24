@@ -6,41 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:31:32 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:21:25 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "window.h"
 
-static void	calculate_map_size(t_game *game)
-{
-	int	width;
-
-	if (!game->map)
-		return ;
-	game->map_width = 0;
-	game->map_height = 0;
-	while (game->map[game->map_height])
-	{
-		width = 0;
-		while (game->map[game->map_height][width])
-			width++;
-		if (game->map_width < width)
-			game->map_width = width;
-		game->map_height++;
-	}
-}
-
-static void	init_player(t_game *game)
-{
-	game->player.plane = create_vector(0.66, 0);
-	game->player.pos = create_vector(5, 5);
-	game->player.dir = create_vector(0, -1);
-	game->player.speed = 0.04;
-}
-
-int	game_setup(t_game *game)
+void	game_init(t_game *game)
 {
 	game->mlx = NULL;
 	game->win = NULL;
@@ -49,7 +22,25 @@ int	game_setup(t_game *game)
 	game->south_texture = NULL;
 	game->west_texture = NULL;
 	game->east_texture = NULL;
-	calculate_map_size(game);
+	game->control.strafe_right = FALSE;
+	game->control.strafe_left = FALSE;
+	game->control.walk_up = FALSE;
+	game->control.walk_down = FALSE;
+	game->control.rotate_left = FALSE;
+	game->control.rotate_right = FALSE;
+	game->player.plane = create_vector(FOV_RAD, 0);
+	game->player.pos = create_vector(0, 0);
+	game->player.dir = create_vector(0, 0);
+	game->player.movement = create_vector(0, 0);
+	game->player.strafe = create_vector(0, 0);
+	game->player.move_speed = MOVEMENT_SPEED;
+	game->player.strafe_speed = STRAFE_SPEED;
+	game->player.rotate_speed = 0;
+}
+
+int	game_setup(t_game *game)
+{
+	game_init(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (MLX_ERROR);
@@ -57,15 +48,18 @@ int	game_setup(t_game *game)
 			WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 	if (!game->win)
 		return (MLX_ERROR);
-	mlx_clear_window(game->mlx, game->win);
 	game->canvas = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->canvas)
 		return (MLX_ERROR);
-	game->frame_3d = create_canvas(game->mlx,
-			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	game->frame_3d = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->frame_3d)
 		return (MLX_ERROR);
-	init_player(game);
+	game->player.pos = create_vector(5, 5);
+	game->player.dir = create_vector(0, -1);
+	mlx_do_key_autorepeatoff(game->mlx);
+	draw_ceiling(game->frame_3d, game->ceilling_color.argb);
+	draw_floor(game->frame_3d, game->floor_color.argb);
+	save_canvas_background(game->frame_3d);
 	return (0);
 }
 
@@ -89,13 +83,19 @@ int	destroy_game(t_game *game)
 	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
 	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
 	game->frame_3d = destroy_canvas(game->mlx, game->frame_3d);
-	if (game->win)
+	if (game->mlx && game->win)
+	{
 		mlx_destroy_window(game->mlx, game->win);
+		game->win = NULL;
+	}
 	if (game->mlx)
 	{
+		mlx_do_key_autorepeaton(game->mlx);
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
+		game->mlx = NULL;
 	}
 	ft_free_matrix(game->map);
+	game->map = NULL;
 	return (0);
 }

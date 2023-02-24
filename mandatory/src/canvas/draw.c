@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:33:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 01:33:05 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 10:06:09 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,26 @@ void	draw_rectangle(t_img *img, t_rect rect, int argb_color)
 		}
 		pixel_y++;
 	}
+}
+
+void	draw_ceiling(t_img *img, int argb_color)
+{
+	t_rect	rect;
+
+	rect.x = 0;
+	rect.y = 0;
+	rect.width = img->width;
+	rect.height = img->height / 2;
+	draw_rectangle(img, rect, argb_color);
+}
+
+void	draw_floor(t_img *img, int argb_color)
+{
+	t_rect	rect;
+
+	rect.x = 0;
+	rect.y = img->height / 2;
+	rect.width = img->width;
+	rect.height = img->height;
+	draw_rectangle(img, rect, argb_color);
 }

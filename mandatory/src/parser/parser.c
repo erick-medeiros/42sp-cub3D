@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "parser.h"
 
 char	**get_map(int fd)
 {
@@ -39,6 +40,25 @@ char	**get_map(int fd)
 	return (map);
 }
 
+static void	calculate_map_size(t_game *game)
+{
+	int	width;
+
+	if (!game->map)
+		return ;
+	game->map_width = 0;
+	game->map_height = 0;
+	while (game->map[game->map_height])
+	{
+		width = 0;
+		while (game->map[game->map_height][width])
+			width++;
+		if (game->map_width < width)
+			game->map_width = width;
+		game->map_height++;
+	}
+}
+
 int	init_map(t_game *game, char **av)
 {
 	int	fd;
@@ -55,6 +75,7 @@ int	init_map(t_game *game, char **av)
 		ft_free_matrix(game->map);
 		return (0);
 	}
+	calculate_map_size(game);
 	print_map(game->map);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/21 14:30:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:42:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,40 @@
 #include "feature_flags.h"
 #include "raycaster.h"
 
+void	update_input(t_player *player, int map_width, int map_height)
+{
+	t_vector	move;
+	t_vector	strafe;
+
+	move = add_vector(player->pos, player->movement);
+	if (move.x >= 0 && move.x < map_width)
+		if (move.y >= 0 && move.y < map_height)
+			player->pos = move;
+	strafe = add_vector(player->pos, player->strafe);
+	if (strafe.x >= 0 && strafe.x < map_width)
+		if (strafe.y >= 0 && strafe.y < map_height)
+			player->pos = strafe;
+	if (player->rotate_speed)
+	{
+		player->dir = rotate_vector(player->dir, player->rotate_speed);
+		player->plane = rotate_vector(player->plane, player->rotate_speed);
+	}
+}
+
 int	render(t_game *game)
 {
-	draw_background(game->canvas, 0x000000);
+	update_input(&game->player, game->map_width, game->map_height);
 	if (FEATURE_FLAG_MINIMAP)
 		draw_minimap(game);
+	reset_canvas(game->frame_3d);
 	raycaster(game);
-	draw_layer_fullscreen(game, game->frame_3d);
 	if (FEATURE_FLAG_MINIMAP)
-		draw_layer(game, game->minimap.frame, game->minimap.pos);
+		draw_layer(game->frame_3d, game->minimap.frame, game->minimap.pos);
 	if (FEATURE_FLAG_PENGUIN)
 	{
 		draw_background(game->canvas, 0x000000);
-		draw_layer(game, game->north_texture, (t_vector){0, 0});
+		draw_layer(game->frame_3d, game->north_texture, create_vector(0, 0));
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->canvas->ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->frame_3d->ptr, 0, 0);
 	return (0);
 }
