@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/24 12:15:26 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:45:40 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	game_init(t_game *game)
 {
 	game->mlx = NULL;
 	game->win = NULL;
+	game->window_width = WINDOW_WIDTH;
+	game->window_height = WINDOW_HEIGHT;
 	game->canvas = NULL;
 	game->frame_3d = NULL;
 	game->ceilling_color = separate_argb_color(0xFFFFFF);
@@ -55,13 +57,15 @@ int	game_setup(t_game *game)
 	if (!game->mlx)
 		return (MLX_ERROR);
 	game->win = mlx_new_window(game->mlx,
-			WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
+			game->window_width, game->window_height, WINDOW_NAME);
 	if (!game->win)
 		return (MLX_ERROR);
-	game->canvas = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	game->canvas = create_canvas(game->mlx,
+			game->window_width, game->window_height);
 	if (!game->canvas)
 		return (MLX_ERROR);
-	game->frame_3d = create_canvas(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	game->frame_3d = create_canvas(game->mlx,
+			game->window_width, game->window_height);
 	if (!game->frame_3d)
 		return (MLX_ERROR);
 	game->player.pos = create_vector(5, 5);
