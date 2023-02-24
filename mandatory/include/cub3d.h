@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/22 23:06:29 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/23 01:38:13 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>     // strerror
 # include <unistd.h>     // close, read, write
 # include "parser.h"
+# include "colors.h"
 
 // core
 int			game_setup(t_game *game);
