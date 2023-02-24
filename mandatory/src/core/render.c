@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 20:44:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:42:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 #include "feature_flags.h"
 #include "raycaster.h"
 
-void	update_input(t_player *player)
+void	update_input(t_player *player, int map_width, int map_height)
 {
-	player->pos = add_vector(player->pos, player->movement);
-	player->pos = add_vector(player->pos, player->strafe);
+	t_vector	move;
+	t_vector	strafe;
+
+	move = add_vector(player->pos, player->movement);
+	if (move.x >= 0 && move.x < map_width)
+		if (move.y >= 0 && move.y < map_height)
+			player->pos = move;
+	strafe = add_vector(player->pos, player->strafe);
+	if (strafe.x >= 0 && strafe.x < map_width)
+		if (strafe.y >= 0 && strafe.y < map_height)
+			player->pos = strafe;
 	if (player->rotate_speed)
 	{
 		player->dir = rotate_vector(player->dir, player->rotate_speed);
@@ -27,7 +36,7 @@ void	update_input(t_player *player)
 
 int	render(t_game *game)
 {
-	update_input(&game->player);
+	update_input(&game->player, game->map_width, game->map_height);
 	if (FEATURE_FLAG_MINIMAP)
 		draw_minimap(game);
 	reset_canvas(game->frame_3d);

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 19:34:01 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:57:26 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,25 @@ t_vector	raycaster_run_dda(t_game *game, t_dda *dda)
 	int			hit;
 	double		dda_line_size_x;
 	double		dda_line_size_y;
-	t_vector	wall_map_pos;
+	t_vector	wall_hit;
 
 	hit = 0;
 	dda_line_size_x = dda->dist_to_side_x;
 	dda_line_size_y = dda->dist_to_side_y;
-	wall_map_pos = dda->map_pos;
+	wall_hit = dda->map_pos;
 	while (hit == 0)
 	{
-		dda_loop(&wall_map_pos, dda, &dda_line_size_x, &dda_line_size_y);
-		if (game->map[(int)wall_map_pos.y][(int)wall_map_pos.x] == '1')
+		dda_loop(&wall_hit, dda, &dda_line_size_x, &dda_line_size_y);
+		if (wall_hit.y < 0 || wall_hit.y >= game->map_height)
+			hit = 1;
+		if (wall_hit.x < 0 || wall_hit.x >= game->map_width)
+			hit = 1;
+		if (hit == 0 && game->map[(int)wall_hit.y][(int)wall_hit.x] == '1')
+			hit = 1;
+		if (hit == 0 && game->map[(int)wall_hit.y][(int)wall_hit.x] == ' ')
 			hit = 1;
 	}
-	return (wall_map_pos);
+	wall_hit.x = fmax(fmin(wall_hit.x, game->map_width - 1), 0);
+	wall_hit.y = fmax(fmin(wall_hit.y, game->map_height - 1), 0);
+	return (wall_hit);
 }
