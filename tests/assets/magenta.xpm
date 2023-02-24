@@ -1,5 +1,5 @@
 /* XPM */
-static char * Untitled_xpm[] = {
+static char * magenta_xpm[] = {
 "10 10 1 1",
 " 	c #FF00FF",
 "          ",
