@@ -6,14 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 13:02:19 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:26:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "raycaster.h"
 
-static void	dda_calcule_delta_dist(t_engine *engine)
+void	dda_calcule_delta_dist(t_engine *engine)
 {
 	if (engine->ray_dir.x == 0)
 	{
@@ -31,7 +31,7 @@ static void	dda_calcule_delta_dist(t_engine *engine)
 		engine->delta_dist_y = fabs(1 / engine->ray_dir.y);
 }
 
-static void	dda_calcule_dist_to_side(t_engine *engine, t_player player)
+void	dda_calcule_dist_to_side(t_engine *engine, t_player player)
 {
 	engine->map_pos = create_vector((int)player.pos.x, (int)player.pos.y);
 	if (engine->ray_dir.x < 0)
@@ -108,13 +108,13 @@ void	raycaster_run_dda(t_game *game, t_engine *engine)
 {
 	double	dda_line_size_x;
 	double	dda_line_size_y;
+	double	hit;
 
-	dda_calcule_delta_dist(engine);
-	dda_calcule_dist_to_side(engine, game->player);
 	dda_line_size_x = engine->dist_to_side_x;
 	dda_line_size_y = engine->dist_to_side_y;
 	engine->wall_hit = engine->map_pos;
-	while (check_hit(game, engine) == 0)
+	hit = 0;
+	while (hit == 0)
 	{
 		if (dda_line_size_x < dda_line_size_y)
 		{
@@ -128,6 +128,7 @@ void	raycaster_run_dda(t_game *game, t_engine *engine)
 			dda_line_size_y += engine->delta_dist_y;
 			engine->hit_side = HIT_Y;
 		}
+		hit = check_hit(game, engine);
 	}
 	which_side_hit(engine);
 }
