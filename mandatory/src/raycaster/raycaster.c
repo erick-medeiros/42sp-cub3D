@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 11:18:45 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:02:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ t_img	*raycaster(t_game *game)
 	while (pixel < game->frame_3d->width)
 	{
 		engine.ray_dir = raycaster_ray_dir(game->frame_3d, game->player, pixel);
-		raycaster_dda_variables(game->player, &engine);
-		engine.wall_hit = raycaster_run_dda(game, &engine);
+		raycaster_run_dda(game, &engine);
 		line = raycaster_get_line(game, engine, engine.ray_dir);
 		raycaster_draw_line(game,
 			((t_vector){pixel, line.start_y}),
