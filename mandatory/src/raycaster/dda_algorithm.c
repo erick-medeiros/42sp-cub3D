@@ -6,92 +6,88 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 22:57:26 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 11:18:22 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "raycaster.h"
 
-static void	dda_calcule_delta_dist(t_dda *dda, t_vector ray_dir)
+static void	dda_calcule_delta_dist(t_engine *engine)
 {
-	if (ray_dir.x == 0)
+	if (engine->ray_dir.x == 0)
 	{
-		dda->delta_dist_x = 1;
-		dda->delta_dist_y = 0;
+		engine->delta_dist_x = 1;
+		engine->delta_dist_y = 0;
 	}
-	else if (ray_dir.y)
-		dda->delta_dist_x = fabs(1 / ray_dir.x);
-	if (ray_dir.y == 0)
+	else if (engine->ray_dir.y)
+		engine->delta_dist_x = fabs(1 / engine->ray_dir.x);
+	if (engine->ray_dir.y == 0)
 	{
-		dda->delta_dist_x = 0;
-		dda->delta_dist_y = 1;
+		engine->delta_dist_x = 0;
+		engine->delta_dist_y = 1;
 	}
-	else if (ray_dir.x)
-		dda->delta_dist_y = fabs(1 / ray_dir.y);
+	else if (engine->ray_dir.x)
+		engine->delta_dist_y = fabs(1 / engine->ray_dir.y);
 }
 
-static void	dda_calcule_dist_to_side(t_dda *dda, t_player player,
-	t_vector ray_dir)
+static void	dda_calcule_dist_to_side(t_engine *engine, t_player player)
 {
-	if (ray_dir.x < 0)
+	if (engine->ray_dir.x < 0)
 	{
-		dda->dist_to_side_x = (player.pos.x - dda->map_pos.x)
-			* dda->delta_dist_x;
-		dda->step_x = -1;
+		engine->dist_to_side_x = (player.pos.x - engine->map_pos.x)
+			* engine->delta_dist_x;
+		engine->step_x = -1;
 	}
 	else
 	{
-		dda->dist_to_side_x = (dda->map_pos.x + 1 - player.pos.x)
-			* dda->delta_dist_x;
-		dda->step_x = 1;
+		engine->dist_to_side_x = (engine->map_pos.x + 1 - player.pos.x)
+			* engine->delta_dist_x;
+		engine->step_x = 1;
 	}
-	if (ray_dir.y < 0)
+	if (engine->ray_dir.y < 0)
 	{
-		dda->dist_to_side_y = (player.pos.y - dda->map_pos.y)
-			* dda->delta_dist_y;
-		dda->step_y = -1;
+		engine->dist_to_side_y = (player.pos.y - engine->map_pos.y)
+			* engine->delta_dist_y;
+		engine->step_y = -1;
 	}
 	else
 	{
-		dda->dist_to_side_y = (dda->map_pos.y + 1 - player.pos.y)
-			* dda->delta_dist_y;
-		dda->step_y = 1;
+		engine->dist_to_side_y = (engine->map_pos.y + 1 - player.pos.y)
+			* engine->delta_dist_y;
+		engine->step_y = 1;
 	}
 }
 
-t_dda	raycaster_dda_variables(t_player player, t_vector ray_dir)
+void	raycaster_dda_variables(t_player player, t_engine *engine)
 {
-	t_dda	dda;
-
-	dda_calcule_delta_dist(&dda, ray_dir);
-	dda.map_pos = create_vector((int)player.pos.x, (int)player.pos.y);
-	dda_calcule_dist_to_side(&dda, player, ray_dir);
-	return (dda);
+	dda_calcule_delta_dist(engine);
+	engine->map_pos = create_vector((int)player.pos.x, (int)player.pos.y);
+	dda_calcule_dist_to_side(engine, player);
 }
 
-static	void	dda_loop(t_vector *wall_map_pos, t_dda *dda,
+static	void	dda_loop(t_vector *wall_map_pos, t_engine *engine,
 	double *dda_line_size_x, double *dda_line_size_y)
 {
 	if (*dda_line_size_x < *dda_line_size_y)
 	{
-		wall_map_pos->x += dda->step_x;
-		*dda_line_size_x += dda->delta_dist_x;
-		dda->hit_side = HIT_WEST;
-		if (dda->step_x == 1)
-			dda->hit_side = HIT_EAST;
+		wall_map_pos->x += engine->step_x;
+		*dda_line_size_x += engine->delta_dist_x;
+		engine->hit_side = HIT_WEST;
+		if (engine->step_x == 1)
+			engine->hit_side = HIT_EAST;
 	}
 	else
 	{
-		wall_map_pos->y += dda->step_y;
-		*dda_line_size_y += dda->delta_dist_y;
-		dda->hit_side = HIT_NORTH;
-		if (dda->step_y == 1)
-			dda->hit_side = HIT_SOUTH;
+		wall_map_pos->y += engine->step_y;
+		*dda_line_size_y += engine->delta_dist_y;
+		engine->hit_side = HIT_NORTH;
+		if (engine->step_y == 1)
+			engine->hit_side = HIT_SOUTH;
 	}
 }
 
-t_vector	raycaster_run_dda(t_game *game, t_dda *dda)
+t_vector	raycaster_run_dda(t_game *game, t_engine *engine)
 {
 	int			hit;
 	double		dda_line_size_x;
@@ -99,12 +95,12 @@ t_vector	raycaster_run_dda(t_game *game, t_dda *dda)
 	t_vector	wall_hit;
 
 	hit = 0;
-	dda_line_size_x = dda->dist_to_side_x;
-	dda_line_size_y = dda->dist_to_side_y;
-	wall_hit = dda->map_pos;
+	dda_line_size_x = engine->dist_to_side_x;
+	dda_line_size_y = engine->dist_to_side_y;
+	wall_hit = engine->map_pos;
 	while (hit == 0)
 	{
-		dda_loop(&wall_hit, dda, &dda_line_size_x, &dda_line_size_y);
+		dda_loop(&wall_hit, engine, &dda_line_size_x, &dda_line_size_y);
 		if (wall_hit.y < 0 || wall_hit.y >= game->map_height)
 			hit = 1;
 		if (wall_hit.x < 0 || wall_hit.x >= game->map_width)

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 03:17:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 11:15:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ typedef enum e_hit
 	HIT_WEST
 }	t_hit;
 
-typedef struct e_dda
+typedef struct e_engine
 {
+	t_vector	ray_dir;
 	double		delta_dist_x;
 	double		delta_dist_y;
 	t_vector	map_pos;
@@ -34,7 +35,7 @@ typedef struct e_dda
 	int			step_y;
 	int			hit_side;
 	t_vector	wall_hit;
-}	t_dda;
+}	t_engine;
 
 typedef struct s_ray_line
 {
@@ -43,8 +44,8 @@ typedef struct s_ray_line
 	int	hit_side;
 }	t_ray_line;
 
-t_dda		raycaster_dda_variables(t_player player, t_vector ray_dir);
-t_vector	raycaster_run_dda(t_game *game, t_dda *dda);
+void		raycaster_dda_variables(t_player player, t_engine *engine);
+t_vector	raycaster_run_dda(t_game *game, t_engine *engine);
 void		raycaster_draw_line(t_game *game, t_vector start, t_vector end,
 				int hit_side);
 
@@ -55,6 +56,6 @@ void		raycaster_floor(t_img *img, int argb_color);
 void		draw_player(t_game *game, t_minimap *minimap);
 void		draw_minimap(t_game *game);
 t_img		*raycaster_minimap(t_game *game);
-void		draw_minimap_ray(t_game *game, t_dda *dda, t_vector ray_dir);
+void		draw_minimap_ray(t_game *game, t_engine *engine, t_vector ray_dir);
 
 #endif

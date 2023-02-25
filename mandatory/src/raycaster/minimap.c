@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 20:43:40 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:17:35 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ void	init_minimap(t_game *game)
 	game->minimap.pos = create_vector(coord.x, coord.y);
 }
 
-void	draw_minimap_ray(t_game *game, t_dda *dda, t_vector ray_dir)
+void	draw_minimap_ray(t_game *game, t_engine *engine, t_vector ray_dir)
 {
 	t_vector	start;
 	t_vector	end;
 	double		euclidian_dist;
 
 	start = mult_vector_scalar(game->player.pos, game->minimap.scale);
-	if (dda->hit_side == HIT_EAST || dda->hit_side == HIT_WEST)
-		euclidian_dist = (fabs(dda->wall_hit.x - game->player.pos.x
-					+ (((double)1 - dda->step_x) / 2))) * mag_vector(ray_dir)
+	if (engine->hit_side == HIT_EAST || engine->hit_side == HIT_WEST)
+		euclidian_dist = (fabs(engine->wall_hit.x - game->player.pos.x
+					+ (((double)1 - engine->step_x) / 2))) * mag_vector(ray_dir)
 			/ ray_dir.x;
 	else
-		euclidian_dist = (fabs(dda->wall_hit.y - game->player.pos.y
-					+ (((double)1 - dda->step_y) / 2))) * mag_vector(ray_dir)
+		euclidian_dist = (fabs(engine->wall_hit.y - game->player.pos.y
+					+ (((double)1 - engine->step_y) / 2))) * mag_vector(ray_dir)
 			/ ray_dir.y;
 	end = ray_dir;
 	end = set_mag_vector(ray_dir, fabs(euclidian_dist));
