@@ -73,6 +73,7 @@ int	init_map(t_game *game, char **av)
 	if (!is_valid_map(game->map))
 	{
 		ft_free_matrix(game->map);
+		game->map = NULL;
 		return (0);
 	}
 	calculate_map_size(game);
