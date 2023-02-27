@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 16:04:24 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:47:40 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,18 @@ int	perr(const char *str)
 	if (str)
 		printf("%s\n", str);
 	return (0);
+}
+
+void	clean_gnl(char *tmp, int fd)
+{
+	if (fd == -1)
+		return ;
+	free(tmp);
+	tmp = ft_gnl(fd);
+	while (tmp)
+	{
+		free(tmp);
+		tmp = ft_gnl(fd);
+	}
+	close(fd);
 }

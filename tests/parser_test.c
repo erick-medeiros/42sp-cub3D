@@ -44,3 +44,41 @@ Test(init_map, parser, .init = cr_redirect_stdout)
 		++i;
 	}
 }
+
+Test(init_config_params, texture_parameters, .init = cr_redirect_stdout)
+{
+	struct s_tt
+	{
+		char  *name;
+		t_game game;
+		char **av;
+		int    expected;
+	} tt[] = {
+	    {"00) valid texture maps:", (t_game){}, ft_split("./bin maps/valid/texture_params0.cub", ' '), 1},
+	    {"01) valid texture maps:", (t_game){}, ft_split("./bin maps/valid/texture_params1.cub", ' '), 1},
+	    {"02) invalid texture file extension:", (t_game){}, ft_split("./bin maps/invalid/texture_params2.cub", ' '), 0},
+	    {"03) invalid texture file extension:", (t_game){}, ft_split("./bin maps/invalid/texture_params3.cub", ' '), 0},
+	    {"04) invalid texture file:", (t_game){}, ft_split("./bin maps/invalid/texture_params4.cub", ' '), 0},
+	    {"05) invalid texture file:", (t_game){}, ft_split("./bin maps/invalid/texture_params5.cub", ' '), 0},
+	    {"06) invalid identifier:", (t_game){}, ft_split("./bin maps/invalid/texture_params6.cub", ' '), 0},
+	    {"07) invalid identifier:", (t_game){}, ft_split("./bin maps/invalid/texture_params7.cub", ' '), 0},
+	    {"08) invalid identifier:", (t_game){}, ft_split("./bin maps/invalid/texture_params8.cub", ' '), 0},
+	    {"09) invalid identifier:", (t_game){}, ft_split("./bin maps/invalid/texture_params9.cub", ' '), 0},
+	    {"10) invalid identifier:", (t_game){}, ft_split("./bin maps/invalid/texture_params10.cub", ' '), 0},
+	    {"11) tab separated:", (t_game){}, ft_split("./bin maps/valid/texture_params11.cub", ' '), 1},
+	    {"12) tab and space separated:", (t_game){}, ft_split("./bin maps/valid/texture_params12.cub", ' '), 1},
+	    {"13) space and tab separated:", (t_game){}, ft_split("./bin maps/valid/texture_params13.cub", ' '), 1},
+	    {"14) duplicated texture:", (t_game){}, ft_split("./bin maps/invalid/texture_params14.cub", ' '), 0},
+	    {"15) duplicated texture:", (t_game){}, ft_split("./bin maps/invalid/texture_params15.cub", ' '), 0},
+	};
+	size_t n = sizeof(tt) / sizeof(tt[0]);
+
+	size_t i = 0;
+	while (i < n)
+	{
+		int got = init_config_params(&tt[i].game, tt[i].av[1]);
+		cr_expect(got == tt[i].expected, "%s expect %d, but got %d", tt[i].name,
+		          tt[i].expected, got);
+		++i;
+	}
+}

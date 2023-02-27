@@ -21,7 +21,7 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)%.o: %.c
 	@${FORMAT} $<
-	@$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(CUB3D):
 	@make -C ..

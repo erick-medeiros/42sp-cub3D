@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/24 12:07:18 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 18:06:38 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int	main(int argc, char *argv[])
 	t_game	game;
 
 	game_init(&game);
-	if (!input_validation(argc, argv))
+	if (!input_validation(&game, argc, argv))
 		return (1);
 	if (!init_map(&game, argv))
 		return (1);
-	game.floor_color = separate_argb_color(COLOR_2);
-	game.ceilling_color = separate_argb_color(COLOR_3);
 	game_setup(&game);
 	if (FEATURE_FLAG_PENGUIN)
 		game.north_texture = create_canvas_texture(game.mlx, IMG_XPM);
+	game.floor_color = separate_argb_color(COLOR_2);
+	game.ceilling_color = separate_argb_color(COLOR_3);
 	if (FEATURE_FLAG_MINIMAP)
 		init_minimap(&game);
 	game_loop(&game);
