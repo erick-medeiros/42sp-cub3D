@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 18:26:26 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:39:10 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,16 @@ static int	is_valid_texture(t_game *game, char **matrix,
 	if (!path)
 		return (perr(err_msg));
 	if (!validate_file(path))
+	{
+		free(path);
 		return (0);
+	}
 	if (!init_texture(game, *cardinal, path))
+	{
+		free(path);
 		return (perr("[-] duplicated texture found"));
+	}
+	free(path);
 	return (1);
 }
 
