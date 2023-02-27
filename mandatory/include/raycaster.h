@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 18:26:21 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 18:35:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct e_engine
 	int			line_height;
 	int			line_start;
 	int			line_end;
+	double		wall_hit_x;
 }	t_engine;
 
 void	dda_calcule_delta_dist(t_engine *engine);
