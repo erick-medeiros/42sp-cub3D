@@ -3,27 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/24 14:45:40 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:25:14 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "window.h"
-
-static void	init_player(t_game *game)
-{
-	game->player.plane = create_vector(FOV_RAD, 0);
-	game->player.pos = create_vector(0, 0);
-	game->player.dir = create_vector(0, 0);
-	game->player.movement = create_vector(0, 0);
-	game->player.strafe = create_vector(0, 0);
-	game->player.move_speed = MOVEMENT_SPEED;
-	game->player.strafe_speed = STRAFE_SPEED;
-	game->player.rotate_speed = 0;
-}
 
 void	game_init(t_game *game)
 {
@@ -33,12 +21,6 @@ void	game_init(t_game *game)
 	game->window_height = WINDOW_HEIGHT;
 	game->canvas = NULL;
 	game->frame_3d = NULL;
-	game->ceilling_color = separate_argb_color(0xFFFFFF);
-	game->floor_color = separate_argb_color(0x000000);
-	game->north_texture = NULL;
-	game->south_texture = NULL;
-	game->west_texture = NULL;
-	game->east_texture = NULL;
 	game->map = NULL;
 	game->map_width = 0;
 	game->map_height = 0;
@@ -49,6 +31,7 @@ void	game_init(t_game *game)
 	game->control.rotate_left = FALSE;
 	game->control.rotate_right = FALSE;
 	init_player(game);
+	init_params(game);
 }
 
 int	game_setup(t_game *game)
@@ -91,12 +74,7 @@ int	game_loop(t_game *game)
 
 int	destroy_game(t_game *game)
 {
-	game->canvas = destroy_canvas(game->mlx, game->canvas);
-	game->north_texture = destroy_canvas(game->mlx, game->north_texture);
-	game->south_texture = destroy_canvas(game->mlx, game->south_texture);
-	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
-	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
-	game->frame_3d = destroy_canvas(game->mlx, game->frame_3d);
+	clean_canvas(game);
 	if (game->mlx && game->win)
 	{
 		mlx_destroy_window(game->mlx, game->win);
@@ -109,6 +87,7 @@ int	destroy_game(t_game *game)
 		free(game->mlx);
 		game->mlx = NULL;
 	}
+	clean_params(&game->params);
 	ft_free_matrix(game->map);
 	game->map = NULL;
 	return (0);

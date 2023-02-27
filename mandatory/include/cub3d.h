@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 22:02:44 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:54:38 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>     // malloc, free, exit
 # include <string.h>     // strerror
 # include <unistd.h>     // close, read, write
+# include "colors.h"
 
 // core
 void		game_init(t_game *game);
@@ -36,6 +37,11 @@ int			render(t_game *game);
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
 void		input_handler(t_player *player, t_control *control);
+
+void		init_player(t_game *game);
+void		init_params(t_game *game);
+void		clean_params(t_params *params);
+void		clean_canvas(t_game *game);
 
 // canvas
 t_img		*create_canvas(void *mlx, int width, int height);
@@ -67,7 +73,16 @@ t_img		*raycaster(t_game *game);
 void		init_minimap(t_game *game);
 
 // validation
-int			input_validation(int ac, char **av);
+void		clean_gnl(char *tmp, int fd);
+int			input_validation(t_game *game, int ac, char **av);
+int			files_validation(t_params *params, char *filepath);
+int			validation_failed(t_params *params);
+int			init_config_params(t_game *game, char *filepath);
+char		*get_identifier(char *row);
+char		**get_matrix(char *row);
+char		*get_filename(char *filename);
+int			validate_file(char *filepath);
+int			init_texture(t_game *game, char cardinal, char *path);
 
 // utils
 t_vector	create_vector(double x, double y);

@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 11:47:40 by frosa-ma         ###   ########.fr       */
+/*   Created: 2023/02/23 01:35:07 by frosa-ma          #+#    #+#             */
+/*   Updated: 2023/02/25 17:21:58 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef COLORS_H
+# define COLORS_H
 
-int	is_reserved_ch(char c, const char *set)
-{
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
+# define FG_RED "\x1b[38;5;1m"
+# define BG_RED "\x1b[41m"
+# define BG_GREEN_W "\x1b[42m"
+# define BG_GREEN_F "\x1b[48;5;22m"
+# define BG_BLUE "\x1b[48;5;45m"
+# define BG_YELLOW "\x1b[43m"
+# define BG_PURPLE "\x1b[45m"
+# define RES "\x1b[0m"
 
-int	perr(const char *str)
-{
-	if (str)
-		printf("%s\n", str);
-	return (0);
-}
-
-void	clean_gnl(char *tmp, int fd)
-{
-	if (fd == -1)
-		return ;
-	free(tmp);
-	tmp = ft_gnl(fd);
-	while (tmp)
-	{
-		free(tmp);
-		tmp = ft_gnl(fd);
-	}
-	close(fd);
-}
+#endif

@@ -1,7 +1,7 @@
 NO ./assets/penguin.xpm
 SO ./assets/penguin.xpm
 WE ./assets/penguin.xpm
-EA ./assets/penguin.xpm
+EA ./assets/penguin
 
 F 220,100,0
 C 225,30,0

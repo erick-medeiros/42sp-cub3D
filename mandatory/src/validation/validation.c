@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:47:13 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 15:09:41 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:45:16 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ static int	is_valid_input(int ac, char **av)
 	return (1);
 }
 
-int	input_validation(int ac, char **av)
+int	input_validation(t_game *game, int ac, char **av)
 {
 	if (!is_valid_input(ac, av))
+		return (0);
+	if (!init_config_params(game, av[1]))
 		return (0);
 	return (1);
 }
