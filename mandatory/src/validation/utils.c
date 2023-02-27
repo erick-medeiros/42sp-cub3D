@@ -6,54 +6,39 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:17:23 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 11:44:55 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:24:27 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+char	**get_matrix(char *row)
+{
+	char	**matrix;
+
+	matrix = NULL;
+	if (ft_strchr(row, '\t'))
+		matrix = ft_split(row, '\t');
+	else
+		matrix = ft_split(row, ' ');
+	if (!matrix)
+		return (NULL);
+	return (matrix);
+}
+
 char	*get_identifier(char *row)
 {
 	char	**matrix;
 	char	*id;
-	int		i;
 
-	matrix = ft_split(row, ' ');
+	matrix = get_matrix(row);
 	if (!matrix)
 		return (NULL);
-	i = 1;
-	while ((*matrix)[i++] == '\t')
-		matrix[i]++;
-	id = matrix[0];
+	id = ft_strdup(matrix[0]);
 	if (ft_strlen(id) > 2)
-	{
-		ft_free_matrix(matrix);
-		matrix = ft_split(row, '\t');
-		id = matrix[0];
-	}
+		return (NULL);
+	ft_free_matrix(matrix);
 	return (id);
-}
-
-char	**get_matrix(char *row)
-{
-	char	**matrix;
-	char	*id;
-	int		i;
-
-	matrix = ft_split(row, ' ');
-	if (!matrix)
-		return (NULL);
-	i = 1;
-	while ((*matrix)[i++] == '\t')
-		matrix[i]++;
-	id = matrix[0];
-	if (ft_strlen(id) > 2)
-	{
-		ft_free_matrix(matrix);
-		matrix = ft_split(row, '\t');
-		id = matrix[0];
-	}
-	return (matrix);
 }
 
 int	validate_file(char *filepath)
@@ -82,7 +67,7 @@ char	*get_filename(char *filename)
 {
 	if (!filename || ft_strncmp(filename, "\n", 2) == 0)
 		return (NULL);
-	return (filename);
+	return (ft_strdup(filename));
 }
 
 int	init_texture(t_game *game, char cardinal, char *path)

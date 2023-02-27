@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 11:52:59 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:26:26 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,11 @@ static int	is_valid_texture(t_game *game, char **matrix,
 
 	path = get_filename(matrix[1]);
 	if (!path)
-	{
-		ft_free_matrix(matrix);
 		return (perr(err_msg));
-	}
 	if (!validate_file(path))
-	{
-		ft_free_matrix(matrix);
 		return (0);
-	}
 	if (!init_texture(game, *cardinal, path))
-	{
-		ft_free_matrix(matrix);
 		return (perr("[-] duplicated texture found"));
-	}
 	return (1);
 }
 
@@ -45,15 +36,23 @@ static int	check_texture(t_game *game, char *row,
 	id = get_identifier(row);
 	if (!id)
 		return (0);
-	if (ft_strlen(id) == 1
-		|| (ft_strncmp(id, cardinal, 2) == 0 && ft_strlen(id) == 2))
+	if (ft_strlen(id) == 1 || (ft_strncmp(id, cardinal, 2) == 0
+			&& ft_strlen(id) == 2))
 	{
 		matrix = get_matrix(row);
 		if (!matrix[1])
+		{
+			ft_free_matrix(matrix);
 			return (perr(err_msg));
+		}
 		if (!is_valid_texture(game, matrix, cardinal, err_msg))
+		{
+			ft_free_matrix(matrix);
 			return (0);
+		}
+		ft_free_matrix(matrix);
 	}
+	free(id);
 	return (1);
 }
 
