@@ -6,14 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 17:26:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:09:06 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "raycaster.h"
 
-void	dda_calcule_delta_dist(t_engine *engine)
+static void	dda_calcule_delta_dist(t_engine *engine)
 {
 	if (engine->ray_dir.x == 0)
 	{
@@ -31,7 +31,7 @@ void	dda_calcule_delta_dist(t_engine *engine)
 		engine->delta_dist_y = fabs(1 / engine->ray_dir.y);
 }
 
-void	dda_calcule_dist_to_side(t_engine *engine, t_player player)
+static void	dda_calcule_dist_to_side(t_engine *engine, t_player player)
 {
 	engine->map_pos = create_vector((int)player.pos.x, (int)player.pos.y);
 	if (engine->ray_dir.x < 0)
@@ -86,49 +86,30 @@ static int	check_hit(t_game *game, t_engine *engine)
 	return (hit);
 }
 
-static void	which_side_hit(t_engine *engine)
+void	raycaster_perform_dda(t_game *game, t_engine *engine)
 {
-	if (engine->hit_side == HIT_X)
-	{
-		if (engine->step_x == 1)
-			engine->hit_side = HIT_EAST;
-		else
-			engine->hit_side = HIT_WEST;
-	}
-	if (engine->hit_side == HIT_Y)
-	{
-		if (engine->step_y == 1)
-			engine->hit_side = HIT_SOUTH;
-		else
-			engine->hit_side = HIT_NORTH;
-	}
-}
-
-void	raycaster_run_dda(t_game *game, t_engine *engine)
-{
-	double	dda_line_size_x;
-	double	dda_line_size_y;
 	double	hit;
 
-	dda_line_size_x = engine->dist_to_side_x;
-	dda_line_size_y = engine->dist_to_side_y;
+	dda_calcule_delta_dist(engine);
+	dda_calcule_dist_to_side(engine, game->player);
+	engine->dda_line_size_x = engine->dist_to_side_x;
+	engine->dda_line_size_y = engine->dist_to_side_y;
 	engine->wall_hit = engine->map_pos;
 	hit = 0;
 	while (hit == 0)
 	{
-		if (dda_line_size_x < dda_line_size_y)
+		if (engine->dda_line_size_x < engine->dda_line_size_y)
 		{
 			engine->wall_hit.x += engine->step_x;
-			dda_line_size_x += engine->delta_dist_x;
+			engine->dda_line_size_x += engine->delta_dist_x;
 			engine->hit_side = HIT_X;
 		}
 		else
 		{
 			engine->wall_hit.y += engine->step_y;
-			dda_line_size_y += engine->delta_dist_y;
+			engine->dda_line_size_y += engine->delta_dist_y;
 			engine->hit_side = HIT_Y;
 		}
 		hit = check_hit(game, engine);
 	}
-	which_side_hit(engine);
 }

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 18:35:32 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:08:50 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,18 @@ typedef struct e_engine
 	int			hit_side;
 	t_vector	wall_hit;
 	double		perp_wall_dist;
+	double		dda_line_size_x;
+	double		dda_line_size_y;
 	int			line_height;
 	int			line_start;
 	int			line_end;
 	double		wall_hit_x;
+	t_img		*texture;
+	t_argb		color;
 }	t_engine;
 
-void	dda_calcule_delta_dist(t_engine *engine);
-void	dda_calcule_dist_to_side(t_engine *engine, t_player player);
-void	raycaster_run_dda(t_game *game, t_engine *engine);
+void	raycaster_perform_dda(t_game *game, t_engine *engine);
 void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel);
-
-void	raycaster_ceiling(t_img *img, int argb_color);
-void	raycaster_floor(t_img *img, int argb_color);
 
 // minimap
 void	draw_player(t_game *game, t_minimap *minimap);

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 01:17:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:03:28 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_minimap_ray(t_game *game, t_engine *engine, t_vector ray_dir)
 	double		euclidian_dist;
 
 	start = mult_vector_scalar(game->player.pos, game->minimap.scale);
-	if (engine->hit_side == HIT_EAST || engine->hit_side == HIT_WEST)
+	if (engine->hit_side == HIT_X)
 		euclidian_dist = (fabs(engine->wall_hit.x - game->player.pos.x
 					+ (((double)1 - engine->step_x) / 2))) * mag_vector(ray_dir)
 			/ ray_dir.x;
