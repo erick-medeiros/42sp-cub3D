@@ -26,7 +26,7 @@ Test(input_validation, validation, .init = cr_redirect_stdout)
 	int i = -1;
 	while (++i < n)
 	{
-		int got = input_validation(tt[i].ac, tt[i].av);
+		int got = input_validation(&(t_game){}, tt[i].ac, tt[i].av);
 		cr_expect(got == tt[i].expected, "%s expect %d, but got %d", tt[i].name,
 		          tt[i].expected, got);
 	}

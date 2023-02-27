@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_types.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/24 14:42:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/25 18:00:27 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,6 @@ typedef struct s_argb
 	int	argb;
 }	t_argb;
 
-// HINT: we will probably need something like this
-typedef struct s_params
-{
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		ceil;
-	int		floor;
-}	t_params;
-
 typedef struct s_vector
 {
 	double	x;
@@ -104,6 +93,16 @@ typedef struct s_minimap
 	t_img		*frame;
 }	t_minimap;
 
+typedef struct s_params
+{
+	char	*north_texture;
+	char	*south_texture;
+	char	*east_texture;
+	char	*west_texture;
+	t_argb	ceilling_color;
+	t_argb	floor_color;
+}	t_params;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -124,6 +123,7 @@ typedef struct s_game
 	t_img		*frame_3d;
 	t_player	player;
 	t_minimap	minimap;
+	t_params	params;
 }	t_game;
 
 typedef struct s_rect
