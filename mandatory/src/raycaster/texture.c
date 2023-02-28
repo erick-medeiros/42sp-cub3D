@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:09:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 19:10:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:37:21 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ static void	raycaster_get_line(t_game *game, t_engine *engine)
 		engine->wall_hit_x = game->player.pos.x
 			+ (engine->perp_wall_dist * engine->ray_dir.x);
 	engine->wall_hit_x -= floor(engine->wall_hit_x);
+	raycaster_get_texture(game, engine);
 }
 
 void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel)
@@ -105,7 +106,6 @@ void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel)
 	double	tex_pos;
 
 	raycaster_get_line(game, engine);
-	raycaster_get_texture(game, engine);
 	tex_x = (int)(engine->wall_hit_x * engine->texture->width);
 	if (engine->hit_side == HIT_X && engine->ray_dir.x > 0)
 			tex_x = engine->texture->width - tex_x - 1;
@@ -120,7 +120,8 @@ void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel)
 		tex_y = (int)tex_pos & (engine->texture->height - 1);
 		tex_pos += step;
 		engine->color = mlx_get_argb_image_pixel(engine->texture, tex_x, tex_y);
-		mlx_put_image_pixel(game->frame_3d, pixel, y, engine->color.argb);
+		if (engine->color.a == 0)
+			mlx_put_image_pixel(game->frame_3d, pixel, y, engine->color.argb);
 		y++;
 	}
 }
