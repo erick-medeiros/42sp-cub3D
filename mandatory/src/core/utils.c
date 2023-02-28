@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 11:54:17 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:51 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,14 @@ void	init_params(t_game *game)
 	game->params.west_texture = NULL;
 }
 
-void	clean_params(t_params *params)
+void	init_textures(t_game *game)
 {
-	if (!params)
-		return ;
-	free(params->north_texture);
-	free(params->south_texture);
-	free(params->east_texture);
-	free(params->west_texture);
-}
-
-void	clean_canvas(t_game *game)
-{
-	game->canvas = destroy_canvas(game->mlx, game->canvas);
-	game->canvas = destroy_canvas(game->mlx, game->canvas);
-	game->north_texture = destroy_canvas(game->mlx, game->north_texture);
-	game->canvas = destroy_canvas(game->mlx, game->canvas);
-	game->canvas = destroy_canvas(game->mlx, game->canvas);
-	game->south_texture = destroy_canvas(game->mlx, game->south_texture);
-	game->canvas = destroy_canvas(game->mlx, game->canvas);
-	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
-	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
-	game->frame_3d = destroy_canvas(game->mlx, game->frame_3d);
+	game->north_texture = create_canvas_texture(game->mlx,
+			game->params.north_texture);
+	game->south_texture = create_canvas_texture(game->mlx,
+			game->params.south_texture);
+	game->west_texture = create_canvas_texture(game->mlx,
+			game->params.west_texture);
+	game->east_texture = create_canvas_texture(game->mlx,
+			game->params.east_texture);
 }

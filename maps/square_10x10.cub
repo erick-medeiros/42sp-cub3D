@@ -1,7 +1,7 @@
-NO ./assets/penguin.xpm
-SO ./assets/penguin.xpm
-WE ./assets/penguin.xpm
-EA ./assets/penguin.xpm
+NO ./assets/wolftex/pics_xpm/redbrick.xpm
+SO ./assets/wolftex/pics_xpm/redbrick.xpm
+WE ./assets/wolftex/pics_xpm/redbrick.xpm
+EA ./assets/wolftex/pics_xpm/redbrick.xpm
 
 F 220,100,0
 C 225,30,0

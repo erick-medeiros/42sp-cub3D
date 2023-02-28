@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:17:23 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 18:39:29 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:34 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_filename(char *filename)
 	return (ft_strdup(filename));
 }
 
-int	init_texture(t_game *game, char cardinal, char *path)
+int	save_texture_path(t_game *game, char cardinal, char *path)
 {
 	if (cardinal == 'N')
 	{

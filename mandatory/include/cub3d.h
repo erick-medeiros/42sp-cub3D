@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 11:54:38 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:10:47 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		init_player(t_game *game);
 void		init_params(t_game *game);
 void		clean_params(t_params *params);
 void		clean_canvas(t_game *game);
+void		init_textures(t_game *game);
 
 // canvas
 t_img		*create_canvas(void *mlx, int width, int height);
@@ -82,7 +83,7 @@ char		*get_identifier(char *row);
 char		**get_matrix(char *row);
 char		*get_filename(char *filename);
 int			validate_file(char *filepath);
-int			init_texture(t_game *game, char cardinal, char *path);
+int			save_texture_path(t_game *game, char cardinal, char *path);
 
 // utils
 t_vector	create_vector(double x, double y);
