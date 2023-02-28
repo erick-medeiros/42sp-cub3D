@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 21:02:22 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:21:52 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ int	main(int argc, char *argv[])
 
 	game_init(&game);
 	if (!input_validation(&game, argc, argv))
+	{
+		clean_params(&game.params);
 		return (1);
+	}
 	if (!init_map(&game, argv))
+	{
+		clean_params(&game.params);
 		return (1);
+	}
 	game.ceilling_color = separate_argb_color(0x00FFFF);
 	game.floor_color = separate_argb_color(0xFF00FF);
 	game_setup(&game);
-	game.north_texture = create_canvas_texture(game.mlx, "assets/red.xpm");
-	game.south_texture = create_canvas_texture(game.mlx, "assets/blue.xpm");
-	game.west_texture = create_canvas_texture(game.mlx, "assets/green.xpm");
-	game.east_texture = create_canvas_texture(game.mlx, "assets/yellow.xpm");
+	init_textures(&game);
 	if (FEATURE_FLAG_MINIMAP)
 		init_minimap(&game);
 	game_loop(&game);

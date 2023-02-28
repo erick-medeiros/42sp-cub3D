@@ -35,13 +35,12 @@ Test(init_map, parser, .init = cr_redirect_stdout)
 	};
 	size_t n = sizeof(tt) / sizeof(tt[0]);
 
-	size_t i = 0;
-	while (i < n)
+	size_t i = -1;
+	while (++i < n)
 	{
 		int got = init_map(&tt[i].game, tt[i].av);
 		cr_expect(got == tt[i].expected, "%s expect %d, but got %d", tt[i].name,
 		          tt[i].expected, got);
-		++i;
 	}
 }
 
@@ -73,12 +72,11 @@ Test(init_config_params, texture_parameters, .init = cr_redirect_stdout)
 	};
 	size_t n = sizeof(tt) / sizeof(tt[0]);
 
-	size_t i = 0;
-	while (i < n)
+	size_t i = -1;
+	while (++i < n)
 	{
 		int got = init_config_params(&tt[i].game, tt[i].av[1]);
 		cr_expect(got == tt[i].expected, "%s expect %d, but got %d", tt[i].name,
 		          tt[i].expected, got);
-		++i;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 18:26:26 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:01 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,16 @@ static int	is_valid_texture(t_game *game, char **matrix,
 	if (!path)
 		return (perr(err_msg));
 	if (!validate_file(path))
+	{
+		free(path);
 		return (0);
-	if (!init_texture(game, *cardinal, path))
+	}
+	if (!save_texture_path(game, *cardinal, path))
+	{
+		free(path);
 		return (perr("[-] duplicated texture found"));
+	}
+	free(path);
 	return (1);
 }
 
@@ -36,19 +43,20 @@ static int	check_texture(t_game *game, char *row,
 	id = get_identifier(row);
 	if (!id)
 		return (0);
-	if (ft_strlen(id) == 1 || (ft_strncmp(id, cardinal, 2) == 0
-			&& ft_strlen(id) == 2))
+	if (ft_strlen(id) == 1
+		|| (ft_strncmp(id, cardinal, 2) == 0 && ft_strlen(id) == 2))
 	{
 		matrix = get_matrix(row);
 		if (!matrix[1])
 		{
+			free(id);
 			ft_free_matrix(matrix);
 			return (perr(err_msg));
 		}
 		if (!is_valid_texture(game, matrix, cardinal, err_msg))
 		{
-			ft_free_matrix(matrix);
-			return (0);
+			free(id);
+			return (ft_free_matrix(matrix), 0);
 		}
 		ft_free_matrix(matrix);
 	}
@@ -56,7 +64,7 @@ static int	check_texture(t_game *game, char *row,
 	return (1);
 }
 
-static int	init_textures(t_game *game, char *row)
+static int	validate_texture_row(t_game *game, char *row)
 {
 	if (*row == 'N')
 		return (check_texture(game, row, "NO", "[-] missing north textures"));
@@ -73,7 +81,7 @@ static int	check_texture_param(t_game *game, char **row, int fd)
 {
 	int	valid;
 
-	valid = init_textures(game, *row);
+	valid = validate_texture_row(game, *row);
 	if (!valid)
 	{
 		clean_gnl(*row, fd);
@@ -100,7 +108,10 @@ int	init_config_params(t_game *game, char *filepath)
 			return (0);
 	if (!game->params.north_texture || !game->params.south_texture
 		|| !game->params.east_texture || !game->params.west_texture)
+	{
+		clean_gnl(row, fd);
 		return (perr("[-] invalid config file"));
+	}
 	clean_gnl(row, fd);
 	return (1);
 }
