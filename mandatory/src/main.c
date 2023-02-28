@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/28 15:21:52 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/28 20:04:35 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int argc, char *argv[])
 	game.ceilling_color = separate_argb_color(0x00FFFF);
 	game.floor_color = separate_argb_color(0xFF00FF);
 	game_setup(&game);
-	init_textures(&game);
 	if (FEATURE_FLAG_MINIMAP)
 		init_minimap(&game);
 	game_loop(&game);

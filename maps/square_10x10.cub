@@ -1,10 +1,10 @@
-NO ./assets/wolftex/pics_xpm/redbrick.xpm
-SO ./assets/wolftex/pics_xpm/redbrick.xpm
-WE ./assets/wolftex/pics_xpm/redbrick.xpm
-EA ./assets/wolftex/pics_xpm/redbrick.xpm
+NO ./assets/red.xpm
+SO ./assets/green.xpm
+WE ./assets/blue.xpm
+EA ./assets/yellow.xpm
 
-F 220,100,0
-C 225,30,0
+F 0,255,255
+C 255,0,255
 
 1111111111
 1100100011
