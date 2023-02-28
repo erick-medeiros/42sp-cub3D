@@ -3,7 +3,7 @@
 #include "parser.h"
 #include <criterion/criterion.h>
 
-#define RUNFOLDER "./tests/"
+#define RUNFOLDER "./"
 
 Test(render, floor_and_ceiling)
 {
@@ -28,7 +28,7 @@ Test(render, floor_and_ceiling)
 	destroy_game(&game);
 }
 
-Test(render, textures)
+Test(render, load_textures)
 {
 	const char *north_texture = RUNFOLDER "assets/cyan.xpm";
 	const char *south_texture = RUNFOLDER "assets/green.xpm";
@@ -53,5 +53,56 @@ Test(render, textures)
 	game.east_texture = create_canvas_texture(game.mlx, (char *) east_texture);
 	color = mlx_get_argb_image_pixel(game.east_texture, 0, 0);
 	cr_assert_eq(color.argb, 0xFFFF00);
+	destroy_game(&game);
+}
+
+Test(render, render_textures)
+{
+	const char  *north_texture = RUNFOLDER "assets/red.xpm";
+	const char  *south_texture = RUNFOLDER "assets/green.xpm";
+	const char  *west_texture = RUNFOLDER "assets/blue.xpm";
+	const char  *east_texture = RUNFOLDER "assets/yellow.xpm";
+	const t_argb ceilling = separate_argb_color(0x00FFFF);
+	const t_argb floor = separate_argb_color(0xFF00FF);
+	t_game       game;
+	t_argb       color;
+
+	game_init(&game);
+	game.window_width = 10;
+	game.window_height = 10;
+	game.map = calloc(3, sizeof(char *));
+	game.map[0] = strdup("111");
+	game.map[1] = strdup("1N1");
+	game.map[2] = strdup("111");
+	game.map_width = 3;
+	game.map_height = 3;
+	game.ceilling_color = ceilling;
+	game.floor_color = floor;
+	game_setup(&game);
+	game.north_texture = create_canvas_texture(game.mlx, (char *) north_texture);
+	game.south_texture = create_canvas_texture(game.mlx, (char *) south_texture);
+	game.west_texture = create_canvas_texture(game.mlx, (char *) west_texture);
+	game.east_texture = create_canvas_texture(game.mlx, (char *) east_texture);
+	game.player.pos = create_vector(1.5, 1.5);
+	// north
+	game.player.dir = create_vector(0, -1);
+	render(&game);
+	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	cr_assert_eq(color.argb, 0xFF0000);
+	// south
+	game.player.dir = create_vector(0, 1);
+	render(&game);
+	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	cr_assert_eq(color.argb, 0x00FF00);
+	// east
+	game.player.dir = create_vector(1, 0);
+	render(&game);
+	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	cr_assert_eq(color.argb, 0xFFFF00);
+	// west
+	game.player.dir = create_vector(-1, 0);
+	render(&game);
+	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	cr_assert_eq(color.argb, 0x0000FF);
 	destroy_game(&game);
 }

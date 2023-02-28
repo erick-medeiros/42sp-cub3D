@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 22:42:19 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 21:03:17 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ int	render(t_game *game)
 	raycaster(game);
 	if (FEATURE_FLAG_MINIMAP)
 		draw_layer(game->frame_3d, game->minimap.frame, game->minimap.pos);
-	if (FEATURE_FLAG_PENGUIN)
-	{
-		draw_background(game->canvas, 0x000000);
-		draw_layer(game->frame_3d, game->north_texture, create_vector(0, 0));
-	}
 	mlx_put_image_to_window(game->mlx, game->win, game->frame_3d->ptr, 0, 0);
 	return (0);
 }

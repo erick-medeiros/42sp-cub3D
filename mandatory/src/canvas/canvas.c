@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:56:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 17:36:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/02/27 21:20:59 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_img	*create_canvas_texture(void *mlx, char *filename)
 	texture = malloc(sizeof(*texture));
 	if (!texture)
 		return (NULL);
+	texture->background = NULL;
 	texture->ptr = mlx_xpm_file_to_image(mlx, filename,
 			&texture->width, &texture->height);
 	if (!texture->ptr)
@@ -46,6 +47,8 @@ t_img	*create_canvas_texture(void *mlx, char *filename)
 			&texture->bits_per_pixel, &texture->size_line, &texture->endian);
 	if (!texture->addr)
 		return (destroy_canvas(mlx, texture));
+	texture->size = texture->width * texture->height
+		* texture->bits_per_pixel / 8;
 	return (texture);
 }
 
