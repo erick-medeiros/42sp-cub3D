@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:17:23 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/27 18:24:27 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:26:34 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,31 +70,31 @@ char	*get_filename(char *filename)
 	return (ft_strdup(filename));
 }
 
-int	init_texture(t_game *game, char cardinal, char *path)
+int	save_texture_path(t_game *game, char cardinal, char *path)
 {
 	if (cardinal == 'N')
 	{
 		if (game->params.north_texture)
 			return (0);
-		game->params.north_texture = path;
+		game->params.north_texture = ft_strtrim(path, "\n");
 	}
 	if (cardinal == 'S')
 	{
 		if (game->params.south_texture)
 			return (0);
-		game->params.south_texture = path;
+		game->params.south_texture = ft_strtrim(path, "\n");
 	}
 	if (cardinal == 'E')
 	{
 		if (game->params.east_texture)
 			return (0);
-		game->params.east_texture = path;
+		game->params.east_texture = ft_strtrim(path, "\n");
 	}
 	if (cardinal == 'W')
 	{
 		if (game->params.west_texture)
 			return (0);
-		game->params.west_texture = path;
+		game->params.west_texture = ft_strtrim(path, "\n");
 	}
 	return (1);
 }
