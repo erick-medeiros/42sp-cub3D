@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:09:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 19:37:21 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:19:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,29 +99,27 @@ static void	raycaster_get_line(t_game *game, t_engine *engine)
 
 void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel)
 {
-	int		tex_y;
-	int		tex_x;
-	int		y;
+	t_px	tex_px;
+	t_px	frame_px;
 	double	step;
 	double	tex_pos;
 
 	raycaster_get_line(game, engine);
-	tex_x = (int)(engine->wall_hit_x * engine->texture->width);
+	tex_px.x = (int)(engine->wall_hit_x * engine->texture->width);
 	if (engine->hit_side == HIT_X && engine->ray_dir.x > 0)
-			tex_x = engine->texture->width - tex_x - 1;
+			tex_px.x = engine->texture->width - tex_px.x - 1;
 	if (engine->hit_side == HIT_Y && engine->ray_dir.y < 0)
-			tex_x = engine->texture->width - tex_x - 1;
+			tex_px.x = engine->texture->width - tex_px.x - 1;
 	step = 1.0 * engine->texture->height / engine->line_height;
 	tex_pos = (engine->line_start - (double)game->frame_3d->height / 2
 			+ (double)engine->line_height / 2) * step;
-	y = engine->line_start;
-	while (y < engine->line_end)
+	frame_px.x = pixel;
+	frame_px.y = engine->line_start;
+	while (frame_px.y < engine->line_end)
 	{
-		tex_y = (int)tex_pos & (engine->texture->height - 1);
+		tex_px.y = (int)tex_pos & (engine->texture->height - 1);
 		tex_pos += step;
-		engine->color = mlx_get_argb_image_pixel(engine->texture, tex_x, tex_y);
-		if (engine->color.a == 0)
-			mlx_put_image_pixel(game->frame_3d, pixel, y, engine->color.argb);
-		y++;
+		mlx_copy_image_pixel(game->frame_3d, frame_px, engine->texture, tex_px);
+		frame_px.y++;
 	}
 }

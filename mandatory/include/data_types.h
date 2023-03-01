@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_types.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 18:00:27 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:05:16 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }	t_vector;
+
+typedef struct s_px
+{
+	int	x;
+	int	y;
+}	t_px;
 
 typedef struct s_control
 {
