@@ -76,6 +76,10 @@ Test(init_config_params, texture_parameters, .init = cr_redirect_stdout)
 	    {"13) space and tab separated:", ft_split("./bin maps/valid/texture_params13.cub", ' '), 1},
 	    {"14) duplicated texture:", ft_split("./bin maps/invalid/texture_params14.cub", ' '), 0},
 	    {"15) duplicated texture:", ft_split("./bin maps/invalid/texture_params15.cub", ' '), 0},
+	    {"16) empty lines between:", ft_split("./bin maps/valid/texture_params16.cub", ' '), 1},
+	    {"17) empty lines between:", ft_split("./bin maps/valid/texture_params17.cub", ' '), 1},
+	    {"18) empty lines between:", ft_split("./bin maps/valid/texture_params18.cub", ' '), 1},
+	    {"19) empty lines between:", ft_split("./bin maps/valid/texture_params19.cub", ' '), 1},
 	};
 	size_t n = sizeof(tt) / sizeof(tt[0]);
 

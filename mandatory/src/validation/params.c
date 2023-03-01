@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/28 15:26:01 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:45:55 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,15 @@ static int	check_texture_param(t_game *game, char **row, int fd)
 	return (1);
 }
 
+int	is_empty_line(char **row, int fd)
+{
+	if (**row != '\n')
+		return (0);
+	free(*row);
+	*row = ft_gnl(fd);
+	return (1);
+}
+
 int	init_config_params(t_game *game, char *filepath)
 {
 	char	*row;
@@ -103,9 +112,13 @@ int	init_config_params(t_game *game, char *filepath)
 	row = ft_gnl(fd);
 	if (!row)
 		return (0);
-	while (row && is_reserved_ch(*row, "NSEW"))
+	while (row && is_reserved_ch(*row, "NSEW\n"))
+	{
+		if (is_empty_line(&row, fd))
+			continue ;
 		if (!check_texture_param(game, &row, fd))
 			return (0);
+	}
 	if (!game->params.north_texture || !game->params.south_texture
 		|| !game->params.east_texture || !game->params.west_texture)
 	{
