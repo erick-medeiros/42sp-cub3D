@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/01 20:34:28 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:09:45 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	clean_canvas(t_game *game)
 	game->canvas = destroy_canvas(game->mlx, game->canvas);
 	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
 	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
-	game->frame_3d = destroy_canvas(game->mlx, game->frame_3d);
 }
 
 int	destroy_game(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:56:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 21:20:59 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 09:58:34 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,54 @@
 
 t_img	*create_canvas(void *mlx, int width, int height)
 {
-	t_img	*canvas;
+	t_img	*img;
 
-	canvas = malloc(sizeof(*canvas));
-	canvas->ptr = mlx_new_image(mlx, width, height);
-	if (!canvas->ptr)
-		return (destroy_canvas(mlx, canvas));
-	canvas->addr = mlx_get_data_addr(canvas->ptr, &canvas->bits_per_pixel,
-			&canvas->size_line, &canvas->endian);
-	if (!canvas->addr)
-		return (destroy_canvas(mlx, canvas));
-	canvas->width = width;
-	canvas->height = height;
-	canvas->background = NULL;
-	canvas->size = canvas->width * canvas->height * canvas->bits_per_pixel / 8;
-	return (canvas);
+	img = malloc(sizeof(*img));
+	if (!img)
+		return (NULL);
+	img->width = width;
+	img->height = height;
+	img->background = NULL;
+	img->ptr = mlx_new_image(mlx, width, height);
+	if (!img->ptr)
+		return (destroy_canvas(mlx, img));
+	img->addr = mlx_get_data_addr(img->ptr,
+			&img->bytes_per_pixel, &img->size_line, &img->endian);
+	if (!img->addr)
+		return (destroy_canvas(mlx, img));
+	img->bytes_per_pixel = img->bytes_per_pixel / 8;
+	img->size = img->width * img->height * img->bytes_per_pixel;
+	img->alpha_mask = 0;
+	if (img->bytes_per_pixel == 4 && img->endian)
+		img->alpha_mask = 0xFF;
+	else if (img->bytes_per_pixel == 4 && !img->endian)
+		img->alpha_mask = 0xFF000000;
+	return (img);
 }
 
 t_img	*create_canvas_texture(void *mlx, char *filename)
 {
-	t_img	*texture;
+	t_img	*img;
 
-	texture = malloc(sizeof(*texture));
-	if (!texture)
+	img = malloc(sizeof(*img));
+	if (!img)
 		return (NULL);
-	texture->background = NULL;
-	texture->ptr = mlx_xpm_file_to_image(mlx, filename,
-			&texture->width, &texture->height);
-	if (!texture->ptr)
-		return (destroy_canvas(mlx, texture));
-	texture->addr = mlx_get_data_addr(texture->ptr,
-			&texture->bits_per_pixel, &texture->size_line, &texture->endian);
-	if (!texture->addr)
-		return (destroy_canvas(mlx, texture));
-	texture->size = texture->width * texture->height
-		* texture->bits_per_pixel / 8;
-	return (texture);
+	img->background = NULL;
+	img->ptr = mlx_xpm_file_to_image(mlx, filename, &img->width, &img->height);
+	if (!img->ptr)
+		return (destroy_canvas(mlx, img));
+	img->addr = mlx_get_data_addr(img->ptr,
+			&img->bytes_per_pixel, &img->size_line, &img->endian);
+	if (!img->addr)
+		return (destroy_canvas(mlx, img));
+	img->bytes_per_pixel = img->bytes_per_pixel / 8;
+	img->size = img->width * img->height * img->bytes_per_pixel;
+	img->alpha_mask = 0;
+	if (img->bytes_per_pixel == 4 && img->endian)
+		img->alpha_mask = 0xFF;
+	else if (img->bytes_per_pixel == 4 && !img->endian)
+		img->alpha_mask = 0xFF000000;
+	return (img);
 }
 
 void	save_canvas_background(t_img *canvas)
@@ -63,7 +75,7 @@ void	reset_canvas(t_img *canvas)
 	if (canvas->background)
 		ft_memcpy(canvas->addr, canvas->background, canvas->size);
 	else
-		draw_background(canvas, 0);
+		ft_memset(canvas->addr, 0, canvas->size);
 }
 
 void	*destroy_canvas(void *mlx, t_img *canvas)
