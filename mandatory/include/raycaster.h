@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 19:08:50 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:19:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 
 # include "cub3d.h"
 
-typedef enum e_hit
-{
-	HIT_X,
-	HIT_Y,
-	HIT_NORTH,
-	HIT_SOUTH,
-	HIT_EAST,
-	HIT_WEST
-}	t_hit;
+# define HIT_X 1
+# define HIT_Y 2
 
 typedef struct e_engine
 {
