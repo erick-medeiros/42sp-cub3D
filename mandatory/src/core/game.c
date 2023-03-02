@@ -6,33 +6,12 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 18:25:14 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/01 20:34:34 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "window.h"
-
-void	game_init(t_game *game)
-{
-	game->mlx = NULL;
-	game->win = NULL;
-	game->window_width = WINDOW_WIDTH;
-	game->window_height = WINDOW_HEIGHT;
-	game->canvas = NULL;
-	game->frame_3d = NULL;
-	game->map = NULL;
-	game->map_width = 0;
-	game->map_height = 0;
-	game->control.strafe_right = FALSE;
-	game->control.strafe_left = FALSE;
-	game->control.walk_up = FALSE;
-	game->control.walk_down = FALSE;
-	game->control.rotate_left = FALSE;
-	game->control.rotate_right = FALSE;
-	init_player(game);
-	init_params(game);
-}
 
 int	game_setup(t_game *game)
 {
@@ -69,26 +48,5 @@ int	game_loop(t_game *game)
 	mlx_hook(game->win, DestroyNotify, NoEventMask, &mlx_loop_end, game->mlx);
 	mlx_loop_hook(game->mlx, &render, game);
 	mlx_loop(game->mlx);
-	return (0);
-}
-
-int	destroy_game(t_game *game)
-{
-	clean_canvas(game);
-	if (game->mlx && game->win)
-	{
-		mlx_destroy_window(game->mlx, game->win);
-		game->win = NULL;
-	}
-	if (game->mlx)
-	{
-		mlx_do_key_autorepeaton(game->mlx);
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-		game->mlx = NULL;
-	}
-	clean_params(&game->params);
-	ft_free_matrix(game->map);
-	game->map = NULL;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/25 18:00:27 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:02:00 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,23 @@ typedef struct s_minimap
 	t_img		*frame;
 }	t_minimap;
 
+typedef struct s_colors
+{
+	char	*r;
+	char	*g;
+	char	*b;
+}	t_colors;
+
 typedef struct s_params
 {
-	char	*north_texture;
-	char	*south_texture;
-	char	*east_texture;
-	char	*west_texture;
-	t_argb	ceilling_color;
-	t_argb	floor_color;
+	char		*north_texture;
+	char		*south_texture;
+	char		*east_texture;
+	char		*west_texture;
+	t_argb		ceilling_color;
+	t_argb		floor_color;
+	t_colors	floor;
+	t_colors	ceil;
 }	t_params;
 
 typedef struct s_game

@@ -3,8 +3,8 @@ SO ./assets/wolftex/pics_xpm/redbrick.xpm
 WE ./assets/wolftex/pics_xpm/redbrick.xpm
 EA ./assets/wolftex/pics_xpm/redbrick.xpm
 
-F 220,100,0
-C 225,30,0
+F	230,80,0
+C 250,23,20
 
 1111111111
 1100100011
