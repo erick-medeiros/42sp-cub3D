@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/28 20:11:44 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/01 21:15:10 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "data_types.h"
+# include "window.h"
 # include <X11/X.h>      // X11 events
 # include <fcntl.h>      // open
 # include <libft.h>      // lib: libft
@@ -80,11 +81,19 @@ int			input_validation(t_game *game, int ac, char **av);
 int			files_validation(t_params *params, char *filepath);
 int			validation_failed(t_params *params);
 int			init_config_params(t_game *game, char *filepath);
-char		*get_identifier(char *row);
 char		**get_matrix(char *row);
 char		*get_filename(char *filename);
 int			validate_file(char *filepath);
-int			save_texture_path(t_game *game, char cardinal, char *path);
+
+int			validate_identifiers(char *filepath);
+int			validate_parameter(t_game *game, char **row, int fd);
+int			is_valid_rgb(t_game *game);
+int			validate_colors(t_game *game, char id);
+
+// parser
+int			check_texture(t_game *game, char *row, char *cardinal,
+				char *err_msg);
+int			check_rgb_color(t_game *game, char *row, char ch, char *err_msg);
 
 // utils
 t_vector	create_vector(double x, double y);
@@ -100,6 +109,9 @@ t_vector	rotate_vector(t_vector v, double angle_radian);
 t_vector	set_mag_vector(t_vector v, double new_mag);
 int			perr(const char *str);
 int			is_reserved_ch(char c, const char *set);
+int			is_empty_line(char **row, int fd);
+int			is_digit_string(char *str);
+int			is_player_found(char **map);
 
 // debug
 void		print_map(char **map);

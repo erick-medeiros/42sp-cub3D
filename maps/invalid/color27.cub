@@ -1,0 +1,18 @@
+NO ./assets/penguin.xpm
+SO ./assets/penguin.xpm
+WE ./assets/penguin.xpm
+EA ./assets/penguin.xpm
+
+F 256,2,2
+C 2,2,2
+
+1111111111
+1100100011
+1000000001
+1000000001
+1000000001
+1100E00011
+1000000001
+1000000001
+1100100011
+1111111111
