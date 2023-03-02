@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/01 20:48:45 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/01 21:15:10 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		init_params(t_game *game);
 void		clean_params(t_params *params);
 void		clean_canvas(t_game *game);
 void		init_textures(t_game *game);
+void		player_orientation(t_player *player, char orientation);
 
 // canvas
 t_img		*create_canvas(void *mlx, int width, int height);
