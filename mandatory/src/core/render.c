@@ -6,13 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 21:03:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/01 21:52:12 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "feature_flags.h"
 #include "raycaster.h"
+#include "debug.h"
 
 void	update_input(t_player *player, int map_width, int map_height)
 {
@@ -44,5 +45,7 @@ int	render(t_game *game)
 	if (FEATURE_FLAG_MINIMAP)
 		draw_layer(game->frame_3d, game->minimap.frame, game->minimap.pos);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame_3d->ptr, 0, 0);
+	if (FEATURE_FLAG_FPS)
+		fps_meter(game->mlx, -1);
 	return (0);
 }
