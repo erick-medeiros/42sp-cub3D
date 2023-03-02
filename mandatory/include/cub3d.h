@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/01 21:38:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:03:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_argb		create_argb_color(int a, int r, int g, int b);
 t_argb		separate_argb_color(int argb);
 
 // raycaster
-t_img		*raycaster(t_game *game);
+void		raycaster(t_game *game, t_img *img);
 void		init_minimap(t_game *game);
 
 // validation

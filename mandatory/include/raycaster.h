@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 12:19:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:07:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct e_engine
 	int			line_start;
 	int			line_end;
 	double		wall_hit_x;
+	t_img		*frame;
 	t_img		*texture;
 	t_argb		color;
 }	t_engine;

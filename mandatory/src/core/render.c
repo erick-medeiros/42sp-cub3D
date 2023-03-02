@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/01 21:52:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:04:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	render(t_game *game)
 	update_input(&game->player, game->map_width, game->map_height);
 	if (FEATURE_FLAG_MINIMAP)
 		draw_minimap(game);
-	reset_canvas(game->frame_3d);
-	raycaster(game);
+	reset_canvas(game->canvas);
+	raycaster(game, game->canvas);
 	if (FEATURE_FLAG_MINIMAP)
-		draw_layer(game->frame_3d, game->minimap.frame, game->minimap.pos);
-	mlx_put_image_to_window(game->mlx, game->win, game->frame_3d->ptr, 0, 0);
+		draw_layer(game->canvas, game->minimap.frame, game->minimap.pos);
+	mlx_put_image_to_window(game->mlx, game->win, game->canvas->ptr, 0, 0);
 	if (FEATURE_FLAG_FPS)
 		fps_meter(game->mlx, -1);
 	return (0);
