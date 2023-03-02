@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/01 21:39:30 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 09:55:50 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ typedef struct s_img
 {
 	void	*ptr;
 	void	*addr;
-	int		bits_per_pixel;
+	int		bytes_per_pixel;
 	int		size_line;
 	int		endian;
 	int		width;
 	int		height;
 	size_t	size;
 	void	*background;
+	int		alpha_mask;
 }	t_img;
 
 typedef struct s_argb
