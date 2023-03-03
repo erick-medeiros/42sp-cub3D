@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 14:03:04 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:12:08 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "data_types.h"
-# include "window.h"
+# include "config.h"
 # include <X11/X.h>      // X11 events
 # include <fcntl.h>      // open
 # include <libft.h>      // lib: libft
@@ -75,7 +75,6 @@ t_argb		separate_argb_color(int argb);
 
 // raycaster
 void		raycaster(t_game *game, t_img *img);
-void		init_minimap(t_game *game);
 
 // validation
 void		clean_gnl(char *tmp, int fd);

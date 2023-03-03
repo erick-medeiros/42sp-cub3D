@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/02 14:08:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:56:41 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	game_init(t_game *game)
 	game->control.rotate_right = FALSE;
 	init_player(game);
 	init_params(game);
+	game->minimap.frame = NULL;
 }
 
 void	init_player(t_game *game)

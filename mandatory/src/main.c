@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/01 21:14:54 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:17:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "feature_flags.h"
 #include "parser.h"
+#include "minimap.h"
 
 int	main(int argc, char *argv[])
 {

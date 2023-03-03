@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 14:08:38 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:12:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "window.h"
 
 int	game_setup(t_game *game)
 {

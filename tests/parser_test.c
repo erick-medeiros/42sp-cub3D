@@ -31,6 +31,8 @@ Test(init_map, parser, .init = cr_redirect_stdout)
 	    {"18) player at W:", ft_split("./bin maps/valid/west.cub", ' '), 1},
 	    {"19) player at E:", ft_split("./bin maps/valid/east.cub", ' '), 1},
 	    {"20) minimum map size:", ft_split("./bin maps/valid/min_map.cub", ' '), 1},
+	    {"21) exceeded maximum height:", ft_split("./bin maps/invalid/size_3_101.cub", ' '), 0},
+	    {"22) exceeded maximum width:", ft_split("./bin maps/invalid/size_101_3.cub", ' '), 0},
 	};
 	size_t n = sizeof(tt) / sizeof(tt[0]);
 
