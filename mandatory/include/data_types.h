@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 14:17:34 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:49:22 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ typedef struct s_minimap
 	t_vector	pos;
 	int			scale;
 	t_img		*frame;
+	t_img		*map_2d;
+	t_px		middle_frame;
+	t_bool		fullscreen;
 }	t_minimap;
 
 typedef struct s_colors
