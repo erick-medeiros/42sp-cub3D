@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 18:59:47 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 17:29:31 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/03/03 11:05:21 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/03/03 11:11:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-# define WINDOW_H
+#ifndef CONFIG_H
+# define CONFIG_H
 
+// window settings
 # define WINDOW_NAME "cub3D"
 # define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 768
+
+// player moves
+# define FOV_RAD 0.66
+# define MOVEMENT_SPEED 0.04
+# define STRAFE_SPEED 0.04
+# define ROTATE_SPEED_RAD 0.04
+
+// max map size
+# define MAX_MAP_SIZE 100
 
 #endif
