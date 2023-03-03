@@ -6,40 +6,30 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:32:57 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 20:12:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:20:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "debug.h"
 
-double	calculate_scale(t_img *layer, double new_width, double new_height)
-{
-	double	scale;
-
-	scale = fmin(new_width / layer->width, new_height / layer->height);
-	return (scale);
-}
-
 void	draw_layer(t_img *canvas, t_img *layer, t_vector init)
 {
-	t_argb	color;
-	int		pixel_x;
-	int		pixel_y;
+	t_px	layer_pixel;
+	t_px	canvas_pixel;
 
-	pixel_y = 0;
-	while (pixel_y < layer->height)
+	layer_pixel.y = 0;
+	while (layer_pixel.y < layer->height)
 	{
-		pixel_x = 0;
-		while (pixel_x < layer->width)
+		layer_pixel.x = 0;
+		while (layer_pixel.x < layer->width)
 		{
-			color = mlx_get_argb_image_pixel(layer, pixel_x, pixel_y);
-			if (color.a == 0)
-				mlx_put_image_pixel(canvas,
-					init.x + pixel_x, init.y + pixel_y, color.argb);
-			pixel_x++;
+			canvas_pixel.x = init.x + layer_pixel.x;
+			canvas_pixel.y = init.y + layer_pixel.y;
+			mlx_copy_image_pixel(canvas, canvas_pixel, layer, layer_pixel);
+			layer_pixel.x++;
 		}
-		pixel_y++;
+		layer_pixel.y++;
 	}
 }
 
@@ -74,6 +64,7 @@ void	draw_layer_fullscreen(t_img *canvas, t_img *layer)
 {
 	double	scale;
 
-	scale = calculate_scale(layer, canvas->width, canvas->height);
+	scale = fmin((double)canvas->width / layer->width,
+			(double)canvas->height / layer->height);
 	draw_layer_scale(canvas, layer, create_vector(0, 0), scale);
 }

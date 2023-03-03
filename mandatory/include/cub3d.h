@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 11:12:08 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:12:10 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void		draw_background(t_img *img, int color);
 void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
 void		draw_ceiling(t_img *img, int argb_color);
 void		draw_floor(t_img *img, int argb_color);
-double		calculate_scale(t_img *layer, double new_width, double new_height);
 void		draw_layer(t_img *canvas, t_img *layer, t_vector init);
 void		draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 				double scale);

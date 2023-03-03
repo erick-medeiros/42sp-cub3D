@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 10:39:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:27:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void	init_minimap(t_game *game)
 {
 	t_rect	coord;
+	double	edge_distance;
 
-	coord.width = game->canvas->width * 0.10;
-	coord.height = game->canvas->height * 0.20;
-	coord.x = game->canvas->width - coord.width - 100;
-	coord.y = 100;
+	coord.width = game->canvas->width * 0.15;
+	coord.height = game->canvas->height * 0.15;
+	edge_distance = fmin(coord.width * 0.15, coord.height * 0.15);
+	coord.x = game->canvas->width - coord.width - edge_distance;
+	coord.y = edge_distance;
 	game->minimap.frame = create_canvas(game->mlx, coord.width, coord.height);
-	game->minimap.scale = fmin((double)coord.width / game->map_width,
-			(double)coord.height / game->map_height);
+	game->minimap.scale = 15;
 	game->minimap.pos = create_vector(coord.x, coord.y);
 }
 
@@ -89,11 +90,11 @@ void	draw_minimap(t_game *game)
 	int		y;
 
 	draw_background(game->minimap.frame, MINIMAP_COLOR_TRANSPARENT);
-	x = 0;
-	while (x < game->map_width)
+	x = -1;
+	while (++x < game->map_width)
 	{
-		y = 0;
-		while (y < game->map_height)
+		y = -1;
+		while (++y < game->map_height)
 		{
 			rect.x = (x * game->minimap.scale);
 			rect.y = (y * game->minimap.scale);
@@ -101,12 +102,11 @@ void	draw_minimap(t_game *game)
 			rect.height = game->minimap.scale;
 			if (game->map[y][x] == '1')
 				draw_rectangle(game->minimap.frame, rect, MINIMAP_COLOR_WALL);
-			else
+			else if (game->map[y][x] == '0')
 				draw_rectangle(game->minimap.frame, rect, MINIMAP_COLOR_FLOOR);
-			minimap_border(game, &rect);
-			y++;
+			if (game->map[y][x] != ' ')
+				minimap_border(game, &rect);
 		}
-		x++;
 	}
 	draw_player(game, &game->minimap);
 }
