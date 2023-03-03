@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 14:07:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:17:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,5 @@ typedef struct e_engine
 
 void	raycaster_perform_dda(t_game *game, t_engine *engine);
 void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel);
-
-// minimap
-void	draw_player(t_game *game, t_minimap *minimap);
-void	draw_minimap(t_game *game);
-t_img	*raycaster_minimap(t_game *game);
-void	draw_minimap_ray(t_game *game, t_engine *engine, t_vector ray_dir);
 
 #endif
