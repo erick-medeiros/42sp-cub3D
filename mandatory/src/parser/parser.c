@@ -68,6 +68,23 @@ static char	**split_map(char *map_array, int map_width)
 	return (map);
 }
 
+int	check_map_sizes(t_game *game)
+{
+	if (game->map_width > MAX_MAP_SIZE)
+	{
+		ft_free_matrix(game->map);
+		game->map = NULL;
+		return (perr("[-] exceeded maximum width"));
+	}
+	if (game->map_height > MAX_MAP_SIZE)
+	{
+		ft_free_matrix(game->map);
+		game->map = NULL;
+		return (perr("[-] exceeded maximum height"));
+	}
+	return (1);
+}
+
 int	init_map(t_game *game, char **av)
 {
 	int		fd;
@@ -83,6 +100,8 @@ int	init_map(t_game *game, char **av)
 	close(fd);
 	if (!game->map)
 		return (perr("[-] empty map"));
+	if (!check_map_sizes(game))
+		return (0);
 	if (!is_valid_map(game->map))
 	{
 		ft_free_matrix(game->map);
