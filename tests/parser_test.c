@@ -224,6 +224,8 @@ Test(init_map, map_borders)
 	    {"48) invalid player position:", ft_split("./bin maps/valid/borders48.cub", ' '), 0},
 	    {"49) invalid player position:", ft_split("./bin maps/valid/borders49.cub", ' '), 0},
 
+	    {"50) invalid border:", ft_split("./bin maps/valid/borders50.cub", ' '), 0},
+
 	};
 	size_t n = sizeof(tt) / sizeof(tt[0]);
 

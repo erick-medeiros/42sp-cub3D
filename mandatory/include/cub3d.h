@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/01 21:38:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 14:58:05 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int			validate_identifiers(char *filepath);
 int			validate_parameter(t_game *game, char **row, int fd);
 int			is_valid_rgb(t_game *game);
 int			validate_colors(t_game *game, char id);
+int			validate_sides(t_game *game);
 
 // parser
 int			check_texture(t_game *game, char *row, char *cardinal,
