@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/04 13:12:53 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:21:22 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int			is_reserved_ch(char c, const char *set);
 int			is_empty_line(char **row, int fd);
 int			is_digit_string(char *str);
 int			is_player_found(char **map);
+double		calcule_scale(int origin_width, int origin_height,
+				int destination_width, int destination_height);
 
 // debug
 void		print_map(char **map);

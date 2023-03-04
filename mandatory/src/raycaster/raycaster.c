@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 10:38:02 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:28:53 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	raycaster(t_game *game, t_img *img)
 		raycaster_perform_dda(game, &engine);
 		raycaster_draw_line(game, &engine, pixel);
 		if (FEATURE_FLAG_MINIMAP && game->minimap.frame)
-			draw_minimap_ray(game, &engine, engine.ray_dir);
+			draw_minimap_ray(game, &engine);
 		pixel++;
 	}
 }

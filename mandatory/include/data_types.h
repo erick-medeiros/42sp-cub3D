@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/04 14:43:45 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:10:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_minimap
 	t_px		pos_fullscreen;
 	t_px		middle_frame;
 	t_bool		fullscreen;
-	double		scale_fullscreen;
+	double		scale_full;
 	t_px		start_map_in_fullscreen;
 }	t_minimap;
 

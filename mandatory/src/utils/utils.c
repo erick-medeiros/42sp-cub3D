@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/01 20:08:56 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:21:57 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,18 @@ int	is_digit_string(char *str)
 		if (!ft_isdigit(str[i]))
 			return (0);
 	return (1);
+}
+
+double	calcule_scale(int origin_width, int origin_height,
+	int destination_width, int destination_height)
+{
+	double	width_proportion;
+	double	height_proportion;
+
+	width_proportion = (double) destination_width / origin_width;
+	height_proportion = (double) destination_height / origin_height;
+	if (width_proportion > height_proportion)
+		return (height_proportion);
+	else
+		return (width_proportion);
 }
