@@ -6,28 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/04 17:29:15 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:26:10 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minimap.h"
-
-static void	minimap_border(t_img *frame, t_rect *rect)
-{
-	t_vector	p1;
-	t_vector	p2;
-	t_vector	p3;
-	t_vector	p4;
-
-	p1 = create_vector(rect->x, rect->y);
-	p2 = create_vector(p1.x + rect->width, p1.y);
-	p3 = create_vector(p1.x, p1.y + rect->height);
-	p4 = create_vector(p1.x + rect->width, p1.y + rect->height);
-	draw_line(frame, p1, p2, MINIMAP_COLOR_GRID);
-	draw_line(frame, p1, p3, MINIMAP_COLOR_GRID);
-	draw_line(frame, p2, p4, MINIMAP_COLOR_GRID);
-	draw_line(frame, p3, p4, MINIMAP_COLOR_GRID);
-}
 
 void	draw_map_2d(t_game *game, t_img *frame, double scale)
 {
@@ -49,8 +32,6 @@ void	draw_map_2d(t_game *game, t_img *frame, double scale)
 				draw_rectangle(frame, rect, MINIMAP_COLOR_WALL);
 			else if (game->map[pixel.y][pixel.x] != ' ')
 				draw_rectangle(frame, rect, MINIMAP_COLOR_FLOOR);
-			if (game->map[pixel.y][pixel.x] != ' ')
-				minimap_border(frame, &rect);
 		}
 	}
 }
@@ -66,7 +47,8 @@ void	init_minimap(t_game *game)
 	coord.y = game->minimap.edge_distance;
 	game->minimap.frame = create_canvas(game->mlx, coord.width, coord.height);
 	game->minimap.scale = 15;
-	game->minimap.pos = create_vector(coord.x, coord.y);
+	game->minimap.pos.x = coord.x;
+	game->minimap.pos.y = coord.y;
 	game->minimap.map_2d = create_canvas(game->mlx,
 			game->map_width * game->minimap.scale,
 			game->map_height * game->minimap.scale);

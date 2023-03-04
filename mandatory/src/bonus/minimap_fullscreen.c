@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 14:51:31 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/04 17:27:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:27:26 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_minimap_fullscreen(t_game *game)
 		- ((double) game->minimap.frame_fullscreen->width / 2);
 	game->minimap.pos_fullscreen.y = ((double) game->canvas->height / 2)
 		- ((double) game->minimap.frame_fullscreen->height / 2);
-	game->minimap.fullscreen = TRUE;
+	game->minimap.fullscreen = FALSE;
 }
 
 void	draw_minimap_fullscreen_ray(t_game *game, t_engine *engine,
