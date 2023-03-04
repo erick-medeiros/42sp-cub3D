@@ -30,8 +30,10 @@ FILES += debug/print_bits.c debug/vector.c debug/print_map.c debug/engine.c debu
 FILES += utils/utils.c utils/vector1.c utils/vector2.c utils/vector3.c
 FILES += validation/validation.c validation/parameters.c validation/colors.c validation/utils.c
 FILES += parser/parser.c parser/colors.c parser/textures.c parser/utils.c
-FILES += raycaster/raycaster.c raycaster/minimap.c raycaster/texture.c
+FILES += raycaster/raycaster.c raycaster/texture.c
 FILES += raycaster/dda_algorithm.c
+
+FILES += bonus/minimap.c bonus/minimap_fullscreen.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/

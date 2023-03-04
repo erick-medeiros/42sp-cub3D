@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:15:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 16:58:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 12:34:06 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 void	init_minimap(t_game *game);
 void	draw_minimap(t_game *game);
+void	draw_fullscreen_minimap(t_game *game);
 void	draw_minimap_ray(t_game *game, t_engine *engine, t_vector ray_dir);
 
 #endif
