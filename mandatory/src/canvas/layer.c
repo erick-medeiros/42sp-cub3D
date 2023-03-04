@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:32:57 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 16:07:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:12:44 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,17 @@ void	draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 	}
 }
 
-void	draw_layer_fullscreen(t_img *canvas, t_img *layer)
+void	draw_layer_fullscreen(t_img *canvas, t_img *layer, double *scale,
+	t_px *pixel)
 {
-	double	scale;
+	double	start_w;
+	double	start_h;
 
-	scale = fmin((double)canvas->width / layer->width,
+	*scale = fmin((double)canvas->width / layer->width,
 			(double)canvas->height / layer->height);
-	draw_layer_scale(canvas, layer, create_vector(0, 0), scale);
+	start_w = ((double) canvas->width / 2) - ((*scale * layer->width) / 2);
+	start_h = ((double) canvas->height / 2) - ((*scale * layer->height) / 2);
+	pixel->x = start_w;
+	pixel->y = start_h;
+	draw_layer_scale(canvas, layer, create_vector(start_w, start_h), *scale);
 }

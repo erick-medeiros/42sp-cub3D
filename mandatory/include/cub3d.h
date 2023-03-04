@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 15:54:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:12:53 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void		draw_layer(t_img *canvas, t_img *layer,
 				t_px start_canvas, t_px start_layer);
 void		draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 				double scale);
-void		draw_layer_fullscreen(t_img *canvas, t_img *layer);
+void		draw_layer_fullscreen(t_img *canvas, t_img *layer, double *scale,
+				t_px *pixel);
 
 // color
 t_argb		create_argb_color(int a, int r, int g, int b);
