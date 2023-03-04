@@ -20,10 +20,10 @@ Test(render, floor_and_ceiling)
 	game.window_width = 2;
 	game.window_height = 2;
 	game_setup(&game);
-	reset_canvas(game.frame_3d);
-	color = mlx_get_argb_image_pixel(game.frame_3d, 0, 0);
+	reset_canvas(game.canvas);
+	color = mlx_get_argb_image_pixel(game.canvas, 0, 0);
 	cr_assert_eq(color.argb, ceilling);
-	color = mlx_get_argb_image_pixel(game.frame_3d, 0, game.frame_3d->height - 1);
+	color = mlx_get_argb_image_pixel(game.canvas, 0, game.canvas->height - 1);
 	cr_assert_eq(color.argb, floor);
 	destroy_game(&game);
 }
@@ -87,22 +87,22 @@ Test(render, render_textures)
 	// north
 	game.player.dir = create_vector(0, -1);
 	render(&game);
-	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	color = mlx_get_argb_image_pixel(game.canvas, game.window_width / 2, game.window_height / 2);
 	cr_assert_eq(color.argb, 0xFF0000);
 	// south
 	game.player.dir = create_vector(0, 1);
 	render(&game);
-	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	color = mlx_get_argb_image_pixel(game.canvas, game.window_width / 2, game.window_height / 2);
 	cr_assert_eq(color.argb, 0x00FF00);
 	// east
 	game.player.dir = create_vector(1, 0);
 	render(&game);
-	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	color = mlx_get_argb_image_pixel(game.canvas, game.window_width / 2, game.window_height / 2);
 	cr_assert_eq(color.argb, 0xFFFF00);
 	// west
 	game.player.dir = create_vector(-1, 0);
 	render(&game);
-	color = mlx_get_argb_image_pixel(game.frame_3d, game.window_width / 2, game.window_height / 2);
+	color = mlx_get_argb_image_pixel(game.canvas, game.window_width / 2, game.window_height / 2);
 	cr_assert_eq(color.argb, 0x0000FF);
 	destroy_game(&game);
 }

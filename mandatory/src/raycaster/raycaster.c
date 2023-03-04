@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 19:07:16 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:38:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "cub3d.h"
 #include "debug.h"
 #include "feature_flags.h"
+#include "minimap.h"
 
 static t_vector	raycaster_ray_dir(t_img *img, t_player player, int pixel)
 {
@@ -27,20 +28,20 @@ static t_vector	raycaster_ray_dir(t_img *img, t_player player, int pixel)
 	return (ray_dir);
 }
 
-t_img	*raycaster(t_game *game)
+void	raycaster(t_game *game, t_img *img)
 {
 	t_engine	engine;
 	int			pixel;
 
+	engine.frame = img;
 	pixel = 0;
-	while (pixel < game->frame_3d->width)
+	while (pixel < img->width)
 	{
-		engine.ray_dir = raycaster_ray_dir(game->frame_3d, game->player, pixel);
+		engine.ray_dir = raycaster_ray_dir(engine.frame, game->player, pixel);
 		raycaster_perform_dda(game, &engine);
 		raycaster_draw_line(game, &engine, pixel);
-		if (FEATURE_FLAG_MINIMAP)
+		if (FEATURE_FLAG_MINIMAP && game->minimap.frame)
 			draw_minimap_ray(game, &engine, engine.ray_dir);
 		pixel++;
 	}
-	return (game->frame_3d);
 }

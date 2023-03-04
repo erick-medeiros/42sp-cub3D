@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/01 21:14:51 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:12:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "window.h"
 
 int	game_setup(t_game *game)
 {
@@ -26,16 +25,12 @@ int	game_setup(t_game *game)
 			game->window_width, game->window_height);
 	if (!game->canvas)
 		return (MLX_ERROR);
-	game->frame_3d = create_canvas(game->mlx,
-			game->window_width, game->window_height);
-	if (!game->frame_3d)
-		return (MLX_ERROR);
 	game->player.pos = create_vector(5, 5);
 	player_orientation(&game->player, 'N');
 	mlx_do_key_autorepeatoff(game->mlx);
-	draw_ceiling(game->frame_3d, game->ceilling_color.argb);
-	draw_floor(game->frame_3d, game->floor_color.argb);
-	save_canvas_background(game->frame_3d);
+	draw_ceiling(game->canvas, game->ceilling_color.argb);
+	draw_floor(game->canvas, game->floor_color.argb);
+	save_canvas_background(game->canvas);
 	init_textures(game);
 	return (0);
 }

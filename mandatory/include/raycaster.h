@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 19:08:50 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:17:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 
 # include "cub3d.h"
 
-typedef enum e_hit
-{
-	HIT_X,
-	HIT_Y,
-	HIT_NORTH,
-	HIT_SOUTH,
-	HIT_EAST,
-	HIT_WEST
-}	t_hit;
+# define HIT_X 1
+# define HIT_Y 2
 
 typedef struct e_engine
 {
@@ -44,17 +37,12 @@ typedef struct e_engine
 	int			line_start;
 	int			line_end;
 	double		wall_hit_x;
+	t_img		*frame;
 	t_img		*texture;
 	t_argb		color;
 }	t_engine;
 
 void	raycaster_perform_dda(t_game *game, t_engine *engine);
 void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel);
-
-// minimap
-void	draw_player(t_game *game, t_minimap *minimap);
-void	draw_minimap(t_game *game);
-t_img	*raycaster_minimap(t_game *game);
-void	draw_minimap_ray(t_game *game, t_engine *engine, t_vector ray_dir);
 
 #endif

@@ -13,9 +13,8 @@
 #include "cub3d.h"
 #include "parser.h"
 
-char	**get_map(int fd)
+static char	*get_map(int fd, int *map_width, int *map_height)
 {
-	char	**map;
 	char	*row;
 	char	*buff;
 	char	*tmp;
@@ -27,49 +26,82 @@ char	**get_map(int fd)
 		if (!is_row_empty(&row, fd))
 			return (NULL);
 	buff = ft_strdup("");
+	*map_width = 0;
+	*map_height = 0;
 	while (row)
 	{
+		(*map_height)++;
+		(*map_width) = fmaxf(*map_width, ft_strlen(row));
 		tmp = buff;
 		buff = ft_strjoin(buff, row);
 		free(tmp);
 		free(row);
 		row = ft_gnl(fd);
 	}
-	map = ft_split(buff, '\n');
-	free(buff);
+	(*map_width) = fmaxf(*map_width - 1, 0);
+	return (buff);
+}
+
+static char	**split_map(char *map_array, int map_width)
+{
+	char	**map;
+	char	*line;
+	int		i;
+
+	map = ft_split(map_array, '\n');
+	if (!map)
+		return (NULL);
+	i = 0;
+	while (map[i])
+	{
+		line = map[i];
+		map[i] = malloc((map_width + 1) * sizeof(char));
+		if (!map[i])
+			return (NULL);
+		map[i][map_width] = '\0';
+		ft_memset(map[i], ' ', map_width);
+		ft_memcpy(map[i], line, ft_strlen(line));
+		free(line);
+		i++;
+	}
+	free(map_array);
 	return (map);
 }
 
-static void	calculate_map_size(t_game *game)
+int	check_map_sizes(t_game *game)
 {
-	int	width;
-
-	if (!game->map)
-		return ;
-	game->map_width = 0;
-	game->map_height = 0;
-	while (game->map[game->map_height])
+	if (game->map_width > MAX_MAP_SIZE)
 	{
-		width = 0;
-		while (game->map[game->map_height][width])
-			width++;
-		if (game->map_width < width)
-			game->map_width = width;
-		game->map_height++;
+		ft_free_matrix(game->map);
+		game->map = NULL;
+		return (perr("[-] exceeded maximum width"));
 	}
+	if (game->map_height > MAX_MAP_SIZE)
+	{
+		ft_free_matrix(game->map);
+		game->map = NULL;
+		return (perr("[-] exceeded maximum height"));
+	}
+	return (1);
 }
 
 int	init_map(t_game *game, char **av)
 {
-	int	fd;
+	int		fd;
+	char	*map_array;
 
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (perr("[-] error while reading the map"));
-	game->map = get_map(fd);
+	map_array = get_map(fd, &game->map_width, &game->map_height);
+	if (!map_array)
+		return (perr("[-] empty map"));
+	game->map = split_map(map_array, game->map_width);
 	close(fd);
 	if (!game->map)
 		return (perr("[-] empty map"));
+	if (!check_map_sizes(game))
+		return (0);
 	if (!is_valid_map(game->map))
 	{
 		ft_free_matrix(game->map);
