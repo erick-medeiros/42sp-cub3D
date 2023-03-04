@@ -77,6 +77,8 @@ int	init_map(t_game *game, char **av)
 		return (0);
 	}
 	calculate_map_size(game);
-	print_map(game->map);
+	if (!validate_map(game))
+		return (0);
+	// print_map(game->map);
 	return (1);
 }

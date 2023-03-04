@@ -1,7 +1,7 @@
-NO ./assets/red.xpm
-SO ./assets/green.xpm
-WE ./assets/blue.xpm
-EA ./assets/yellow.xpm
+NO ./assets/wolftex/pics_xpm/redbrick.xpm
+SO ./assets/wolftex/pics_xpm/redbrick.xpm
+WE ./assets/wolftex/pics_xpm/redbrick.xpm
+EA ./assets/wolftex/pics_xpm/redbrick.xpm
 
 C 0,255,255
 F 255,0,255

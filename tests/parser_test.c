@@ -159,3 +159,88 @@ Test(init_config_params, color_parameters, .init = cr_redirect_stdout)
 		ft_free_matrix(game.map);
 	}
 }
+
+Test(init_map, map_borders)
+{
+	struct s_tt
+	{
+		char  *name;
+		char **av;
+		int    expected;
+	} tt[] = {
+	    {"01) invalid top border:", ft_split("./bin maps/valid/borders1.cub", ' '), 0},
+	    {"02) invalid top border:", ft_split("./bin maps/valid/borders2.cub", ' '), 0},
+	    {"03) invalid top border:", ft_split("./bin maps/valid/borders3.cub", ' '), 0},
+	    {"04) invalid top border:", ft_split("./bin maps/valid/borders4.cub", ' '), 0},
+	    {"05) invalid top border:", ft_split("./bin maps/valid/borders5.cub", ' '), 0},
+	    {"06) invalid top border:", ft_split("./bin maps/valid/borders6.cub", ' '), 0},
+
+	    {"07) invalid bottom border:", ft_split("./bin maps/valid/borders7.cub", ' '), 0},
+	    {"08) invalid bottom border:", ft_split("./bin maps/valid/borders8.cub", ' '), 0},
+	    {"09) invalid bottom border:", ft_split("./bin maps/valid/borders9.cub", ' '), 0},
+	    {"10) invalid bottom border:", ft_split("./bin maps/valid/borders10.cub", ' '), 0},
+	    {"11) invalid bottom border:", ft_split("./bin maps/valid/borders11.cub", ' '), 0},
+	    {"12) invalid bottom border:", ft_split("./bin maps/valid/borders12.cub", ' '), 0},
+
+	    {"13) invalid left border:", ft_split("./bin maps/valid/borders13.cub", ' '), 0},
+	    {"14) invalid left border:", ft_split("./bin maps/valid/borders14.cub", ' '), 0},
+	    {"15) invalid left border:", ft_split("./bin maps/valid/borders15.cub", ' '), 0},
+	    {"16) invalid left border:", ft_split("./bin maps/valid/borders16.cub", ' '), 0},
+	    {"17) invalid left border:", ft_split("./bin maps/valid/borders17.cub", ' '), 0},
+	    {"18) invalid left border:", ft_split("./bin maps/valid/borders18.cub", ' '), 0},
+
+	    {"19) valid with spaces:", ft_split("./bin maps/valid/borders19.cub", ' '), 1},
+
+	    {"20) invalid right border:", ft_split("./bin maps/valid/borders20.cub", ' '), 0},
+	    {"21) invalid right border:", ft_split("./bin maps/valid/borders21.cub", ' '), 0},
+	    {"22) invalid right border:", ft_split("./bin maps/valid/borders22.cub", ' '), 0},
+	    {"23) invalid right border:", ft_split("./bin maps/valid/borders23.cub", ' '), 0},
+	    {"24) invalid right border:", ft_split("./bin maps/valid/borders24.cub", ' '), 0},
+	    {"25) invalid right border:", ft_split("./bin maps/valid/borders25.cub", ' '), 0},
+	    {"26) valid with space in right side:", ft_split("./bin maps/valid/borders26.cub", ' '), 1},
+	    {"27) valid with tab on right side:", ft_split("./bin maps/valid/borders27.cub", ' '), 1},
+	    {"28) invalid right border:", ft_split("./bin maps/valid/borders28.cub", ' '), 0},
+	    {"29) valid:", ft_split("./bin maps/valid/borders29.cub", ' '), 1},
+	    {"30) valid with spaces:", ft_split("./bin maps/valid/borders30.cub", ' '), 1},
+	    {"31) valid with spaces:", ft_split("./bin maps/valid/borders31.cub", ' '), 1},
+
+	    {"32) invalid map structure:", ft_split("./bin maps/valid/borders32.cub", ' '), 0},
+	    {"33) invalid map structure:", ft_split("./bin maps/valid/borders33.cub", ' '), 0},
+	    {"34) invalid map structure:", ft_split("./bin maps/valid/borders34.cub", ' '), 0},
+	    {"35) invalid map structure:", ft_split("./bin maps/valid/borders35.cub", ' '), 0},
+	    {"36) invalid map structure:", ft_split("./bin maps/valid/borders36.cub", ' '), 0},
+
+	    {"37) valid map:", ft_split("./bin maps/valid/borders37.cub", ' '), 1},
+	    {"38) invalid border with player:", ft_split("./bin maps/valid/borders38.cub", ' '), 0},
+	    {"39) invalid border with player:", ft_split("./bin maps/valid/borders39.cub", ' '), 0},
+	    {"40) invalid border with player:", ft_split("./bin maps/valid/borders40.cub", ' '), 0},
+	    {"41) invalid border with player:", ft_split("./bin maps/valid/borders41.cub", ' '), 0},
+	    {"42) invalid border with player:", ft_split("./bin maps/valid/borders42.cub", ' '), 0},
+	    {"43) invalid border with player:", ft_split("./bin maps/valid/borders43.cub", ' '), 0},
+	    {"44) invalid border with player:", ft_split("./bin maps/valid/borders44.cub", ' '), 0},
+	    {"45) invalid border with player:", ft_split("./bin maps/valid/borders45.cub", ' '), 0},
+	    {"46) invalid player position:", ft_split("./bin maps/valid/borders46.cub", ' '), 0},
+	    {"47) invalid player position:", ft_split("./bin maps/valid/borders47.cub", ' '), 0},
+	    {"48) invalid player position:", ft_split("./bin maps/valid/borders48.cub", ' '), 0},
+	    {"49) invalid player position:", ft_split("./bin maps/valid/borders49.cub", ' '), 0},
+
+	};
+	size_t n = sizeof(tt) / sizeof(tt[0]);
+
+	size_t i = -1;
+	while (++i < n)
+	{
+		t_game game;
+
+		game.map = NULL;
+		game_init(&game);
+
+		int got = init_map(&game, tt[i].av);
+		cr_expect(got == tt[i].expected, "%s expect %d, but got %d", tt[i].name,
+		          tt[i].expected, got);
+		ft_free_matrix(tt[i].av);
+
+		clean_params(&game.params);
+		ft_free_matrix(game.map);
+	}
+}
