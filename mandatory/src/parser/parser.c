@@ -26,11 +26,10 @@ static char	*get_map(int fd, int *map_width, int *map_height)
 		if (!is_row_empty(&row, fd))
 			return (NULL);
 	buff = ft_strdup("");
-	*map_width = 0;
-	*map_height = 0;
 	while (row)
 	{
-		(*map_height)++;
+		if (ft_strlen(row) > 1)
+			(*map_height)++;
 		(*map_width) = fmaxf(*map_width, ft_strlen(row));
 		tmp = buff;
 		buff = ft_strjoin(buff, row);
@@ -93,6 +92,8 @@ int	init_map(t_game *game, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (perr("[-] error while reading the map"));
+	game->map_width = 0;
+	game->map_height = 0;
 	map_array = get_map(fd, &game->map_width, &game->map_height);
 	if (!map_array)
 		return (perr("[-] empty map"));
