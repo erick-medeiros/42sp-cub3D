@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:56:04 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/04 15:17:11 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 13:36:54 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int		is_row_empty(char **row, int fd);
 
 
 // map
-int		validate_map(t_game *game);
+int		validate_map(t_game *game, char *filepath);
 
 #endif

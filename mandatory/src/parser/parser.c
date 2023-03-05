@@ -94,10 +94,10 @@ int	init_map(t_game *game, char **av)
 	if (fd == -1)
 		return (perr("[-] error while reading the map"));
 	map_array = get_map(fd, &game->map_width, &game->map_height);
+	close(fd);
 	if (!map_array)
 		return (perr("[-] empty map"));
 	game->map = split_map(map_array, game->map_width);
-	close(fd);
 	if (!game->map)
 		return (perr("[-] empty map"));
 	if (!check_map_sizes(game))
@@ -108,8 +108,7 @@ int	init_map(t_game *game, char **av)
 		game->map = NULL;
 		return (0);
 	}
-	calculate_map_size(game);
-	if (!validate_map(game))
+	if (!validate_map(game, av[1]))
 		return (0);
 	// print_map(game->map);
 	return (1);
