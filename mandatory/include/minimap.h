@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:15:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 10:39:41 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/05 15:19:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@
 # define MINIMAP_COLOR_TRANSPARENT 0xFF000000
 
 void	init_minimap(t_game *game);
-void	draw_player(t_game *game, t_minimap *minimap);
+void	init_minimap_fullscreen(t_game *game);
+void	destroy_minimap(void *mlx, t_minimap *minimap);
+
+void	draw_map_2d(t_game *game, t_img *frame, double scale);
 void	draw_minimap(t_game *game);
-t_img	*raycaster_minimap(t_game *game);
-void	draw_minimap_ray(t_game *game, t_engine *engine, t_vector ray_dir);
+void	draw_fullscreen_minimap(t_game *game);
+void	draw_minimap_ray(t_game *game, t_engine *engine);
+void	draw_minimap_fullscreen_ray(t_game *game, t_engine *engine,
+			double euclidian_dist);
 
 #endif
