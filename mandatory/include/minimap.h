@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:15:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/04 17:27:53 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/05 15:19:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 void	init_minimap(t_game *game);
 void	init_minimap_fullscreen(t_game *game);
+void	destroy_minimap(void *mlx, t_minimap *minimap);
+
 void	draw_map_2d(t_game *game, t_img *frame, double scale);
 void	draw_minimap(t_game *game);
 void	draw_fullscreen_minimap(t_game *game);
