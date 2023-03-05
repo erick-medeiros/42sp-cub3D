@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map.c                                     :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 12:44: by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:13:19 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	init_map(t_game *game, char **av)
 		return (perr("[-] empty map"));
 	if (!check_map_sizes(game))
 		return (0);
-	if (!is_valid_map(game->map))
+	if (!validate_map_attributes(game->map))
 	{
 		ft_free_matrix(game->map);
 		game->map = NULL;
@@ -110,6 +110,5 @@ int	init_map(t_game *game, char **av)
 	}
 	if (!validate_map(game, av[1]))
 		return (0);
-	// print_map(game->map);
 	return (1);
 }

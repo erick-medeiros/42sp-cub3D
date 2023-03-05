@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sides.c                                            :+:      :+:    :+:   */
+/*   map_sides.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 14:56:34 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 17:10:58 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:00:53 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ static int	is_valid_left(t_game *game)
 	int	j;
 	int	len;
 
-	len = 0;
-	i = -1;
-	while (game->map[++i])
-		if (game->map[i][0] != '\n')
-			len++;
 	i = 0;
+	len = get_map_size(game);
 	while (++i < len - 1)
 	{
 		j = -1;
@@ -59,12 +55,8 @@ static int	is_valid_right(t_game *game)
 	int		i;
 	int		len;
 
-	len = 0;
-	i = -1;
-	while (game->map[++i])
-		if (game->map[i][0] != '\n')
-			len++;
 	i = 0;
+	len = get_map_size(game);
 	while (++i < len - 1)
 	{
 		row = ft_strtrim(game->map[i], " \n\t");
@@ -86,16 +78,11 @@ static int	is_valid_right(t_game *game)
 
 static int	is_valid_bottom(t_game *game)
 {
-	int	i;
-	int	len;
 	int	j;
+	int	len;
 
-	len = 0;
-	i = -1;
-	while (game->map[++i])
-		if (game->map[i][0] != '\n')
-			len++;
 	j = -1;
+	len = get_map_size(game);
 	while (game->map[len - 1][++j])
 	{
 		if (game->map[len - 1][j] == ' ')
@@ -104,7 +91,6 @@ static int	is_valid_bottom(t_game *game)
 			return (perr("[-] bottom border is not surrounded by walls"));
 	}
 	return (1);
-
 }
 
 int	validate_sides(t_game *game)

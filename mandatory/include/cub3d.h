@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/04 15:16:11 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:15:49 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int			validate_parameter(t_game *game, char **row, int fd);
 int			is_valid_rgb(t_game *game);
 int			validate_colors(t_game *game, char id);
 int			validate_sides(t_game *game);
+int			validate_map_lines(char *filepath);
+int			validate_inner(t_game *game);
 
 // parser
 int			check_texture(t_game *game, char *row, char *cardinal,
@@ -113,7 +115,7 @@ int			perr(const char *str);
 int			is_reserved_ch(char c, const char *set);
 int			is_empty_line(char **row, int fd);
 int			is_digit_string(char *str);
-int			is_player_found(char **map);
+int			get_map_size(t_game *game);
 
 // debug
 void		print_map(char **map);
