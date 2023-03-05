@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/05 18:15:49 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:21:37 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ void		draw_background(t_img *img, int color);
 void		draw_rectangle(t_img *img, t_rect rect, int argb_color);
 void		draw_ceiling(t_img *img, int argb_color);
 void		draw_floor(t_img *img, int argb_color);
-double		calculate_scale(t_img *layer, double new_width, double new_height);
-void		draw_layer(t_img *canvas, t_img *layer, t_vector init);
+void		draw_layer(t_img *canvas, t_img *layer,
+				t_px start_canvas, t_px start_layer);
 void		draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 				double scale);
-void		draw_layer_fullscreen(t_img *canvas, t_img *layer);
+void		draw_layer_fullscreen(t_img *canvas, t_img *layer, double *scale,
+				t_px *pixel);
 
 // color
 t_argb		create_argb_color(int a, int r, int g, int b);
@@ -116,6 +117,9 @@ int			is_reserved_ch(char c, const char *set);
 int			is_empty_line(char **row, int fd);
 int			is_digit_string(char *str);
 int			get_map_size(t_game *game);
+int			is_player_found(char **map);
+double		calcule_scale(int origin_width, int origin_height,
+				int destination_width, int destination_height);
 
 // debug
 void		print_map(char **map);

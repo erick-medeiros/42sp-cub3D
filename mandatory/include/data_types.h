@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 14:17:34 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:26:17 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define XKEY_D 100
 # define XKEY_LEFT_ARROW 65361
 # define XKEY_RIGHT_ARROW 65363
+# define XKEY_M 109
 
 # define FOV_RAD 0.66
 # define MOVEMENT_SPEED 0.04
@@ -95,9 +96,17 @@ typedef struct s_player
 
 typedef struct s_minimap
 {
-	t_vector	pos;
+	t_px		pos;
 	int			scale;
 	t_img		*frame;
+	t_img		*map_2d;
+	t_img		*frame_fullscreen;
+	double		edge_distance;
+	t_px		pos_fullscreen;
+	t_px		middle_frame;
+	t_bool		fullscreen;
+	double		scale_full;
+	t_px		start_map_in_fullscreen;
 }	t_minimap;
 
 typedef struct s_colors

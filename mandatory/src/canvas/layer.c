@@ -6,40 +6,36 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:32:57 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/23 20:12:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:12:44 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "debug.h"
 
-double	calculate_scale(t_img *layer, double new_width, double new_height)
+void	draw_layer(t_img *canvas, t_img *layer,
+	t_px start_canvas, t_px start_layer)
 {
-	double	scale;
+	t_px	layer_px;
+	t_px	canvas_px;
+	t_px	px;
 
-	scale = fmin(new_width / layer->width, new_height / layer->height);
-	return (scale);
-}
-
-void	draw_layer(t_img *canvas, t_img *layer, t_vector init)
-{
-	t_argb	color;
-	int		pixel_x;
-	int		pixel_y;
-
-	pixel_y = 0;
-	while (pixel_y < layer->height)
+	px.y = 0;
+	while (px.y + start_layer.y < layer->height
+		&& px.y + start_canvas.y < canvas->height)
 	{
-		pixel_x = 0;
-		while (pixel_x < layer->width)
+		px.x = 0;
+		while (px.x + start_layer.x < layer->width
+			&& px.x + start_canvas.x < canvas->width)
 		{
-			color = mlx_get_argb_image_pixel(layer, pixel_x, pixel_y);
-			if (color.a == 0)
-				mlx_put_image_pixel(canvas,
-					init.x + pixel_x, init.y + pixel_y, color.argb);
-			pixel_x++;
+			layer_px.x = px.x + start_layer.x;
+			layer_px.y = px.y + start_layer.y;
+			canvas_px.x = px.x + start_canvas.x;
+			canvas_px.y = px.y + start_canvas.y;
+			mlx_copy_image_pixel(canvas, canvas_px, layer, layer_px);
+			px.x++;
 		}
-		pixel_y++;
+		px.y++;
 	}
 }
 
@@ -52,10 +48,10 @@ void	draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 	t_rect	scaled_pixel;
 
 	pixel_y = 0;
-	while (pixel_y < layer->height)
+	while (pixel_y < layer->height && pixel_y < canvas->height)
 	{
 		pixel_x = 0;
-		while (pixel_x < layer->width)
+		while (pixel_x < layer->width && pixel_x < canvas->width)
 		{
 			scaled_pixel.x = init.x + (pixel_x * scale);
 			scaled_pixel.y = init.y + (pixel_y * scale);
@@ -70,10 +66,17 @@ void	draw_layer_scale(t_img *canvas, t_img *layer, t_vector init,
 	}
 }
 
-void	draw_layer_fullscreen(t_img *canvas, t_img *layer)
+void	draw_layer_fullscreen(t_img *canvas, t_img *layer, double *scale,
+	t_px *pixel)
 {
-	double	scale;
+	double	start_w;
+	double	start_h;
 
-	scale = calculate_scale(layer, canvas->width, canvas->height);
-	draw_layer_scale(canvas, layer, create_vector(0, 0), scale);
+	*scale = fmin((double)canvas->width / layer->width,
+			(double)canvas->height / layer->height);
+	start_w = ((double) canvas->width / 2) - ((*scale * layer->width) / 2);
+	start_h = ((double) canvas->height / 2) - ((*scale * layer->height) / 2);
+	pixel->x = start_w;
+	pixel->y = start_h;
+	draw_layer_scale(canvas, layer, create_vector(start_w, start_h), *scale);
 }

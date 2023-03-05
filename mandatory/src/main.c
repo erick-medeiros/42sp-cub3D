@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 17:17:04 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/05 15:19:23 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	main(int argc, char *argv[])
 		init_minimap(&game);
 	game_loop(&game);
 	if (FEATURE_FLAG_MINIMAP)
-		destroy_canvas(game.mlx, game.minimap.frame);
+		destroy_minimap(game.mlx, &game.minimap);
 	destroy_game(&game);
 }

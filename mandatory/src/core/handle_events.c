@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/26 18:02:39 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/04 14:44:42 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	handle_keyrelease(int keycode, t_game *game)
 		game->control.rotate_left = FALSE;
 	else if (keycode == XKEY_RIGHT_ARROW)
 		game->control.rotate_right = FALSE;
+	else if (keycode == XKEY_M)
+		game->minimap.fullscreen = !game->minimap.fullscreen;
 	input_handler(&game->player, &game->control);
 	if (DEBUG)
 		printf("keyrelease %d\n", keycode);
