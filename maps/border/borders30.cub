@@ -1,0 +1,22 @@
+N ./assets/penguin.xpm
+S ./assets/penguin.xpm
+W ./assets/penguin.xpm
+E ./assets/penguin.xpm
+
+F 220,100,0
+C 225,30,0
+
+      11   
+    11111  
+   1001    
+    1001   
+   100001  
+  1000N11  
+ 100001    
+ 10000011  
+  10000001 
+ 111110011 
+      101  
+   11111   
+   111     
+    1      

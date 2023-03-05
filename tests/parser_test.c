@@ -161,3 +161,112 @@ Test(init_config_params, color_parameters, .init = cr_redirect_stdout)
 		ft_free_matrix(game.map);
 	}
 }
+
+Test(init_map, map_borders, .init = cr_redirect_stdout)
+{
+	struct s_tt
+	{
+		char  *name;
+		char **av;
+		int    expected;
+	} tt[] = {
+	    {"01) invalid top border:", ft_split("./bin maps/border/borders1.cub", ' '), 0},
+	    {"02) invalid top border:", ft_split("./bin maps/border/borders2.cub", ' '), 0},
+	    {"03) invalid top border:", ft_split("./bin maps/border/borders3.cub", ' '), 0},
+	    {"04) invalid top border:", ft_split("./bin maps/border/borders4.cub", ' '), 0},
+	    {"05) invalid top border:", ft_split("./bin maps/border/borders5.cub", ' '), 0},
+	    {"06) invalid top border:", ft_split("./bin maps/border/borders6.cub", ' '), 0},
+	    {"07) invalid bottom border:", ft_split("./bin maps/border/borders7.cub", ' '), 0},
+	    {"08) invalid bottom border:", ft_split("./bin maps/border/borders8.cub", ' '), 0},
+	    {"09) invalid bottom border:", ft_split("./bin maps/border/borders9.cub", ' '), 0},
+	    {"10) invalid bottom border:", ft_split("./bin maps/border/borders10.cub", ' '), 0},
+	    {"11) invalid bottom border:", ft_split("./bin maps/border/borders11.cub", ' '), 0},
+	    {"12) invalid bottom border:", ft_split("./bin maps/border/borders12.cub", ' '), 0},
+	    {"13) invalid left border:", ft_split("./bin maps/border/borders13.cub", ' '), 0},
+	    {"14) invalid left border:", ft_split("./bin maps/border/borders14.cub", ' '), 0},
+	    {"15) invalid left border:", ft_split("./bin maps/border/borders15.cub", ' '), 0},
+	    {"16) invalid left border:", ft_split("./bin maps/border/borders16.cub", ' '), 0},
+	    {"17) invalid left border:", ft_split("./bin maps/border/borders17.cub", ' '), 0},
+	    {"18) invalid left border:", ft_split("./bin maps/border/borders18.cub", ' '), 0},
+	    {"19) valid with spaces:", ft_split("./bin maps/border/borders19.cub", ' '), 1},
+	    {"20) invalid right border:", ft_split("./bin maps/border/borders20.cub", ' '), 0},
+	    {"21) invalid right border:", ft_split("./bin maps/border/borders21.cub", ' '), 0},
+	    {"22) invalid right border:", ft_split("./bin maps/border/borders22.cub", ' '), 0},
+	    {"23) invalid right border:", ft_split("./bin maps/border/borders23.cub", ' '), 0},
+	    {"24) invalid right border:", ft_split("./bin maps/border/borders24.cub", ' '), 0},
+	    {"25) invalid right border:", ft_split("./bin maps/border/borders25.cub", ' '), 0},
+	    {"26) valid with space in right side:", ft_split("./bin maps/border/borders26.cub", ' '), 1},
+	    {"27) valid with tab on right side:", ft_split("./bin maps/border/borders27.cub", ' '), 1},
+	    {"28) invalid right border:", ft_split("./bin maps/border/borders28.cub", ' '), 0},
+	    {"29) valid:", ft_split("./bin maps/border/borders29.cub", ' '), 1},
+	    {"30) valid with spaces:", ft_split("./bin maps/border/borders30.cub", ' '), 1},
+	    {"31) valid with spaces:", ft_split("./bin maps/border/borders31.cub", ' '), 1},
+	    {"32) invalid map structure:", ft_split("./bin maps/border/borders32.cub", ' '), 0},
+	    {"33) invalid map structure:", ft_split("./bin maps/border/borders33.cub", ' '), 0},
+	    {"34) invalid map structure:", ft_split("./bin maps/border/borders34.cub", ' '), 0},
+	    {"35) invalid map structure:", ft_split("./bin maps/border/borders35.cub", ' '), 0},
+	    {"36) invalid map structure:", ft_split("./bin maps/border/borders36.cub", ' '), 0},
+	    {"37) valid map:", ft_split("./bin maps/border/borders37.cub", ' '), 1},
+	    {"38) invalid border with player:", ft_split("./bin maps/border/borders38.cub", ' '), 0},
+	    {"39) invalid border with player:", ft_split("./bin maps/border/borders39.cub", ' '), 0},
+	    {"40) invalid border with player:", ft_split("./bin maps/border/borders40.cub", ' '), 0},
+	    {"41) invalid border with player:", ft_split("./bin maps/border/borders41.cub", ' '), 0},
+	    {"42) invalid border with player:", ft_split("./bin maps/border/borders42.cub", ' '), 0},
+	    {"43) invalid border with player:", ft_split("./bin maps/border/borders43.cub", ' '), 0},
+	    {"44) invalid border with player:", ft_split("./bin maps/border/borders44.cub", ' '), 0},
+	    {"45) invalid border with player:", ft_split("./bin maps/border/borders45.cub", ' '), 0},
+	    {"46) invalid player position:", ft_split("./bin maps/border/borders46.cub", ' '), 0},
+	    {"47) invalid player position:", ft_split("./bin maps/border/borders47.cub", ' '), 0},
+	    {"48) invalid player position:", ft_split("./bin maps/border/borders48.cub", ' '), 0},
+	    {"49) invalid player position:", ft_split("./bin maps/border/borders49.cub", ' '), 0},
+	    {"50) invalid border:", ft_split("./bin maps/border/borders50.cub", ' '), 0},
+	    {"51) invalid border:", ft_split("./bin maps/border/borders51.cub", ' '), 0},
+	    {"52) invalid border:", ft_split("./bin maps/border/borders52.cub", ' '), 0},
+	    {"53) invalid border:", ft_split("./bin maps/border/borders53.cub", ' '), 0},
+	    {"54) invalid border:", ft_split("./bin maps/border/borders54.cub", ' '), 0},
+	    {"55) invalid border:", ft_split("./bin maps/border/borders55.cub", ' '), 0},
+	    {"56) invalid border:", ft_split("./bin maps/border/borders56.cub", ' '), 0},
+	    {"57) invalid border:", ft_split("./bin maps/border/borders57.cub", ' '), 0},
+	    {"58) invalid border:", ft_split("./bin maps/border/borders58.cub", ' '), 0},
+	    {"59) invalid border:", ft_split("./bin maps/border/borders59.cub", ' '), 0},
+	    {"60) valid border:", ft_split("./bin maps/border/borders60.cub", ' '), 1},
+	    {"61) valid border:", ft_split("./bin maps/border/borders61.cub", ' '), 1},
+	    {"62) valid border:", ft_split("./bin maps/border/borders62.cub", ' '), 1},
+	    {"63) valid border:", ft_split("./bin maps/border/borders63.cub", ' '), 1},
+	    {"64) valid border:", ft_split("./bin maps/border/borders64.cub", ' '), 1},
+	    {"65) valid border:", ft_split("./bin maps/border/borders65.cub", ' '), 1},
+	    {"66) invalid border:", ft_split("./bin maps/border/borders66.cub", ' '), 0},
+	    {"67) invalid border:", ft_split("./bin maps/border/borders67.cub", ' '), 0},
+	    {"68) invalid border:", ft_split("./bin maps/border/borders68.cub", ' '), 0},
+	    {"69) invalid border:", ft_split("./bin maps/border/borders69.cub", ' '), 0},
+	    {"70) valid border:", ft_split("./bin maps/border/borders70.cub", ' '), 1},
+	    {"71) invalid horizontal empty line:", ft_split("./bin maps/border/borders71.cub", ' '), 0},
+	    {"72) invalid horizontal empty line:", ft_split("./bin maps/border/borders72.cub", ' '), 0},
+	    {"73) invalid horizontal empty line:", ft_split("./bin maps/border/borders73.cub", ' '), 0},
+	    {"74) valid map:", ft_split("./bin maps/border/borders74.cub", ' '), 1},
+	    {"75) invalid horizontal empty line:", ft_split("./bin maps/border/borders75.cub", ' '), 0},
+	    {"76) invalid horizontal empty line:", ft_split("./bin maps/border/borders76.cub", ' '), 0},
+	    {"77) invalid horizontal empty line:", ft_split("./bin maps/border/borders77.cub", ' '), 0},
+	    {"79) valid map:", ft_split("./bin maps/border/borders79.cub", ' '), 1},
+	    {"80) valid map:", ft_split("./bin maps/border/borders80.cub", ' '), 1},
+	    {"81) valid map:", ft_split("./bin maps/border/borders81.cub", ' '), 1},
+	};
+	size_t n = sizeof(tt) / sizeof(tt[0]);
+
+	size_t i = -1;
+	while (++i < n)
+	{
+		t_game game;
+
+		game.map = NULL;
+		game_init(&game);
+
+		int got = init_map(&game, tt[i].av);
+		cr_expect(got == tt[i].expected, "%s expect %d, but got %d", tt[i].name,
+		          tt[i].expected, got);
+		ft_free_matrix(tt[i].av);
+
+		clean_params(&game.params);
+		ft_free_matrix(game.map);
+	}
+}
