@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/05 18:21:37 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:27:14 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ int			is_reserved_ch(char c, const char *set);
 int			is_empty_line(char **row, int fd);
 int			is_digit_string(char *str);
 int			get_map_size(t_game *game);
-int			is_player_found(char **map);
 double		calcule_scale(int origin_width, int origin_height,
 				int destination_width, int destination_height);
+int			clean_map(t_game *game);
 
 // debug
 void		print_map(char **map);

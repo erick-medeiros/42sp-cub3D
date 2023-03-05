@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:54:54 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 18:15:04 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:27:05 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,11 @@ int	is_empty_line(char **row, int fd)
 	free(*row);
 	*row = ft_gnl(fd);
 	return (1);
+}
+
+int	clean_map(t_game *game)
+{
+	ft_free_matrix(game->map);
+	game->map = NULL;
+	return (0);
 }

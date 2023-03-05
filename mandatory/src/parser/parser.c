@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 18:13:19 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:26:54 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,7 @@ int	init_map(t_game *game, char **av)
 	if (!check_map_sizes(game))
 		return (0);
 	if (!validate_map_attributes(game->map))
-	{
-		ft_free_matrix(game->map);
-		game->map = NULL;
-		return (0);
-	}
+		return (clean_map(game));
 	if (!validate_map(game, av[1]))
 		return (0);
 	return (1);
