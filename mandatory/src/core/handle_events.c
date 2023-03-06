@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/04 14:44:42 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:21:46 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,4 @@ int	handle_keyrelease(int keycode, t_game *game)
 	if (DEBUG)
 		printf("keyrelease %d\n", keycode);
 	return (1);
-}
-
-void	input_handler(t_player *player, t_control *control)
-{
-	if (control->walk_up && !control->walk_down)
-		player->movement = mult_vector_scalar(player->dir, player->move_speed);
-	else if (control->walk_down && !control->walk_up)
-		player->movement = mult_vector_scalar(player->dir, -player->move_speed);
-	else
-		player->movement = create_vector(0, 0);
-	if (control->strafe_left && !control->strafe_right)
-		player->strafe = mult_vector_scalar(rotate_vector(player->dir, -M_PI_2),
-				player->strafe_speed);
-	else if (control->strafe_right && !control->strafe_left)
-		player->strafe = mult_vector_scalar(rotate_vector(player->dir, M_PI_2),
-				player->strafe_speed);
-	else
-		player->strafe = create_vector(0, 0);
-	if (control->rotate_left && !control->rotate_right)
-		player->rotate_speed = -ROTATE_SPEED_RAD;
-	else if (control->rotate_right && !control->rotate_left)
-		player->rotate_speed = ROTATE_SPEED_RAD;
-	else
-		player->rotate_speed = 0;
 }
