@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:18:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/01 21:01:12 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:54:00 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static int	assign_color_value(t_game *game, t_argb *place,
 	int	b;
 
 	if (!is_color_numeric(game, id))
-		return (perr("[-] color value must be a positive digit"));
+		return (perr("color value must be a positive digit"));
 	r = ft_atoi(colors.r);
 	g = ft_atoi(colors.g);
 	b = ft_atoi(colors.b);
 	if (!is_valid_color_range(r, g, b))
-		return (perr("[-] color value range should be between 0-255"));
+		return (perr("color value range should be between 0-255"));
 	*place = create_argb_color(0, r, g, b);
 	return (1);
 }

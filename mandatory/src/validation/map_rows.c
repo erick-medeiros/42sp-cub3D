@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:40:26 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 18:03:19 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:54:34 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static int	validate_empty_rows(char **row, int *n, int fd, char *filepath)
 			if (ft_strlen(*row) == 1 && !ft_strncmp(*row, "\n", 2))
 			{
 				clean_gnl(*row, fd);
-				return (perr("[-] empty line detected"));
+				return (perr("empty line detected"));
 			}
 		}
 		if (ft_strlen(*row) > 2)
 		{
 			clean_gnl(*row, fd);
-			return (perr("[-] empty line detected"));
+			return (perr("empty line detected"));
 		}
 	}
 	return (1);

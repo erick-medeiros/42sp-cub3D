@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:12:39 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 18:15:00 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:54:07 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static int	is_player_found(char **map)
 int	validate_map_attributes(char **map)
 {
 	if (!is_player_found(map))
-		return (perr("[-] invalid number of players"));
+		return (perr("invalid number of players"));
 	if (!is_valid_attributes(map))
-		return (perr("[-] invalid map attribute"));
+		return (perr("invalid map attribute"));
 	return (1);
 }

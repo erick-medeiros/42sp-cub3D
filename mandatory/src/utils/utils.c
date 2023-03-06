@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/04 17:21:57 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:50:55 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_reserved_ch(char c, const char *set)
 int	perr(const char *str)
 {
 	if (str)
-		printf("%s\n", str);
+		printf("Error\n%s\n", str);
 	return (0);
 }
 

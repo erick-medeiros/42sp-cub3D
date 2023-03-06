@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 14:56:34 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 18:00:53 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:54:51 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_valid_top(t_game *game)
 		if (game->map[0][j] == ' ')
 			continue ;
 		if (game->map[0][j] != '1')
-			return (perr("[-] top border is not surrounded by walls"));
+			return (perr("top border is not surrounded by walls"));
 	}
 	return (1);
 }
@@ -43,7 +43,7 @@ static int	is_valid_left(t_game *game)
 		if (!game->map[i][j])
 			continue ;
 		if (game->map[i][j] != '1')
-			return (perr("[-] left border is not surrounded by walls"));
+			return (perr("left border is not surrounded by walls"));
 	}
 	return (1);
 }
@@ -69,7 +69,7 @@ static int	is_valid_right(t_game *game)
 		if (row[size] != '1')
 		{
 			free(row);
-			return (perr("[-] right border is not surrounded by walls"));
+			return (perr("right border is not surrounded by walls"));
 		}
 		free(row);
 	}
@@ -88,7 +88,7 @@ static int	is_valid_bottom(t_game *game)
 		if (game->map[len - 1][j] == ' ')
 			continue ;
 		if (game->map[len - 1][j] != '1')
-			return (perr("[-] bottom border is not surrounded by walls"));
+			return (perr("bottom border is not surrounded by walls"));
 	}
 	return (1);
 }

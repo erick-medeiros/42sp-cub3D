@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 19:57:03 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/01 20:31:39 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:53:49 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static int	is_valid_file(char *filepath)
 
 	ext = ft_strrchr(filepath, '.');
 	if (!ext || ft_strncmp(ext, ".xpm\n", 5))
-		return (perr("[-] expects .xpm file for textures"));
+		return (perr("expects .xpm file for textures"));
 	file = ft_strtrim(filepath, " \n\t");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		free(file);
 		close(fd);
-		return (perr("[-] invalid file/permissions"));
+		return (perr("invalid file/permissions"));
 	}
 	free(file);
 	close(fd);
@@ -79,7 +79,7 @@ static int	validate_texture(t_game *game, char **matrix,
 	if (!save_texture_path(game, *cardinal, path))
 	{
 		free(path);
-		return (perr("[-] duplicated texture found"));
+		return (perr("duplicated texture found"));
 	}
 	free(path);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 19:56:33 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/01 20:49:11 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:53:03 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static int	is_color_present(char **colors)
 	if (size != 3)
 	{
 		ft_free_matrix(colors);
-		return (perr("[-] missing color"));
+		return (perr("missing color"));
 	}
 	if (!ft_strncmp(colors[0], "\n", 2)
 		|| !ft_strncmp(colors[1], "\n", 2)
 		|| !ft_strncmp(colors[2], "\n", 2))
 	{
 		ft_free_matrix(colors);
-		return (perr("[-] missing color"));
+		return (perr("missing color"));
 	}
 	return (1);
 }
@@ -62,7 +62,7 @@ static int	init_color_scheme(t_game *game, char id, char *arg)
 		if (arg[i] == ',')
 			count++;
 	if (count != 2)
-		return (perr("[-] invalid color schema"));
+		return (perr("invalid color schema"));
 	colors = ft_split(arg, ',');
 	if (!colors)
 		return (0);
@@ -87,7 +87,7 @@ int	check_rgb_color(t_game *game, char *row, char ch, char *err_msg)
 	if (ft_strlen(id) != 1)
 	{
 		ft_free_matrix(matrix);
-		return (perr("[-] invalid identifier"));
+		return (perr("invalid identifier"));
 	}
 	if (!matrix[1])
 	{
