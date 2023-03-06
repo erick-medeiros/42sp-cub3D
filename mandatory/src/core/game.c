@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 11:12:27 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:46:46 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	game_setup(t_game *game)
 			game->window_width, game->window_height);
 	if (!game->canvas)
 		return (MLX_ERROR);
-	game->player.pos = create_vector(5, 5);
-	player_orientation(&game->player, 'N');
 	mlx_do_key_autorepeatoff(game->mlx);
 	draw_ceiling(game->canvas, game->ceilling_color.argb);
 	draw_floor(game->canvas, game->floor_color.argb);

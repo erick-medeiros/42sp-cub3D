@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 18:26:54 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:46:37 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,33 @@ int	check_map_sizes(t_game *game)
 	return (1);
 }
 
+static void	find_player(t_game *game)
+{
+	int		x;
+	int		y;
+	t_bool	found;
+
+	found = FALSE;
+	y = 0;
+	while (!found && y < game->map_height)
+	{
+		x = 0;
+		while (!found && x < game->map_width)
+		{
+			if (ft_isalpha(game->map[y][x]))
+			{
+				game->player.pos = create_vector(x, y);
+				game->player.pos = add_vector(game->player.pos,
+						create_vector(0.5, 0.5));
+				player_orientation(&game->player, game->map[y][x]);
+				found = TRUE;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 int	init_map(t_game *game, char **av)
 {
 	int		fd;
@@ -107,5 +134,6 @@ int	init_map(t_game *game, char **av)
 		return (clean_map(game));
 	if (!validate_map(game, av[1]))
 		return (0);
+	find_player(game);
 	return (1);
 }
