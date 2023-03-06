@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:46:42 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/05 18:01:05 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:54:23 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static int	validate_vertical_inner(t_game *game)
 			if (game->map[i][j] == ' ' && game->map[i][j + 1] != '1')
 			{
 				if (is_reserved_ch(game->map[i][j + 1], "0NSWE"))
-					return (perr("[-] invalid border"));
+					return (perr("invalid border"));
 			}
 			else if (is_reserved_ch(game->map[i][j], "0NSWE"))
 				if (game->map[i][j + 1] == ' ')
-					return (perr("[-] invalid border"));
+					return (perr("invalid border"));
 		}
 	}
 	return (1);
@@ -58,11 +58,11 @@ static int	validate_horizontal_inner(t_game *game)
 			if (game->map[i][j] == ' ' && game->map[i + 1][j] != '1')
 			{
 				if (is_reserved_ch(game->map[i + 1][j], "0NSWE"))
-					return (perr("[-] invalid border"));
+					return (perr("invalid border"));
 			}
 			else if (is_reserved_ch(game->map[i][j], "0NSWE"))
 				if (game->map[i + 1][j] == ' ')
-					return (perr("[-] invalid border"));
+					return (perr("invalid border"));
 		}
 	}
 	return (1);

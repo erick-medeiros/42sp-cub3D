@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/06 11:46:37 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:53:31 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	check_map_sizes(t_game *game)
 	{
 		ft_free_matrix(game->map);
 		game->map = NULL;
-		return (perr("[-] exceeded maximum width"));
+		return (perr("exceeded maximum width"));
 	}
 	if (game->map_height > MAX_MAP_SIZE)
 	{
 		ft_free_matrix(game->map);
 		game->map = NULL;
-		return (perr("[-] exceeded maximum height"));
+		return (perr("exceeded maximum height"));
 	}
 	return (1);
 }
@@ -118,16 +118,16 @@ int	init_map(t_game *game, char **av)
 
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		return (perr("[-] error while reading the map"));
+		return (perr("error while reading the map"));
 	game->map_width = 0;
 	game->map_height = 0;
 	map_array = get_map(fd, &game->map_width, &game->map_height);
 	close(fd);
 	if (!map_array)
-		return (perr("[-] empty map"));
+		return (perr("empty map"));
 	game->map = split_map(map_array, game->map_width);
 	if (!game->map)
-		return (perr("[-] empty map"));
+		return (perr("empty map"));
 	if (!check_map_sizes(game))
 		return (0);
 	if (!validate_map_attributes(game->map))

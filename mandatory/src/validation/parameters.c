@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/01 21:02:28 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:55:06 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static int	validate_config_row(t_game *game, char *row)
 {
 	if (*row == 'N')
-		return (check_texture(game, row, "NO", "[-] missing north textures"));
+		return (check_texture(game, row, "NO", "missing north textures"));
 	else if (*row == 'S')
-		return (check_texture(game, row, "SO", "[-] missing south textures"));
+		return (check_texture(game, row, "SO", "missing south textures"));
 	else if (*row == 'E')
-		return (check_texture(game, row, "EA", "[-] missing east textures"));
+		return (check_texture(game, row, "EA", "missing east textures"));
 	else if (*row == 'W')
-		return (check_texture(game, row, "WE", "[-] missing west textures"));
+		return (check_texture(game, row, "WE", "missing west textures"));
 	else if (*row == 'F')
-		return (check_rgb_color(game, row, 'F', "[-] floor color not found"));
+		return (check_rgb_color(game, row, 'F', "floor color not found"));
 	else if (*row == 'C')
-		return (check_rgb_color(game, row, 'C', "[-] ceil color not found"));
+		return (check_rgb_color(game, row, 'C', "ceil color not found"));
 	return (0);
 }
 
