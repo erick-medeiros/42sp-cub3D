@@ -11,6 +11,7 @@ RM = rm -rf
 FORMAT = clang-format -i
 
 SRC = keyboard.c validation_test.c parser_test.c render.c
+SRC += minimap_bonus.c
 OBJ_DIR = obj/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 

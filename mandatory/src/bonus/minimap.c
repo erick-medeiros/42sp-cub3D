@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/05 15:19:46 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:30:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void	init_minimap(t_game *game)
 {
 	t_rect	coord;
 
-	coord.width = game->canvas->width * 0.15;
-	coord.height = game->canvas->height * 0.15;
-	game->minimap.edge_distance = fmin(coord.width * 0.15, coord.height * 0.15);
+	coord.width = game->canvas->width * MINIMAP_WINDOW_SCALE;
+	coord.height = game->canvas->height * MINIMAP_WINDOW_SCALE;
+	game->minimap.edge_distance = fmin(coord.width * MINIMAP_WINDOW_SCALE,
+			coord.height * MINIMAP_WINDOW_SCALE);
 	coord.x = game->canvas->width - coord.width - game->minimap.edge_distance;
 	coord.y = game->minimap.edge_distance;
 	game->minimap.frame = create_canvas(game->mlx, coord.width, coord.height);
-	game->minimap.scale = 15;
+	game->minimap.scale = MINIMAP_MAP_SCALE;
 	game->minimap.pos.x = coord.x;
 	game->minimap.pos.y = coord.y;
 	game->minimap.map_2d = create_canvas(game->mlx,
