@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/06 19:21:46 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:34:12 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ int	handle_keyrelease(int keycode, t_game *game)
 	if (DEBUG)
 		printf("keyrelease %d\n", keycode);
 	return (1);
+}
+
+int	handle_mouse(int x, int y, t_game *game)
+{
+	game->mouse.x = game->canvas->width / 2;
+	game->mouse.y = game->canvas->width / 2;
+	game->mouse_move.x = x - game->mouse.x;
+	game->mouse_move.y = y - game->mouse.y;
+	return (0);
 }

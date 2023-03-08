@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 19:21:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/06 19:24:57 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:40:23 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ static void	rotate_input(t_player *player, t_control *control)
 		player->rotate_speed = ROTATE_SPEED_RAD;
 	else
 		player->rotate_speed = 0;
+}
+
+void	check_mouse_move(t_game *game)
+{
+	int	move_x;
+
+	mlx_mouse_move(game->mlx, game->win,
+		game->canvas->width / 2, game->canvas->height / 2);
+	move_x = game->mouse_move.x;
+	if (move_x > 0)
+		game->player.rotate_speed = move_x * game->fov_ratio;
+	else if (move_x < 0)
+		game->player.rotate_speed = move_x * game->fov_ratio;
+	else
+		game->player.rotate_speed = 0;
 }
 
 void	input_handler(t_player *player, t_control *control)
