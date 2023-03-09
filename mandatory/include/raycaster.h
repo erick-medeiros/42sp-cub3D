@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:08:29 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:25:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct e_engine
 }	t_engine;
 
 void		update_input(t_game *game, t_player *player);
-t_vector	collision_with_emptiness(t_game *game, t_vector new_pos);
+t_vector	check_space_collision(t_game *game, t_vector new_pos);
 t_vector	check_collision(t_game *game, t_vector pos, t_vector new_pos,
 				t_vector movement);
 void		raycaster_perform_dda(t_game *game, t_engine *engine);

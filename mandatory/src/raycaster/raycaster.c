@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:08:37 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:25:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	update_input(t_game *game, t_player *player)
 	if (FEATURE_FLAG_COLLISION)
 		collision = check_collision(game, game->player.pos, new_pos, movement);
 	else
-		collision = collision_with_emptiness(game, new_pos);
+		collision = check_space_collision(game, new_pos);
 	movement = mult_vector_vector(movement, collision);
 	game->player.pos = add_vector(game->player.pos, movement);
 }

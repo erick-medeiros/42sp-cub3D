@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:29:48 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:11:40 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:25:38 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_vector	check_square(t_game *game, t_vector pos, t_vector new_pos,
 	return (create_vector(1, 1));
 }
 
-t_vector	collision_with_emptiness(t_game *game, t_vector new_pos)
+t_vector	check_space_collision(t_game *game, t_vector new_pos)
 {
 	t_vector	collision;
 
