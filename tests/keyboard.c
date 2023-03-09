@@ -154,14 +154,14 @@ Test(keyboard, walk_up)
 
 	game.map = NULL;
 	game_init(&game);
+	game.config.mouse = FALSE;
 	game.player.pos = create_vector(10, 10);
-	game.player.dir = create_vector(0, 1);
+	player_orientation(&game.player, 'N');
 	game.player.move_speed = 2;
 	game.control.walk_up = TRUE;
-	input_handler(&game.player, &game.control);
 	update_input(&game.player, 15, 15);
 	cr_assert_eq(game.player.pos.x, 10);
-	cr_assert_eq(game.player.pos.y, 12);
+	cr_assert_eq(game.player.pos.y, 8);
 }
 
 Test(keyboard, walk_down)
@@ -170,14 +170,13 @@ Test(keyboard, walk_down)
 
 	game.map = NULL;
 	game_init(&game);
+	game.config.mouse = FALSE;
 	game.player.pos = create_vector(10, 10);
-	game.player.dir = create_vector(0, 1);
-	game.player.move_speed = 2;
-	game.control.walk_down = TRUE;
-	input_handler(&game.player, &game.control);
+	player_orientation(&game.player, 'N');
+	game.player.move_speed = -2;
 	update_input(&game.player, 15, 15);
 	cr_assert_eq(game.player.pos.x, 10);
-	cr_assert_eq(game.player.pos.y, 8);
+	cr_assert_eq(game.player.pos.y, 12);
 }
 
 Test(keyboard, strafe_left)
@@ -186,13 +185,12 @@ Test(keyboard, strafe_left)
 
 	game.map = NULL;
 	game_init(&game);
+	game.config.mouse = FALSE;
 	game.player.pos = create_vector(10, 10);
-	game.player.dir = create_vector(0, 1);
-	game.player.strafe_speed = 2;
-	game.control.strafe_left = TRUE;
-	input_handler(&game.player, &game.control);
+	player_orientation(&game.player, 'N');
+	game.player.strafe_speed = -2;
 	update_input(&game.player, 15, 15);
-	cr_assert_eq(game.player.pos.x, 12);
+	cr_assert_eq(game.player.pos.x, 8);
 	cr_assert_eq(game.player.pos.y, 10);
 }
 
@@ -202,13 +200,12 @@ Test(keyboard, strafe_right)
 
 	game.map = NULL;
 	game_init(&game);
+	game.config.mouse = FALSE;
 	game.player.pos = create_vector(10, 10);
-	game.player.dir = create_vector(0, 1);
+	player_orientation(&game.player, 'N');
 	game.player.strafe_speed = 2;
-	game.control.strafe_right = TRUE;
-	input_handler(&game.player, &game.control);
 	update_input(&game.player, 15, 15);
-	cr_assert_eq(game.player.pos.x, 8);
+	cr_assert_eq(game.player.pos.x, 12);
 	cr_assert_eq(game.player.pos.y, 10);
 }
 
@@ -218,6 +215,7 @@ Test(keyboard, rotate_left)
 
 	game.map = NULL;
 	game_init(&game);
+	game.config.mouse = FALSE;
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
 	game.player.rotate_speed = -M_PI_2;
@@ -232,6 +230,7 @@ Test(keyboard, rotate_right)
 
 	game.map = NULL;
 	game_init(&game);
+	game.config.mouse = FALSE;
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
 	game.player.rotate_speed = M_PI_2;
