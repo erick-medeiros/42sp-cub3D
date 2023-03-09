@@ -1,4 +1,5 @@
 #include "cub3d.h"
+#include "raycaster.h"
 #include <criterion/criterion.h>
 
 Test(mouse_bonus, mouse)
@@ -25,7 +26,7 @@ Test(mouse_bonus, mouse)
 	fake_mouse.y = game.canvas->height / 2;
 	handle_mouse(fake_mouse.x, fake_mouse.y, &game);
 	input_handler(&game);
-	update_input(&game.player, game.map_width, game.map_height);
+	update_input(&game, &game.player);
 	cr_assert(dir.x < game.player.dir.x);
 	// rotate left
 	player_orientation(&game.player, 'N');
@@ -34,7 +35,7 @@ Test(mouse_bonus, mouse)
 	fake_mouse.y = game.canvas->height / 2;
 	handle_mouse(fake_mouse.x, fake_mouse.y, &game);
 	input_handler(&game);
-	update_input(&game.player, game.map_width, game.map_height);
+	update_input(&game, &game.player);
 	cr_assert(dir.x > game.player.dir.x);
 	//
 	destroy_game(&game);

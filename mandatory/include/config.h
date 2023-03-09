@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:05:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/03 11:11:48 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:39:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@
 
 // max map size
 # define MAX_MAP_SIZE 100
+
+// collision
+# define DIST_TO_WALL 0.4
 
 #endif

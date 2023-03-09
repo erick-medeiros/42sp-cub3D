@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 12:01:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:33:01 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int			game_setup(t_game *game);
 int			game_loop(t_game *game);
 int			destroy_game(t_game *game);
 
-void		update_input(t_player *player, int map_width, int map_height);
 int			render(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
