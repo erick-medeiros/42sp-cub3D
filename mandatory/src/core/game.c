@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 11:40:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:04:42 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "feature_flags.h"
 
 int	game_setup(t_game *game)
 {
@@ -39,7 +38,7 @@ int	game_loop(t_game *game)
 	if (!game->mlx || !game->win || !game->canvas)
 		return (MLX_ERROR);
 	mlx_do_key_autorepeatoff(game->mlx);
-	if (FEATURE_FLAG_MOUSE)
+	if (game->config.mouse)
 	{
 		mlx_mouse_hide(game->mlx, game->win);
 		mlx_hook(game->win, MotionNotify, PointerMotionMask,
@@ -51,7 +50,7 @@ int	game_loop(t_game *game)
 	mlx_loop_hook(game->mlx, &render, game);
 	mlx_loop(game->mlx);
 	mlx_do_key_autorepeaton(game->mlx);
-	if (FEATURE_FLAG_MOUSE)
+	if (game->config.mouse)
 		mlx_mouse_show(game->mlx, game->win);
 	return (0);
 }

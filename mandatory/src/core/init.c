@@ -6,11 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/09 11:34:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:22:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "feature_flags.h"
 
 void	game_init(t_game *game)
 {
@@ -33,6 +34,7 @@ void	game_init(t_game *game)
 	game->minimap.frame = NULL;
 	game->control.mouse.x = 0;
 	game->control.mouse.y = 0;
+	game->config.mouse = FEATURE_FLAG_MINIMAP;
 }
 
 void	init_player(t_game *game)
@@ -42,8 +44,8 @@ void	init_player(t_game *game)
 	game->player.dir = create_vector(0, 0);
 	game->player.movement = create_vector(0, 0);
 	game->player.strafe = create_vector(0, 0);
-	game->player.move_speed = MOVEMENT_SPEED;
-	game->player.strafe_speed = STRAFE_SPEED;
+	game->player.move_speed = 0;
+	game->player.strafe_speed = 0;
 	game->player.rotate_speed = 0;
 }
 

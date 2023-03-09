@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:09:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 11:42:27 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:02:01 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	update_input(t_player *player, int map_width, int map_height)
 
 int	render(t_game *game)
 {
-	input_handler(&game->player, &game->control);
+	input_handler(game);
 	update_input(&game->player, game->map_width, game->map_height);
 	if (FEATURE_FLAG_MINIMAP && game->minimap.frame)
 		draw_minimap(game);

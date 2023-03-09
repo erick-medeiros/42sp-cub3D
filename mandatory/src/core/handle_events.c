@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 11:37:04 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:49:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	handle_mouse(int x, int y, t_game *game)
 {
 	game->control.mouse.x = game->control.mouse.x
 		- game->canvas->width / 2 + x;
-	game->control.mouse.y = game->control.mouse.x
+	game->control.mouse.y = game->control.mouse.y
 		- game->canvas->height / 2 + y;
 	mlx_mouse_move(game->mlx, game->win,
 		game->canvas->width / 2, game->canvas->height / 2);
