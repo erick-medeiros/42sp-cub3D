@@ -159,7 +159,9 @@ Test(keyboard, walk_up)
 	player_orientation(&game.player, 'N');
 	game.player.move_speed = 2;
 	game.control.walk_up = TRUE;
-	update_input(&game.player, 15, 15);
+	game.map_width = 15;
+	game.map_height = 15;
+	update_input(&game, &game.player);
 	cr_assert_eq(game.player.pos.x, 10);
 	cr_assert_eq(game.player.pos.y, 8);
 }
@@ -174,7 +176,9 @@ Test(keyboard, walk_down)
 	game.player.pos = create_vector(10, 10);
 	player_orientation(&game.player, 'N');
 	game.player.move_speed = -2;
-	update_input(&game.player, 15, 15);
+	game.map_width = 15;
+	game.map_height = 15;
+	update_input(&game, &game.player);
 	cr_assert_eq(game.player.pos.x, 10);
 	cr_assert_eq(game.player.pos.y, 12);
 }
@@ -189,7 +193,9 @@ Test(keyboard, strafe_left)
 	game.player.pos = create_vector(10, 10);
 	player_orientation(&game.player, 'N');
 	game.player.strafe_speed = -2;
-	update_input(&game.player, 15, 15);
+	game.map_width = 15;
+	game.map_height = 15;
+	update_input(&game, &game.player);
 	cr_assert_eq(game.player.pos.x, 8);
 	cr_assert_eq(game.player.pos.y, 10);
 }
@@ -204,7 +210,9 @@ Test(keyboard, strafe_right)
 	game.player.pos = create_vector(10, 10);
 	player_orientation(&game.player, 'N');
 	game.player.strafe_speed = 2;
-	update_input(&game.player, 15, 15);
+	game.map_width = 15;
+	game.map_height = 15;
+	update_input(&game, &game.player);
 	cr_assert_eq(game.player.pos.x, 12);
 	cr_assert_eq(game.player.pos.y, 10);
 }
@@ -219,7 +227,9 @@ Test(keyboard, rotate_left)
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
 	game.player.rotate_speed = -M_PI_2;
-	update_input(&game.player, 15, 15);
+	game.map_width = 15;
+	game.map_height = 15;
+	update_input(&game, &game.player);
 	cr_assert_float_eq(game.player.dir.x, 1.000000, 1e-6);
 	cr_assert_float_eq(game.player.dir.y, 0.000000, 1e-6);
 }
@@ -234,7 +244,9 @@ Test(keyboard, rotate_right)
 	game.player.pos = create_vector(10, 10);
 	game.player.dir = create_vector(0, 1);
 	game.player.rotate_speed = M_PI_2;
-	update_input(&game.player, 15, 15);
+	game.map_width = 15;
+	game.map_height = 15;
+	update_input(&game, &game.player);
 	cr_assert_float_eq(game.player.dir.x, -1.000000, 1e-6);
 	cr_assert_float_eq(game.player.dir.y, 0.000000, 1e-6);
 }

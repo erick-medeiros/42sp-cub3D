@@ -33,7 +33,7 @@ FILES += validation/validation.c validation/parameters.c validation/colors.c val
 FILES += validation/map_attributes.c validation/map_sides.c validation/map_rows.c validation/map_borders.c
 FILES += parser/parser.c parser/colors.c parser/textures.c parser/utils.c
 FILES += raycaster/raycaster.c raycaster/texture.c
-FILES += raycaster/dda_algorithm.c
+FILES += raycaster/dda_algorithm.c raycaster/collision.c
 
 FILES += bonus/minimap.c bonus/minimap_fullscreen.c
 
