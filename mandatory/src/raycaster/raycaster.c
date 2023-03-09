@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 17:02:45 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:08:37 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 void	update_input(t_game *game, t_player *player)
 {
 	t_vector	movement;
+	t_vector	new_pos;
+	t_vector	collision;
 
 	if (player->rotate_speed)
 	{
@@ -33,7 +35,13 @@ void	update_input(t_game *game, t_player *player)
 		movement = add_vector(movement,
 				mult_vector_scalar(rotate_vector(player->dir, M_PI_2),
 					player->strafe_speed));
-	player->pos = check_collision(game, game->player.pos, movement);
+	new_pos = add_vector(game->player.pos, movement);
+	if (FEATURE_FLAG_COLLISION)
+		collision = check_collision(game, game->player.pos, new_pos, movement);
+	else
+		collision = collision_with_emptiness(game, new_pos);
+	movement = mult_vector_vector(movement, collision);
+	game->player.pos = add_vector(game->player.pos, movement);
 }
 
 static t_vector	raycaster_ray_dir(t_img *img, t_player player, int pixel)

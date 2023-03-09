@@ -70,7 +70,7 @@ Test(render, render_textures)
 	game_init(&game);
 	game.window_width = 10;
 	game.window_height = 10;
-	game.map = calloc(3, sizeof(char *));
+	game.map = calloc(4, sizeof(char *));
 	game.map[0] = strdup("111");
 	game.map[1] = strdup("1N1");
 	game.map[2] = strdup("111");
