@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/08 19:44:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:40:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_control
 	t_bool	strafe_right;
 	t_bool	rotate_left;
 	t_bool	rotate_right;
+	t_px	mouse;
+	double	fov_ratio;
 }	t_control;
 
 typedef struct s_player
@@ -147,9 +149,6 @@ typedef struct s_game
 	t_player	player;
 	t_minimap	minimap;
 	t_params	params;
-	t_px		mouse;
-	t_px		mouse_move;
-	double		fov_ratio;
 }	t_game;
 
 typedef struct s_rect

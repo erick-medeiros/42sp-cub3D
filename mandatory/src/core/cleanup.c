@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/02 14:09:45 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 10:50:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	destroy_game(t_game *game)
 	}
 	if (game->mlx)
 	{
-		mlx_do_key_autorepeaton(game->mlx);
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 		game->mlx = NULL;

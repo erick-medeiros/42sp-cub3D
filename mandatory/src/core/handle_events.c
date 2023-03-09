@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/08 19:34:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:37:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	handle_keypress(int keycode, t_game *game)
 		game->control.rotate_left = TRUE;
 	else if (keycode == XKEY_RIGHT_ARROW)
 		game->control.rotate_right = TRUE;
-	input_handler(&game->player, &game->control);
 	if (DEBUG)
 		printf("keypress %d\n", keycode);
 	return (1);
@@ -53,7 +52,6 @@ int	handle_keyrelease(int keycode, t_game *game)
 		game->control.rotate_right = FALSE;
 	else if (keycode == XKEY_M)
 		game->minimap.fullscreen = !game->minimap.fullscreen;
-	input_handler(&game->player, &game->control);
 	if (DEBUG)
 		printf("keyrelease %d\n", keycode);
 	return (1);
@@ -61,9 +59,11 @@ int	handle_keyrelease(int keycode, t_game *game)
 
 int	handle_mouse(int x, int y, t_game *game)
 {
-	game->mouse.x = game->canvas->width / 2;
-	game->mouse.y = game->canvas->width / 2;
-	game->mouse_move.x = x - game->mouse.x;
-	game->mouse_move.y = y - game->mouse.y;
+	game->control.mouse.x = game->control.mouse.x
+		- game->canvas->width / 2 + x;
+	game->control.mouse.y = game->control.mouse.x
+		- game->canvas->height / 2 + y;
+	mlx_mouse_move(game->mlx, game->win,
+		game->canvas->width / 2, game->canvas->height / 2);
 	return (0);
 }

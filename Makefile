@@ -16,7 +16,7 @@ LDFLAGS = -L$(LIBFT_DIR)
 LDLIBS = -lft -lm -lmlx -lXext -lX11
 
 VALGRIND = valgrind -q --error-exitcode=1 --leak-check=full \
-	--show-leak-kinds=all --track-origins=yes
+	--suppressions=mlx_mouse_hide.supp --show-leak-kinds=all --track-origins=yes
 
 # mandatory
 
