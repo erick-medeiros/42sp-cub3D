@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 12:04:42 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:52:41 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ int	game_loop(t_game *game)
 	{
 		mlx_mouse_hide(game->mlx, game->win);
 		mlx_hook(game->win, MotionNotify, PointerMotionMask,
-			&handle_mouse, game);
+			&handle_mouse_move, game);
+		mlx_hook(game->win, ButtonPress, ButtonPressMask,
+			&handle_mouse_press, game);
+		mlx_hook(game->win, ButtonRelease, ButtonReleaseMask,
+			&handle_mouse_release, game);
 	}
 	mlx_hook(game->win, KeyPress, KeyPressMask, &handle_keypress, game);
 	mlx_hook(game->win, KeyRelease, KeyReleaseMask, &handle_keyrelease, game);

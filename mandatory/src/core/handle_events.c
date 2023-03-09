@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 14:49:02 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:01:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	handle_keyrelease(int keycode, t_game *game)
 	return (1);
 }
 
-int	handle_mouse(int x, int y, t_game *game)
+int	handle_mouse_move(int x, int y, t_game *game)
 {
 	game->control.mouse.x = game->control.mouse.x
 		- game->canvas->width / 2 + x;
@@ -65,5 +65,23 @@ int	handle_mouse(int x, int y, t_game *game)
 		- game->canvas->height / 2 + y;
 	mlx_mouse_move(game->mlx, game->win,
 		game->canvas->width / 2, game->canvas->height / 2);
+	if (DEBUG)
+		printf("mouse move x %d y %d\n", x, y);
+	return (0);
+}
+
+int	handle_mouse_press(int button, int x, int y, t_game *game)
+{
+	(void)game;
+	if (DEBUG)
+		printf("mouse press button %d x %d y %d\n", button, x, y);
+	return (0);
+}
+
+int	handle_mouse_release(int button, int x, int y, t_game *game)
+{
+	(void)game;
+	if (DEBUG)
+		printf("mouse release button %d x %d y %d\n", button, x, y);
 	return (0);
 }

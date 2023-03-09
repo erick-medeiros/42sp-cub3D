@@ -24,7 +24,7 @@ Test(mouse_bonus, mouse)
 	dir = game.player.dir;
 	fake_mouse.x = (game.canvas->width / 2) + 1;
 	fake_mouse.y = game.canvas->height / 2;
-	handle_mouse(fake_mouse.x, fake_mouse.y, &game);
+	handle_mouse_move(fake_mouse.x, fake_mouse.y, &game);
 	input_handler(&game);
 	update_input(&game, &game.player);
 	cr_assert(dir.x < game.player.dir.x);
@@ -33,7 +33,7 @@ Test(mouse_bonus, mouse)
 	dir = game.player.dir;
 	fake_mouse.x = (game.canvas->width / 2) - 1;
 	fake_mouse.y = game.canvas->height / 2;
-	handle_mouse(fake_mouse.x, fake_mouse.y, &game);
+	handle_mouse_move(fake_mouse.x, fake_mouse.y, &game);
 	input_handler(&game);
 	update_input(&game, &game.player);
 	cr_assert(dir.x > game.player.dir.x);

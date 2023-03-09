@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 16:33:01 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:59:29 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int			render(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
-int			handle_mouse(int x, int y, t_game *game);
+int			handle_mouse_move(int x, int y, t_game *game);
+int			handle_mouse_press(int button, int x, int y, t_game *game);
+int			handle_mouse_release(int button, int x, int y, t_game *game);
 void		input_handler(t_game *game);
 
 void		init_player(t_game *game);
