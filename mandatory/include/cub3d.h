@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/05 18:27:14 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:59:29 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ int			game_setup(t_game *game);
 int			game_loop(t_game *game);
 int			destroy_game(t_game *game);
 
-void		update_input(t_player *player, int map_width, int map_height);
 int			render(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
-void		input_handler(t_player *player, t_control *control);
+int			handle_mouse_move(int x, int y, t_game *game);
+int			handle_mouse_press(int button, int x, int y, t_game *game);
+int			handle_mouse_release(int button, int x, int y, t_game *game);
+void		input_handler(t_game *game);
 
 void		init_player(t_game *game);
 void		init_params(t_game *game);
