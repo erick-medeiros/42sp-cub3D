@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 14:39:44 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:03:31 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ void	configure_sprite(void *mlx, t_sprite *sprite)
 	sprite->pos = create_vector(5.5, 4.5);
 }
 
+void	destroy_sprite(void *mlx, t_sprite *sprite)
+{
+	sprite->num_texture = 0;
+	while (sprite->textures && sprite->textures[sprite->num_texture])
+	{
+		sprite->textures[sprite->num_texture] = destroy_canvas(mlx,
+			sprite->textures[sprite->num_texture]);
+		sprite->num_texture++;
+	}
+	free(sprite->textures);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_game	game;
@@ -60,5 +72,6 @@ int	main(int argc, char *argv[])
 	game_loop(&game);
 	if (FEATURE_FLAG_MINIMAP)
 		destroy_minimap(game.mlx, &game.minimap);
+	destroy_sprite(game.mlx, &game.sprite);
 	destroy_game(&game);
 }
