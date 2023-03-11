@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:29:48 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:25:38 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:36:50 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "feature_flags.h"
+
+static t_vector	check_door_range(t_game *game, t_vector pos, t_vector new_pos,
+	t_vector map_pos)
+
+{
+	t_vector	collision;
+
+	collision = create_vector(0, 0);
+	if ((new_pos.x + DIST_TO_WALL < map_pos.x)
+		|| (new_pos.x - DIST_TO_WALL > map_pos.x + 1)
+		|| (pos.y + DIST_TO_WALL < map_pos.y)
+		|| (pos.y - DIST_TO_WALL > map_pos.y + 1))
+		collision.x = 1;
+	if ((new_pos.y + DIST_TO_WALL < map_pos.y)
+		|| (new_pos.y - DIST_TO_WALL > map_pos.y + 1)
+		|| (pos.x + DIST_TO_WALL < map_pos.x)
+		|| (pos.x - DIST_TO_WALL > map_pos.x + 1))
+		collision.y = 1;
+	game->door_range = 1;
+	return (collision);
+}
 
 static t_vector	check_square(t_game *game, t_vector pos, t_vector new_pos,
 	t_vector map_pos)
@@ -32,6 +54,8 @@ static t_vector	check_square(t_game *game, t_vector pos, t_vector new_pos,
 			collision.y = 1;
 		return (collision);
 	}
+	if (FEATURE_FLAG_DOOR && game->map[(int)map_pos.y][(int)map_pos.x] == '2')
+		return (check_door_range(game, pos, new_pos, map_pos));
 	return (create_vector(1, 1));
 }
 

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algorithm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/02/27 19:09:06 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:13:01 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "raycaster.h"
+#include "feature_flags.h"
 
 static void	dda_calcule_delta_dist(t_engine *engine)
 {
@@ -60,11 +61,21 @@ static void	dda_calcule_dist_to_side(t_engine *engine, t_player player)
 	}
 }
 
+static void	assign_wall_hit_x_and_y(t_game *game, t_engine *engine)
+{
+	engine->wall_hit.x = fmin(engine->wall_hit.x, game->map_width - 1);
+	engine->wall_hit.x = fmax(engine->wall_hit.x, 0);
+	engine->wall_hit.y = fmin(engine->wall_hit.y, game->map_height - 1);
+	engine->wall_hit.y = fmax(engine->wall_hit.y, 0);
+}
+
 static int	check_hit(t_game *game, t_engine *engine)
 {
 	int	hit;
 
 	hit = 0;
+	if (FEATURE_FLAG_DOOR)
+		game->is_door = 0;
 	if (engine->wall_hit.y < 0 || engine->wall_hit.y >= game->map_height)
 		hit = 1;
 	if (engine->wall_hit.x < 0 || engine->wall_hit.x >= game->map_width)
@@ -73,16 +84,17 @@ static int	check_hit(t_game *game, t_engine *engine)
 	{
 		if (game->map[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == '1')
 			hit = 1;
+		if (FEATURE_FLAG_DOOR && game->map
+			[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == '2')
+		{
+			game->is_door = 1;
+			hit = 1;
+		}
 		if (game->map[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == ' ')
 			hit = 1;
 	}
 	if (hit)
-	{
-		engine->wall_hit.x = fmin(engine->wall_hit.x, game->map_width - 1);
-		engine->wall_hit.x = fmax(engine->wall_hit.x, 0);
-		engine->wall_hit.y = fmin(engine->wall_hit.y, game->map_height - 1);
-		engine->wall_hit.y = fmax(engine->wall_hit.y, 0);
-	}
+		assign_wall_hit_x_and_y(game, engine);
 	return (hit);
 }
 

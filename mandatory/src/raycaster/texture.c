@@ -3,32 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:09:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/02 14:07:16 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 03:54:46 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "raycaster.h"
+#include "feature_flags.h"
+
+static void	raycaster_get_vertical_texture(t_game *game, t_engine *engine)
+{
+	if (engine->step_y == 1)
+	{
+		if (FEATURE_FLAG_DOOR && game->is_door)
+			engine->texture = game->door_texture;
+		else
+		{
+			game->door_range = 0;
+			engine->texture = game->south_texture;
+		}
+	}
+	else
+	{
+		if (FEATURE_FLAG_DOOR && game->is_door)
+			engine->texture = game->door_texture;
+		else
+		{
+			game->door_range = 0;
+			engine->texture = game->north_texture;
+		}
+	}
+}
+
+static void	raycaster_get_horizontal_texture(t_game *game, t_engine *engine)
+{
+	if (engine->step_x == 1)
+	{
+		if (FEATURE_FLAG_DOOR && game->is_door)
+			engine->texture = game->door_texture;
+		else
+		{
+			game->door_range = 0;
+			engine->texture = game->east_texture;
+		}
+	}
+	else
+	{
+		if (FEATURE_FLAG_DOOR && game->is_door)
+			engine->texture = game->door_texture;
+		else
+		{
+			game->door_range = 0;
+			engine->texture = game->west_texture;
+		}
+	}
+}
 
 static void	raycaster_get_texture(t_game *game, t_engine *engine)
 {
 	if (engine->hit_side == HIT_X)
-	{
-		if (engine->step_x == 1)
-			engine->texture = game->east_texture;
-		else
-			engine->texture = game->west_texture;
-	}
+		raycaster_get_horizontal_texture(game, engine);
 	else
-	{
-		if (engine->step_y == 1)
-			engine->texture = game->south_texture;
-		else
-			engine->texture = game->north_texture;
-	}
+		raycaster_get_vertical_texture(game, engine);
 }
 
 static void	raycaster_get_line(t_game *game, t_engine *engine)

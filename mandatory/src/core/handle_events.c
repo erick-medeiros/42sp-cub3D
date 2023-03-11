@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 20:01:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:29:22 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "debug.h"
+#include "feature_flags.h"
+#include "door.h"
 
 int	handle_keypress(int keycode, t_game *game)
 {
@@ -29,6 +31,8 @@ int	handle_keypress(int keycode, t_game *game)
 		game->control.rotate_left = TRUE;
 	else if (keycode == XKEY_RIGHT_ARROW)
 		game->control.rotate_right = TRUE;
+	else if (FEATURE_FLAG_DOOR && keycode == XKEY_SPACE && game->door_range)
+		open_door_and_update_matrix(game);
 	if (DEBUG)
 		printf("keypress %d\n", keycode);
 	return (1);
@@ -52,6 +56,8 @@ int	handle_keyrelease(int keycode, t_game *game)
 		game->control.rotate_right = FALSE;
 	else if (keycode == XKEY_M)
 		game->minimap.fullscreen = !game->minimap.fullscreen;
+	else if (FEATURE_FLAG_DOOR && keycode == XKEY_SPACE && game->door_range)
+		open_door_and_update_matrix(game);
 	if (DEBUG)
 		printf("keyrelease %d\n", keycode);
 	return (1);

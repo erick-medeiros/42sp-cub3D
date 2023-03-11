@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_types.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 11:55:23 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 03:22:55 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define XKEY_LEFT_ARROW 65361
 # define XKEY_RIGHT_ARROW 65363
 # define XKEY_M 109
+# define XKEY_SPACE 32
 
 # define FOV_RAD 0.66
 # define MOVEMENT_SPEED 0.04
@@ -155,6 +156,9 @@ typedef struct s_game
 	t_minimap	minimap;
 	t_params	params;
 	t_config	config;
+	int			is_door;
+	int			door_range;
+	t_img		*door_texture;
 }	t_game;
 
 typedef struct s_rect

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/09 10:50:11 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 03:48:58 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "feature_flags.h"
 
 void	clean_params(t_params *params)
 {
@@ -39,6 +40,8 @@ void	clean_canvas(t_game *game)
 	game->canvas = destroy_canvas(game->mlx, game->canvas);
 	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
 	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
+	if (FEATURE_FLAG_DOOR)
+		game->door_texture = destroy_canvas(game->mlx, game->door_texture);
 }
 
 int	destroy_game(t_game *game)

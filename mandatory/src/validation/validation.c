@@ -6,11 +6,13 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:47:13 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/06 12:55:21 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:07:34 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "feature_flags.h"
+#include "door.h"
 
 static int	is_valid_file_extension(char *filename)
 {
@@ -41,6 +43,16 @@ static int	is_valid_input(int ac, char **av)
 	return (1);
 }
 
+static int	validate_parameters_state(t_game *game, char *row, int fd)
+{
+	if (!game->params.north_texture || !game->params.south_texture
+		|| !game->params.east_texture || !game->params.west_texture
+		|| !is_valid_rgb(game))
+		return (clean_gnl(row, fd), perr("invalid config file"));
+	clean_gnl(row, fd);
+	return (1);
+}
+
 int	init_config_params(t_game *game, char *filepath)
 {
 	char	*row;
@@ -49,7 +61,12 @@ int	init_config_params(t_game *game, char *filepath)
 	fd = open(filepath, O_RDONLY);
 	if (!fd)
 		return (0);
-	if (!validate_identifiers(filepath))
+	if (FEATURE_FLAG_DOOR)
+	{
+		if (!validate_identifiers_with_door(filepath))
+			return (perr("invalid identifier"));
+	}
+	else if (!validate_identifiers(filepath))
 		return (perr("invalid identifier"));
 	row = ft_gnl(fd);
 	if (!row)
@@ -61,12 +78,7 @@ int	init_config_params(t_game *game, char *filepath)
 		if (!validate_parameter(game, &row, fd))
 			return (0);
 	}
-	if (!game->params.north_texture || !game->params.south_texture
-		|| !game->params.east_texture || !game->params.west_texture
-		|| !is_valid_rgb(game))
-		return (clean_gnl(row, fd), perr("invalid config file"));
-	clean_gnl(row, fd);
-	return (1);
+	return (validate_parameters_state(game, row, fd));
 }
 
 int	input_validation(t_game *game, int ac, char **av)
