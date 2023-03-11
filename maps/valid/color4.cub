@@ -1,8 +1,7 @@
-N ./assets/penguin.xpm
-S ./assets/penguin.xpm
-W ./assets/penguin.xpm
-E ./assets/penguin.xpm
-
+NO ./assets/penguin.xpm
+SO ./assets/penguin.xpm
+WE ./assets/penguin.xpm
+EA ./assets/penguin.xpm
 
 
 
