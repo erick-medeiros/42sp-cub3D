@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 15:49:06 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:18:49 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ void	init_textures(t_game *game)
 	game->east_texture = create_canvas_texture(game->mlx,
 			game->params.east_texture);
 	if (FEATURE_FLAG_DOOR)
+	{
 		game->door_texture = create_canvas_texture(game->mlx,
 				game->params.door_texture);
+		free(game->params.door_texture);
+	}
 }
