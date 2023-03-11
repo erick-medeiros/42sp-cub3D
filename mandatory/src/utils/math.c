@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite.c                                           :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 12:39:18 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 12:47:51 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/03/07 15:19:25 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/03/11 15:49:59 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "config.h"
-
-t_img	*get_sprite_texture(t_sprite *sprite)
+int	ft_max(int number1, int number2)
 {
-	t_img	*texture;
-
-	texture = sprite->textures[sprite->num_texture];
-	if (!texture)
-	{
-		sprite->num_texture = 0;
-		return (get_sprite_texture(sprite));
-	}
-	if (sprite->frames == FRAMES_PER_SPRITE)
-	{
-		sprite->num_texture++;
-		sprite->frames = 0;
-	}
+	if (number2 > number1)
+		return (number2);
 	else
-		sprite->frames++;
-	return (texture);
+		return (number1);
+}
+
+int	ft_min(int number1, int number2)
+{
+	if (number2 < number1)
+		return (number2);
+	else
+		return (number1);
+}
+
+int	ft_constrain(int value, int min, int max)
+{
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
 }

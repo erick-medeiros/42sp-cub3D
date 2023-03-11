@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 12:42:15 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:50:28 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,11 @@ double		calcule_scale(int origin_width, int origin_height,
 				int destination_width, int destination_height);
 int			clean_map(t_game *game);
 
+int			ft_max(int number1, int number2);
+int			ft_min(int number1, int number2);
+int			ft_constrain(int value, int min, int max);
+
 // debug
 void		print_map(char **map);
-
-// sprite
-
-t_img		*get_sprite_texture(t_sprite *sprite);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 14:25:57 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:31:25 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ typedef struct s_game
 	t_img		*door_texture;
 	t_sprite	sprite;
 	int			*all_perpend;
+	double		inverse_determinant;
 }	t_game;
 
 typedef struct s_rect
