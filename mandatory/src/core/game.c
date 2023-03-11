@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:07:51 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:52:41 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:27:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	game_setup(t_game *game)
 	save_canvas_background(game->canvas);
 	init_textures(game);
 	game->control.fov_ratio = tanf(FOV_RAD / (game->canvas->width - 1));
+	game->all_perpend = ft_calloc(game->canvas->width, sizeof(int));
 	return (0);
 }
 
