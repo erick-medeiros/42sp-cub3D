@@ -35,7 +35,7 @@ FILES += parser/parser.c parser/colors.c parser/textures.c parser/utils.c
 FILES += raycaster/raycaster.c raycaster/texture.c
 FILES += raycaster/dda_algorithm.c raycaster/collision.c
 
-FILES += bonus/minimap.c bonus/minimap_fullscreen.c
+FILES += bonus/minimap.c bonus/minimap_fullscreen.c bonus/door.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/

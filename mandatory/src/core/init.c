@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/09 12:22:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:10:05 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	game_init(t_game *game)
 	game->control.mouse.x = 0;
 	game->control.mouse.y = 0;
 	game->config.mouse = FEATURE_FLAG_MINIMAP;
+	game->door_range = 0;
 }
 
 void	init_player(t_game *game)
@@ -83,4 +84,7 @@ void	init_textures(t_game *game)
 			game->params.west_texture);
 	game->east_texture = create_canvas_texture(game->mlx,
 			game->params.east_texture);
+	if (FEATURE_FLAG_DOOR)
+		game->door_texture = create_canvas_texture(game->mlx,
+				"assets/wolftex/pics_xpm/door_0.xpm");
 }

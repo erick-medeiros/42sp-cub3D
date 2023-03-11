@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   feature_flags.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:28:53 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:18:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:07:59 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 // frame rate
 # ifndef FEATURE_FLAG_COLLISION
 #  define FEATURE_FLAG_COLLISION 1
+# endif
+
+# ifndef FEATURE_FLAG_DOOR
+#  define FEATURE_FLAG_DOOR 1
 # endif
 
 #endif
