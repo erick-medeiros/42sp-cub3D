@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 04:10:05 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:42:59 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_player(t_game *game)
 
 void	init_params(t_game *game)
 {
+	game->door_texture = NULL;
 	game->north_texture = NULL;
 	game->south_texture = NULL;
 	game->west_texture = NULL;
