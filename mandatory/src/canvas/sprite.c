@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/03 11:05:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 12:48:36 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/03/11 12:39:18 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/03/11 12:47:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include "cub3d.h"
+#include "config.h"
 
-// window settings
-# define WINDOW_NAME "cub3D"
-# define WINDOW_WIDTH 1024
-# define WINDOW_HEIGHT 768
+t_img	*get_sprite_texture(t_sprite *sprite)
+{
+	t_img	*texture;
 
-// player moves
-# define FOV_RAD 0.66
-# define MOVEMENT_SPEED 0.04
-# define STRAFE_SPEED 0.04
-# define ROTATE_SPEED_RAD 0.04
-
-// max map size
-# define MAX_MAP_SIZE 100
-
-// collision
-# define DIST_TO_WALL 0.3
-
-// sprite
-
-# define FRAMES_PER_SPRITE 40
-
-#endif
+	texture = sprite->textures[sprite->num_texture];
+	if (!texture)
+	{
+		sprite->num_texture = 0;
+		return (get_sprite_texture(sprite));
+	}
+	if (sprite->frames == FRAMES_PER_SPRITE)
+	{
+		sprite->num_texture++;
+		sprite->frames = 0;
+	}
+	else
+		sprite->frames++;
+	return (texture);
+}

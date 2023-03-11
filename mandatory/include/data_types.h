@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_types.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 03:22:55 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:44:45 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,14 @@ typedef struct s_config
 	t_bool	mouse;
 }	t_config;
 
+typedef struct s_sprite
+{
+	t_img		**textures;
+	int			num_texture;
+	t_vector	pos;
+	int			frames;
+}	t_sprite;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -159,6 +167,7 @@ typedef struct s_game
 	int			is_door;
 	int			door_range;
 	t_img		*door_texture;
+	t_sprite	sprite;
 }	t_game;
 
 typedef struct s_rect
