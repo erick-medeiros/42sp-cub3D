@@ -1,0 +1,18 @@
+NO ./assets/wolftex/pics_xpm/redbrick.xpm
+SO ./assets/wolftex/pics_xpm/redbrick.xpm
+WE ./assets/wolftex/pics_xpm/redbrick.xpm
+EA ./assets/wolftex/pics_xpm/redbrick.xpm
+
+C 0,255,255
+F 255,0,255
+
+1111111111
+1100100011
+1000000001
+1000000001
+1000000001
+1100N00011
+1000000001
+1000000001
+1100100011
+1111111111
