@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:29:48 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 04:36:50 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:35:55 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_vector	check_square(t_game *game, t_vector pos, t_vector new_pos,
 			collision.y = 1;
 		return (collision);
 	}
-	if (FEATURE_FLAG_DOOR && game->map[(int)map_pos.y][(int)map_pos.x] == '2')
+	if (FEATURE_FLAG_DOOR && game->map[(int)map_pos.y][(int)map_pos.x] == 'D')
 		return (check_door_range(game, pos, new_pos, map_pos));
 	return (create_vector(1, 1));
 }

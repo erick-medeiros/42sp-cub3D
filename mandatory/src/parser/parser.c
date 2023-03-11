@@ -6,14 +6,14 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/06 12:53:31 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:46:03 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parser.h"
 
-static char	*get_map(int fd, int *map_width, int *map_height)
+char	*get_map(int fd, int *map_width, int *map_height)
 {
 	char	*row;
 	char	*buff;
@@ -97,7 +97,7 @@ static void	find_player(t_game *game)
 		x = 0;
 		while (!found && x < game->map_width)
 		{
-			if (ft_isalpha(game->map[y][x]))
+			if (is_reserved_ch(game->map[y][x], "NSWE"))
 			{
 				game->player.pos = create_vector(x, y);
 				game->player.pos = add_vector(game->player.pos,
@@ -121,7 +121,7 @@ int	init_map(t_game *game, char **av)
 		return (perr("error while reading the map"));
 	game->map_width = 0;
 	game->map_height = 0;
-	map_array = get_map(fd, &game->map_width, &game->map_height);
+	map_array = start_map(game, fd);
 	close(fd);
 	if (!map_array)
 		return (perr("empty map"));

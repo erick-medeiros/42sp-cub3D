@@ -6,11 +6,13 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/06 12:55:06 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:39:58 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "feature_flags.h"
+#include "door.h"
 
 static int	validate_config_row(t_game *game, char *row)
 {
@@ -26,6 +28,8 @@ static int	validate_config_row(t_game *game, char *row)
 		return (check_rgb_color(game, row, 'F', "floor color not found"));
 	else if (*row == 'C')
 		return (check_rgb_color(game, row, 'C', "ceil color not found"));
+	else if (FEATURE_FLAG_DOOR && *row == 'D')
+		return (check_door_texture(game, row));
 	return (0);
 }
 
