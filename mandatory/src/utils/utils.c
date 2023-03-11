@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 14:33:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/06 12:50:55 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:08:21 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,20 @@ int	is_reserved_ch(char c, const char *set)
 	return (0);
 }
 
-int	perr(const char *str)
+int	perr(char *str)
 {
-	if (str)
-		printf("Error\n%s\n", str);
+	char	*capitalized;
+	char	*err_msg;
+
+	if (!str)
+		return (0);
+	capitalized = malloc(2);
+	capitalized[0] = ft_toupper(*str);
+	capitalized[1] = 0;
+	err_msg = ft_strjoin(capitalized, str + 1);
+	printf("Error\n%s\n", err_msg);
+	free(capitalized);
+	free(err_msg);
 	return (0);
 }
 

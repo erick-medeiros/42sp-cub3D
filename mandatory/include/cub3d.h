@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:59:29 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:02:24 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ double		dot_product_of_vector(t_vector v1, t_vector v2);
 double		angle_between_vectors(t_vector v1, t_vector v2);
 t_vector	rotate_vector(t_vector v, double angle_radian);
 t_vector	set_mag_vector(t_vector v, double new_mag);
-int			perr(const char *str);
+int			perr(char *str);
 int			is_reserved_ch(char c, const char *set);
 int			is_empty_line(char **row, int fd);
 int			is_digit_string(char *str);
