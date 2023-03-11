@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 03:22:55 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:28:34 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_params
 	t_argb		floor_color;
 	t_colors	floor;
 	t_colors	ceil;
+	char		*door_texture;
 }	t_params;
 
 typedef struct s_config

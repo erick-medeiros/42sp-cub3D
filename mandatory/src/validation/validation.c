@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:47:13 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 04:07:34 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:56:27 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	is_valid_input(int ac, char **av)
 	return (1);
 }
 
-static int	validate_parameters_state(t_game *game, char *row, int fd)
+int	validate_parameters_state(t_game *game, char *row, int fd)
 {
 	if (!game->params.north_texture || !game->params.south_texture
 		|| !game->params.east_texture || !game->params.west_texture
@@ -85,7 +85,12 @@ int	input_validation(t_game *game, int ac, char **av)
 {
 	if (!is_valid_input(ac, av))
 		return (0);
-	if (!init_config_params(game, av[1]))
+	if (FEATURE_FLAG_DOOR)
+	{
+		if (!init_config_params_with_door(game, av[1]))
+			return (0);
+	}
+	else if (!init_config_params(game, av[1]))
 		return (0);
 	return (1);
 }

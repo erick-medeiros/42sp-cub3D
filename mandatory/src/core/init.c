@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 04:42:59 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:37:41 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	init_params(t_game *game)
 	game->params.ceil.r = NULL;
 	game->params.ceil.g = NULL;
 	game->params.ceil.b = NULL;
+	game->params.door_texture = NULL;
 }
 
 void	init_textures(t_game *game)
@@ -85,7 +86,9 @@ void	init_textures(t_game *game)
 			game->params.west_texture);
 	game->east_texture = create_canvas_texture(game->mlx,
 			game->params.east_texture);
-	if (FEATURE_FLAG_DOOR)
+	if (FEATURE_FLAG_DOOR && game->params.door_texture)
+	{
 		game->door_texture = create_canvas_texture(game->mlx,
-				"assets/wolftex/pics_xpm/door_0.xpm");
+				game->params.door_texture);
+	}
 }
