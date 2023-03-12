@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:19:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ void	game_init(t_game *game)
 	game->control.rotate_right = FALSE;
 	init_player(game);
 	init_params(game);
-	game->minimap.frame = NULL;
-	game->control.mouse.x = 0;
-	game->control.mouse.y = 0;
-	game->door_range = 0;
-	game->animation.all_perpend = 0;
-	game->animation.total_sprites = 0;
 }
 
 void	init_player(t_game *game)
@@ -52,7 +46,6 @@ void	init_player(t_game *game)
 
 void	init_params(t_game *game)
 {
-	game->door_texture = NULL;
 	game->north_texture = NULL;
 	game->south_texture = NULL;
 	game->west_texture = NULL;
@@ -73,9 +66,6 @@ void	init_params(t_game *game)
 	game->params.ceil.r = NULL;
 	game->params.ceil.g = NULL;
 	game->params.ceil.b = NULL;
-	game->params.door_texture = NULL;
-	game->sprites.textures = NULL;
-	game->door_sprites.textures = NULL;
 }
 
 void	init_textures(t_game *game)

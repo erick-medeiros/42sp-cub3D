@@ -6,14 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:20:22 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 #include "cub3d.h"
 #include "debug.h"
-#include "minimap.h"
 
 void	update_input(t_game *game, t_player *player)
 {
@@ -64,7 +63,6 @@ void	raycaster(t_game *game, t_img *img)
 	{
 		engine.ray_dir = raycaster_ray_dir(engine.frame, game->player, pixel);
 		raycaster_perform_dda(game, &engine);
-		game->animation.all_perpend[pixel] = engine.perp_wall_dist;
 		raycaster_draw_line(game, &engine, pixel);
 		pixel++;
 	}

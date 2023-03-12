@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 16:53:05 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:16:46 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ int			render(t_game *game);
 
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
-int			handle_mouse_move(int x, int y, t_game *game);
-int			handle_mouse_press(int button, int x, int y, t_game *game);
-int			handle_mouse_release(int button, int x, int y, t_game *game);
 void		input_handler(t_game *game);
 
 void		init_player(t_game *game);
@@ -130,16 +127,8 @@ char		*start_map(t_game *game, int fd);
 int			ft_max(int number1, int number2);
 int			ft_min(int number1, int number2);
 int			ft_constrain(int value, int min, int max);
-int			is_door_open(t_game *game);
 
 // debug
 void		print_map(char **map);
-
-void		init_animation(t_game *game);
-void		get_door_side_texture(t_game *game);
-int			count_char_in_map(t_game *game, char c);
-void		load_sprite(t_game *game, t_sprite *sprite);
-void		destroy_animation(t_game *game, t_sprite *sprites,
-				t_animation *animation);
 
 #endif

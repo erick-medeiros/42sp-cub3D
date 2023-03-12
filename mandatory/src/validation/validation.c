@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:47:13 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:19:50 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "door.h"
 
 static int	is_valid_file_extension(char *filename)
 {
