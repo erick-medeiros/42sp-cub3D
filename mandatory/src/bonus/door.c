@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 03:56:01 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 15:53:55 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:38:28 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_valid_attributes_with_door(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (!is_reserved_ch(map[i][j], "01 NSEWFCD\t\n"))
+			if (!is_reserved_ch(map[i][j], "01 NSEWFCDA\t\n"))
 				return (0);
 		}
 	}
@@ -43,7 +43,7 @@ int	validate_identifiers_with_door(char *filepath)
 		return (0);
 	while (row)
 	{
-		if (!is_reserved_ch(*row, "NSEWFC10D \n"))
+		if (!is_reserved_ch(*row, "NSEWFC10DA \n"))
 		{
 			clean_gnl(row, fd);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 22:28:19 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:06:26 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	init_params(t_game *game)
 	game->params.ceil.g = NULL;
 	game->params.ceil.b = NULL;
 	game->params.door_texture = NULL;
+	game->sprites.textures = NULL;
 }
 
 void	init_textures(t_game *game)

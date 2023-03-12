@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 22:05:44 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:05:55 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ typedef struct s_game
 	int			is_door;
 	int			door_range;
 	t_img		*door_texture;
+	t_sprites	sprites;
 	t_animation	animation;
 }	t_game;
 

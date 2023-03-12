@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 15:39:58 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:34:42 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	validate_config_row(t_game *game, char *row)
 		return (check_rgb_color(game, row, 'C', "ceil color not found"));
 	else if (FEATURE_FLAG_DOOR && *row == 'D')
 		return (check_door_texture(game, row));
+	else if (FEATURE_FLAG_DOOR && *row == 'A')
+		return (check_animated_texture(game, row));
 	return (0);
 }
 
