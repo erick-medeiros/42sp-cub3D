@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 23:06:15 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:53:44 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	clean_params(t_params *params)
 	free(params->ceil.r);
 	free(params->ceil.g);
 	free(params->ceil.b);
-	if (FEATURE_FLAG_DOOR)
-		free(params->door_texture);
 }
 
 void	clean_canvas(t_game *game)
@@ -63,7 +61,10 @@ int	destroy_game(t_game *game)
 	clean_params(&game->params);
 	ft_free_matrix(game->map);
 	if (FEATURE_FLAG_DOOR && game->sprites.textures)
+	{
 		ft_free_matrix(game->sprites.textures);
+		ft_free_matrix(game->door_sprites.textures);
+	}
 	game->map = NULL;
 	free(game->animation.all_perpend);
 	return (0);

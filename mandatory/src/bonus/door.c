@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 03:56:01 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 10:53:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:08:10 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,28 @@ void	open_door_and_update_matrix(t_game *game)
 int	check_door_texture(t_game *game, char *row)
 {
 	char	**tokens;
+	int		i;
+	int		j;
 
 	tokens = get_matrix(row);
 	if (!tokens)
 		return (0);
-	if (!tokens[1])
+	i = 0;
+	if (!tokens[i] || *tokens[1] == '\n')
+		return (perr("door texture not found"));
+	while (tokens[i])
+		i++;
+	if (i < 2)
 	{
 		ft_free_matrix(tokens);
-		return (0);
+		return (perr("door texture not found"));
 	}
-	game->params.door_texture = ft_strtrim(tokens[1], " \n\t");
+	game->door_sprites.textures = ft_calloc(sizeof(char *), i);
+	i = 0;
+	j = -1;
+	while (tokens[++i])
+		game->door_sprites.textures[++j] = ft_strtrim(tokens[i], " \n\t");
 	ft_free_matrix(tokens);
+	game->params.door_texture = game->door_sprites.textures[0];
 	return (1);
 }

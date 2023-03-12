@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:56:07 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 00:22:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:07:49 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ int	check_animated_texture(t_game *game, char *row)
 	if (!tokens)
 		return (0);
 	i = 0;
+	if (!tokens[1] || *tokens[1] == '\n')
+		return (perr("animation texture not found"));
 	while (tokens[i])
 		i++;
+	if (i < 2)
+		return (perr("animation texture not found"));
 	game->sprites.textures = ft_calloc(sizeof(char *), i);
 	i = 0;
 	j = -1;
