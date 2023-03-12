@@ -1,0 +1,21 @@
+NO ./assets/red.xpm
+SO ./assets/green.xpm
+WE ./assets/blue.xpm
+EA ./assets/yellow.xpm
+
+D ./assets/wolftex/pics_xpm/door_0.xpm
+A ./assets/fox/t/b1.xpm ./assets/fox/t/b2.xpm ./assets/fox/t/b3.xpm ./assets/fox/t/b4.xpm ./assets/fox/t/b5.xpm ./assets/fox/t/b6.xpm ./assets/fox/t/b7.xpm
+
+C 0,255,255
+F 255,0,255
+
+1111111111
+110A100011
+1000000001
+100A0A0001
+1000000001
+1100N00011
+1000000001
+1000000001
+1100100011
+1111111111

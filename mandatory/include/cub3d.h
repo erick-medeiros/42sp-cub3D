@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 21:37:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:22:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,11 @@ int			ft_constrain(int value, int min, int max);
 
 // debug
 void		print_map(char **map);
+
+void		init_animation(t_game *game);
+int			count_char_in_map(t_game *game, char c);
+void		load_sprite(t_game *game, t_sprite *sprite);
+void		destroy_animation(void *mlx, t_sprite *sprites,
+				t_animation *animation);
 
 #endif
