@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 23:09:41 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 01:05:55 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ typedef struct s_animation
 {
 	t_sprite	*sprites;
 	int			total_sprites;
-	int			*all_perpend;
+	double		*all_perpend;
 	double		inverse_determinant;
 	int			*sprite_order;
 	int			*sprite_distance;
