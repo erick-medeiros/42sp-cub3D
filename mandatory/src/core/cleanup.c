@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:09:36 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "feature_flags.h"
 
 void	clean_params(t_params *params)
 {

@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:29:48 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:07:06 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "feature_flags.h"
 
 static t_vector	check_square(t_game *game, t_vector pos, t_vector new_pos,
 	t_vector map_pos)

@@ -6,14 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:01:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 #include "cub3d.h"
 #include "debug.h"
-#include "feature_flags.h"
 #include "minimap.h"
 
 void	update_input(t_game *game, t_player *player)

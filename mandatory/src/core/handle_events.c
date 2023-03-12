@@ -6,13 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:06:20 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "debug.h"
-#include "feature_flags.h"
 #include "door.h"
 
 int	handle_keypress(int keycode, t_game *game)

@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:09:39 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "feature_flags.h"
 
 void	game_init(t_game *game)
 {

@@ -6,13 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:09:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:09:10 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "raycaster.h"
-#include "feature_flags.h"
 
 static void	raycaster_get_texture(t_game *game, t_engine *engine)
 {

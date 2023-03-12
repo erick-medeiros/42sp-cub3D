@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:02:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "feature_flags.h"
 #include "parser.h"
 #include "minimap.h"
 

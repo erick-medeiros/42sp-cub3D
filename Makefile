@@ -33,11 +33,8 @@ FILES += utils/math.c
 FILES += validation/validation.c validation/parameters.c validation/colors.c validation/utils.c validation/map.c
 FILES += validation/map_attributes.c validation/map_sides.c validation/map_rows.c validation/map_borders.c
 FILES += parser/parser.c parser/colors.c parser/textures.c parser/utils.c
-FILES += raycaster/raycaster.c raycaster/texture.c raycaster/sprite.c
+FILES += raycaster/raycaster.c raycaster/texture.c
 FILES += raycaster/dda_algorithm.c raycaster/collision.c
-
-FILES += bonus/minimap.c bonus/minimap_fullscreen.c bonus/door.c
-FILES += bonus/door_file.c bonus/sprites.c bonus/map.c bonus/door_texture.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
