@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 04:13:01 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:33:58 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	check_hit(t_game *game, t_engine *engine)
 		if (game->map[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == '1')
 			hit = 1;
 		if (FEATURE_FLAG_DOOR && game->map
-			[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == '2')
+			[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == 'D')
 		{
 			game->is_door = 1;
 			hit = 1;

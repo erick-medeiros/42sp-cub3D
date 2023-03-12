@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 15:50:28 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 21:37:58 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,11 @@ int			validate_colors(t_game *game, char id);
 int			validate_sides(t_game *game);
 int			validate_map_lines(char *filepath);
 int			validate_inner(t_game *game);
+int			validate_parameters_state(t_game *game, char *row, int fd);
 
 // parser
+int			is_row_empty(char **row, int fd);
+char		*get_map(int fd, int *map_width, int *map_height);
 int			check_texture(t_game *game, char *row, char *cardinal,
 				char *err_msg);
 int			check_rgb_color(t_game *game, char *row, char ch, char *err_msg);
@@ -122,6 +125,7 @@ int			get_map_size(t_game *game);
 double		calcule_scale(int origin_width, int origin_height,
 				int destination_width, int destination_height);
 int			clean_map(t_game *game);
+char		*start_map(t_game *game, int fd);
 
 int			ft_max(int number1, int number2);
 int			ft_min(int number1, int number2);
