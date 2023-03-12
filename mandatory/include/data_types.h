@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 15:28:34 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:45:13 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,11 @@ typedef struct s_config
 	t_bool	mouse;
 }	t_config;
 
+typedef struct s_sprites
+{
+	char	**textures;
+}	t_sprites;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -160,6 +165,7 @@ typedef struct s_game
 	int			is_door;
 	int			door_range;
 	t_img		*door_texture;
+	t_sprites	sprites;
 }	t_game;
 
 typedef struct s_rect
