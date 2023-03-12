@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 23:05:55 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:09:41 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,11 @@ typedef struct s_sprite
 	t_vector	pos;
 	int			frames;
 }	t_sprite;
+
+typedef struct s_sprites
+{
+	char	**textures;
+}	t_sprites;
 
 typedef struct s_animation
 {
