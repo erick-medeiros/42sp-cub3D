@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:39:18 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 22:49:20 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 01:22:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	raycaster_sprites(t_game *game, t_engine *engine)
 {
 	int	i;
 
+	if (game->animation.total_sprites == 0)
+		return ;
 	i = 0;
 	while (i < game->animation.total_sprites)
 	{
