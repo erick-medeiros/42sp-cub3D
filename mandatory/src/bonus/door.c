@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 03:56:01 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 22:38:28 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 02:47:52 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,28 @@ int	validate_identifiers_with_door(char *filepath)
 	return (1);
 }
 
+void	close_door_and_update_matrix(t_game *game)
+{
+	if (game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] == 'C')
+		game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] = 'D';
+	if (game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] == 'C')
+		game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] = 'D';
+	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] == 'C')
+		game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] = 'D';
+	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] == 'C')
+		game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] = 'D';
+}
+
 void	open_door_and_update_matrix(t_game *game)
 {
 	if (game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] == 'D')
-		game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] = '0';
+		game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] = 'C';
 	if (game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] == 'D')
-		game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] = '0';
+		game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] = 'C';
 	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] == 'D')
-		game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] = '0';
+		game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] = 'C';
 	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] == 'D')
-		game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] = '0';
+		game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] = 'C';
 }
 
 int	check_door_texture(t_game *game, char *row)
