@@ -120,6 +120,9 @@ norm:
 leaks:
 	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
 
+leaks_bonus:
+	$(VALGRIND) ./$(NAME) maps/example_bonus.cub
+
 tests:
 	make bonus
 	@make -C tests/

@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:46:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "feature_flags_bonus.h"
 #include "door_bonus.h"
 
 static int	validate_config_row(t_game *game, char *row)
@@ -28,9 +27,9 @@ static int	validate_config_row(t_game *game, char *row)
 		return (check_rgb_color(game, row, 'F', "floor color not found"));
 	else if (*row == 'C')
 		return (check_rgb_color(game, row, 'C', "ceil color not found"));
-	else if (FEATURE_FLAG_DOOR && *row == 'D')
+	else if (*row == 'D')
 		return (check_door_texture(game, row));
-	else if (FEATURE_FLAG_DOOR && *row == 'A')
+	else if (*row == 'A')
 		return (check_animated_texture(game, row));
 	return (0);
 }
@@ -44,29 +43,5 @@ int	validate_parameter(t_game *game, char **row, int fd)
 	}
 	free(*row);
 	*row = ft_gnl(fd);
-	return (1);
-}
-
-int	validate_identifiers(char *filepath)
-{
-	char	*row;
-	int		fd;
-
-	fd = open(filepath, O_RDONLY);
-	if (!fd)
-		return (0);
-	row = ft_gnl(fd);
-	if (!row)
-		return (0);
-	while (row)
-	{
-		if (!is_reserved_ch(*row, "NSEWFC10 \n"))
-		{
-			clean_gnl(row, fd);
-			return (0);
-		}
-		free(row);
-		row = ft_gnl(fd);
-	}
 	return (1);
 }

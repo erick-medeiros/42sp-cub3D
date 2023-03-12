@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:42:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "feature_flags_bonus.h"
 #include "door_bonus.h"
 
 void	player_orientation(t_player *player, char orientation)
@@ -37,9 +36,7 @@ void	player_orientation(t_player *player, char orientation)
 
 char	*start_map(t_game *game, int fd)
 {
-	if (FEATURE_FLAG_DOOR)
-		return (get_map_with_door(fd, &game->map_width, &game->map_height));
-	return (get_map(fd, &game->map_width, &game->map_height));
+	return (get_map_with_door(fd, &game->map_width, &game->map_height));
 }
 
 int	is_door_open(t_game *game)

@@ -6,13 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:43:54 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include "raycaster_bonus.h"
-#include "feature_flags_bonus.h"
 
 static void	dda_calcule_delta_dist(t_engine *engine)
 {
@@ -74,8 +73,7 @@ static int	check_hit(t_game *game, t_engine *engine)
 	int	hit;
 
 	hit = 0;
-	if (FEATURE_FLAG_DOOR)
-		game->is_door = 0;
+	game->is_door = 0;
 	if (engine->wall_hit.y < 0 || engine->wall_hit.y >= game->map_height)
 		hit = 1;
 	if (engine->wall_hit.x < 0 || engine->wall_hit.x >= game->map_width)
@@ -84,8 +82,7 @@ static int	check_hit(t_game *game, t_engine *engine)
 	{
 		if (game->map[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == '1')
 			hit = 1;
-		if (FEATURE_FLAG_DOOR && game->map
-			[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == 'D')
+		if (game->map[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == 'D')
 		{
 			game->is_door = 1;
 			hit = 1;

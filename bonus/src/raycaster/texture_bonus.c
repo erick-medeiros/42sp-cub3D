@@ -6,33 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:09:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:44:42 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include "raycaster_bonus.h"
-#include "feature_flags_bonus.h"
-
-static void	raycaster_get_texture(t_game *game, t_engine *engine)
-{
-	if (FEATURE_FLAG_DOOR)
-		return (raycaster_get_texture_door(game, engine));
-	if (engine->hit_side == HIT_X)
-	{
-		if (engine->step_y == 1)
-			engine->texture = game->south_texture;
-		else
-			engine->texture = game->north_texture;
-	}
-	else
-	{
-		if (engine->step_x == 1)
-			engine->texture = game->east_texture;
-		else
-			engine->texture = game->west_texture;
-	}
-}
 
 static void	raycaster_get_line(t_game *game, t_engine *engine)
 {
@@ -69,7 +48,7 @@ void	raycaster_draw_line(t_game *game, t_engine *engine, int pixel)
 	double	step;
 	double	tex_pos;
 
-	raycaster_get_texture(game, engine);
+	raycaster_get_texture_door(game, engine);
 	raycaster_get_line(game, engine);
 	tex_px.x = (int)(engine->wall_hit_x * engine->texture->width);
 	if (engine->hit_side == HIT_X && engine->ray_dir.x > 0)

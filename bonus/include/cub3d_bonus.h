@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 17:36:50 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:47:17 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,10 @@ void		clean_gnl(char *tmp, int fd);
 int			input_validation(t_game *game, int ac, char **av);
 int			files_validation(t_params *params, char *filepath);
 int			validation_failed(t_params *params);
-int			init_config_params(t_game *game, char *filepath);
 char		**get_matrix(char *row);
 char		*get_filename(char *filename);
 int			validate_file(char *filepath);
 
-int			validate_identifiers(char *filepath);
 int			validate_parameter(t_game *game, char **row, int fd);
 int			is_valid_rgb(t_game *game);
 int			validate_colors(t_game *game, char id);
@@ -100,7 +98,6 @@ int			validate_parameters_state(t_game *game, char *row, int fd);
 
 // parser
 int			is_row_empty(char **row, int fd);
-char		*get_map(int fd, int *map_width, int *map_height);
 int			check_texture(t_game *game, char *row, char *cardinal,
 				char *err_msg);
 int			check_rgb_color(t_game *game, char *row, char ch, char *err_msg);

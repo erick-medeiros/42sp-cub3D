@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:29:48 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:43:29 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "feature_flags_bonus.h"
 
 static t_vector	check_door_range(t_game *game, t_vector pos, t_vector new_pos,
 	t_vector map_pos)
@@ -54,23 +53,9 @@ static t_vector	check_square(t_game *game, t_vector pos, t_vector new_pos,
 			collision.y = 1;
 		return (collision);
 	}
-	if (FEATURE_FLAG_DOOR && game->map[(int)map_pos.y][(int)map_pos.x] == 'D')
+	if (game->map[(int)map_pos.y][(int)map_pos.x] == 'D')
 		return (check_door_range(game, pos, new_pos, map_pos));
 	return (create_vector(1, 1));
-}
-
-t_vector	check_space_collision(t_game *game, t_vector new_pos)
-{
-	t_vector	collision;
-
-	collision = create_vector(0, 0);
-	if (new_pos.x - DIST_TO_WALL >= 0
-		&& new_pos.x + DIST_TO_WALL < game->map_width)
-		collision.x = 1;
-	if (new_pos.y - DIST_TO_WALL >= 0
-		&& new_pos.y + DIST_TO_WALL < game->map_height)
-		collision.y = 1;
-	return (collision);
 }
 
 t_vector	check_collision(t_game *game, t_vector pos, t_vector new_pos,
