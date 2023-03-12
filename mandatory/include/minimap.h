@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:15:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/06 11:18:37 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:54:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define MINIMAP_COLOR_WALL 0xFAAFFF
 # define MINIMAP_COLOR_PLAYER 0xFF0000
 # define MINIMAP_COLOR_RAY 0x00FF00
+# define MINIMAP_COLOR_DOOR 0x00FFFF
 # define MINIMAP_COLOR_TRANSPARENT 0xFF000000
 # define MINIMAP_WINDOW_SCALE 0.15
 # define MINIMAP_MAP_SCALE 15

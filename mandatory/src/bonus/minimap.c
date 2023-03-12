@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:06:09 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/06 11:30:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:54:50 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	draw_map_2d(t_game *game, t_img *frame, double scale)
 			rect.height = scale;
 			if (game->map[pixel.y][pixel.x] == '1')
 				draw_rectangle(frame, rect, MINIMAP_COLOR_WALL);
+			else if (game->map[pixel.y][pixel.x] == 'D')
+				draw_rectangle(frame, rect, MINIMAP_COLOR_DOOR);
 			else if (game->map[pixel.y][pixel.x] != ' ')
 				draw_rectangle(frame, rect, MINIMAP_COLOR_FLOOR);
 		}
