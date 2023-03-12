@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 01:26:43 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:48:36 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	init_params(t_game *game)
 	game->params.ceil.b = NULL;
 	game->params.door_texture = NULL;
 	game->sprites.textures = NULL;
+	game->door_sprites.textures = NULL;
 }
 
 void	init_textures(t_game *game)
