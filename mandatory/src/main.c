@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 17:03:31 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 21:39:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	destroy_sprite(void *mlx, t_sprite *sprite)
 	while (sprite->textures && sprite->textures[sprite->num_texture])
 	{
 		sprite->textures[sprite->num_texture] = destroy_canvas(mlx,
-			sprite->textures[sprite->num_texture]);
+				sprite->textures[sprite->num_texture]);
 		sprite->num_texture++;
 	}
 	free(sprite->textures);
