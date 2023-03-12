@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 15:48:36 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:34:15 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,11 @@ void	init_textures(t_game *game)
 	{
 		game->door_texture = create_canvas_texture(game->mlx,
 				game->params.door_texture);
+		if (game->door_sprites.textures[1])
+			game->door_side_texture = create_canvas_texture(game->mlx,
+					game->door_sprites.textures[1]);
+		else
+			game->door_side_texture = create_canvas_texture(game->mlx,
+					game->door_sprites.textures[0]);
 	}
 }

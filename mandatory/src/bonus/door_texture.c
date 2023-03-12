@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 09:55:04 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 10:15:00 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:29:17 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	get_east(t_game *game, t_engine *engine)
 		check.x = ft_constrain(engine->wall_hit.x - 1, 0, game->map_width - 1);
 		check.y = engine->wall_hit.y;
 		if (check.x != engine->wall_hit.x && game->map[check.y][check.x] == 'C')
-			engine->texture = game->door_texture;
+			engine->texture = game->door_side_texture;
 		else
 			engine->texture = game->east_texture;
 	}
@@ -43,7 +43,7 @@ static void	get_west(t_game *game, t_engine *engine)
 		check.x = ft_constrain(engine->wall_hit.x + 1, 0, game->map_width - 1);
 		check.y = engine->wall_hit.y;
 		if (check.x != engine->wall_hit.x && game->map[check.y][check.x] == 'C')
-			engine->texture = game->door_texture;
+			engine->texture = game->door_side_texture;
 		else
 			engine->texture = game->west_texture;
 	}
@@ -61,7 +61,7 @@ static void	get_south(t_game *game, t_engine *engine)
 		check.x = engine->wall_hit.x;
 		check.y = ft_constrain(engine->wall_hit.y - 1, 0, game->map_height - 1);
 		if (check.y != engine->wall_hit.y && game->map[check.y][check.x] == 'C')
-			engine->texture = game->door_texture;
+			engine->texture = game->door_side_texture;
 		else
 			engine->texture = game->south_texture;
 	}
@@ -79,7 +79,7 @@ static void	get_north(t_game *game, t_engine *engine)
 		check.x = engine->wall_hit.x;
 		check.y = ft_constrain(engine->wall_hit.y + 1, 0, game->map_height - 1);
 		if (check.y != engine->wall_hit.y && game->map[check.y][check.x] == 'C')
-			engine->texture = game->door_texture;
+			engine->texture = game->door_side_texture;
 		else
 			engine->texture = game->north_texture;
 	}
