@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 16:09:27 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 09:59:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,8 @@ void		raycaster_draw_line(t_game *game, t_engine *engine, int pixel);
 
 t_img		*get_sprite_texture(t_sprite *sprite);
 void		raycaster_sprites(t_game *game, t_engine *engine);
+
+// bonus
+void		raycaster_get_texture_door(t_game *game, t_engine *engine);
 
 #endif

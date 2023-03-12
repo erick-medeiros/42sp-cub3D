@@ -37,7 +37,7 @@ FILES += raycaster/raycaster.c raycaster/texture.c raycaster/sprite.c
 FILES += raycaster/dda_algorithm.c raycaster/collision.c
 
 FILES += bonus/minimap.c bonus/minimap_fullscreen.c bonus/door.c
-FILES += bonus/door_file.c bonus/sprites.c bonus/map.c
+FILES += bonus/door_file.c bonus/sprites.c bonus/map.c bonus/door_texture.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
