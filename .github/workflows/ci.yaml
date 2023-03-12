@@ -67,13 +67,26 @@ jobs:
           fi
     - name: make
       run: make
-    - name: run
+    - name: run mandatory
       env:
         DISPLAY: ":99"
         WINDOW_NAME: "cub3D"
       run: |
         Xvfb $DISPLAY -screen 0 1080x720x24 &
         make leaks &
+        PID=$!
+        until xdotool search --name $WINDOW_NAME windowfocus &> /dev/null; do echo "trying to find window"; sleep 1; done
+        xdotool key Escape
+        wait $PID
+    - name: make bonus
+      run: make rebonus
+    - name: run bonus
+      env:
+        DISPLAY: ":99"
+        WINDOW_NAME: "cub3D"
+      run: |
+        Xvfb $DISPLAY -screen 0 1080x720x24 &
+        make leaks_bonus &
         PID=$!
         until xdotool search --name $WINDOW_NAME windowfocus &> /dev/null; do echo "trying to find window"; sleep 1; done
         xdotool key Escape
@@ -102,8 +115,10 @@ jobs:
           fi
     - name: make install
       run: make install
-    - name: make tests
+    - name: make tests mandatory
       run: make tests
+    - name: make tests bonus
+      run: make tests_bonus
 
   norminette:
     timeout-minutes: 5

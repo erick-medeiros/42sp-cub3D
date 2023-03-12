@@ -24,7 +24,7 @@ NAME_MAN = mandatory/cub3D
 
 FILES = main.c
 FILES += canvas/canvas.c canvas/color.c canvas/draw.c canvas/pixel.c
-FILES += canvas/bresenham.c canvas/layer.c
+FILES += canvas/bresenham.c
 FILES += core/game.c core/init.c core/handle_events.c core/render.c
 FILES += core/utils.c core/cleanup.c core/input_handler.c
 FILES += debug/print_bits.c debug/vector.c debug/print_map.c debug/engine.c debug/framerate.c
@@ -33,11 +33,8 @@ FILES += utils/math.c
 FILES += validation/validation.c validation/parameters.c validation/colors.c validation/utils.c validation/map.c
 FILES += validation/map_attributes.c validation/map_sides.c validation/map_rows.c validation/map_borders.c
 FILES += parser/parser.c parser/colors.c parser/textures.c parser/utils.c
-FILES += raycaster/raycaster.c raycaster/texture.c raycaster/sprite.c
+FILES += raycaster/raycaster.c raycaster/texture.c
 FILES += raycaster/dda_algorithm.c raycaster/collision.c
-
-FILES += bonus/minimap.c bonus/minimap_fullscreen.c bonus/door.c
-FILES += bonus/door_file.c bonus/sprites.c bonus/map.c bonus/door_texture.c
 
 INC_DIR = mandatory/include/
 SRC_DIR = mandatory/src/
@@ -121,13 +118,26 @@ norm:
 	norminette mandatory/ bonus/ libs/libft/
 
 leaks:
-	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
+	$(VALGRIND) ./$(NAME_MAN) maps/square_10x10.cub
+
+leaks_bonus:
+	$(VALGRIND) ./$(NAME_BONUS) maps/example_bonus.cub
 
 tests:
+	@$(RM) ./cub3D
 	make
-	@make -C tests/
+	@cp $(NAME_MAN) $(NAME)
+	@make -C tests/mandatory/
 	@echo
-	xvfb-run ./tests/tests.out
+	xvfb-run ./tests/mandatory/tests.out
+
+tests_bonus:
+	@$(RM) ./cub3D
+	make bonus
+	@cp $(NAME_BONUS) $(NAME)
+	@make -C tests/bonus/
+	@echo
+	xvfb-run ./tests/bonus/tests.out
 
 debug:
 	make -e DEBUG=1

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 17:37:31 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:43:25 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_sprite_casting
 }	t_sprite_casting;
 
 void		update_input(t_game *game, t_player *player);
-t_vector	check_space_collision(t_game *game, t_vector new_pos);
 t_vector	check_collision(t_game *game, t_vector pos, t_vector new_pos,
 				t_vector movement);
 void		raycaster_perform_dda(t_game *game, t_engine *engine);

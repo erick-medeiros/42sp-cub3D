@@ -6,31 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:12:39 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:45:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "feature_flags_bonus.h"
 #include "door_bonus.h"
-
-static int	is_valid_attributes(char **map)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (map[++i])
-	{
-		j = -1;
-		while (map[i][++j])
-		{
-			if (!is_reserved_ch(map[i][j], "01 NSEWFC\t\n"))
-				return (0);
-		}
-	}
-	return (1);
-}
 
 static int	is_player_found(char **map)
 {
@@ -56,12 +37,7 @@ int	validate_map_attributes(char **map)
 {
 	if (!is_player_found(map))
 		return (perr("invalid number of players"));
-	if (FEATURE_FLAG_DOOR)
-	{
-		if (!is_valid_attributes_with_door(map))
-			return (perr("invalid map attribute"));
-	}
-	else if (!is_valid_attributes(map))
+	if (!is_valid_attributes_with_door(map))
 		return (perr("invalid map attribute"));
 	return (1);
 }

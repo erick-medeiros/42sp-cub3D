@@ -1,5 +1,5 @@
-#include "cub3d.h"
-#include "debug.h"
+#include "cub3d_bonus.h"
+#include "debug_bonus.h"
 #include <criterion/criterion.h>
 
 void create_map_4x4(t_game *game)
@@ -14,29 +14,6 @@ void create_map_4x4(t_game *game)
 	player_orientation(&game->player, 'N');
 }
 
-Test(collision, space)
-{
-	t_game   game;
-	t_vector collision;
-
-	game_init(&game);
-	create_map_4x4(&game);
-	game.player.pos = create_vector(1.5, 1.5);
-	collision = check_space_collision(&game, create_vector(0.5, 0.5));
-	cr_assert(collision.x == 1);
-	cr_assert(collision.y == 1);
-	collision = check_space_collision(&game, create_vector(2.5, 2.5));
-	cr_assert(collision.x == 1);
-	cr_assert(collision.y == 1);
-	collision = check_space_collision(&game, create_vector(-0.5, 0.5));
-	cr_assert(collision.x == 0);
-	cr_assert(collision.y == 1);
-	collision = check_space_collision(&game, create_vector(-0.5, -0.5));
-	cr_assert(collision.x == 0);
-	cr_assert(collision.y == 0);
-	destroy_game(&game);
-}
-
 Test(collision, wall)
 {
 	t_game   game;
@@ -45,6 +22,7 @@ Test(collision, wall)
 
 	game_init(&game);
 	create_map_4x4(&game);
+	game_setup(&game);
 	game.player.pos = create_vector(1.5, 1.5);
 	new_pos = create_vector(0.5, 0.5);
 	collision = check_collision(&game, game.player.pos, new_pos,

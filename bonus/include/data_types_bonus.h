@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 17:33:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:38:13 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,6 @@ typedef struct s_params
 	char		*door_texture;
 }	t_params;
 
-typedef struct s_config
-{
-	t_bool	mouse;
-}	t_config;
-
 typedef struct s_sprite
 {
 	t_img		**textures;
@@ -179,7 +174,6 @@ typedef struct s_game
 	t_player	player;
 	t_minimap	minimap;
 	t_params	params;
-	t_config	config;
 	int			is_door;
 	int			door_range;
 	t_img		*door_texture;

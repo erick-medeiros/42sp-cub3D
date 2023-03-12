@@ -6,13 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 10:49:22 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:39:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include "debug_bonus.h"
-#include "feature_flags_bonus.h"
 #include "door_bonus.h"
 
 int	handle_keypress(int keycode, t_game *game)
@@ -31,7 +30,7 @@ int	handle_keypress(int keycode, t_game *game)
 		game->control.rotate_left = TRUE;
 	else if (keycode == XKEY_RIGHT_ARROW)
 		game->control.rotate_right = TRUE;
-	else if (FEATURE_FLAG_DOOR && keycode == XKEY_SPACE)
+	else if (keycode == XKEY_SPACE)
 	{
 		if (game->door_range)
 			open_door_and_update_matrix(game);
@@ -61,7 +60,7 @@ int	handle_keyrelease(int keycode, t_game *game)
 		game->control.rotate_right = FALSE;
 	else if (keycode == XKEY_M)
 		game->minimap.fullscreen = !game->minimap.fullscreen;
-	else if (FEATURE_FLAG_DOOR && keycode == XKEY_SPACE)
+	else if (keycode == XKEY_SPACE)
 		if (game->door_range)
 			open_door_and_update_matrix(game);
 	if (DEBUG)

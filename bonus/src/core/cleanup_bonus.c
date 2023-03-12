@@ -6,12 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:50:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "feature_flags_bonus.h"
+#include "parser_bonus.h"
+#include "minimap_bonus.h"
 
 void	clean_params(t_params *params)
 {
@@ -40,15 +41,14 @@ void	clean_canvas(t_game *game)
 	game->canvas = destroy_canvas(game->mlx, game->canvas);
 	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
 	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
-	if (FEATURE_FLAG_DOOR)
-	{
-		game->door_texture = destroy_canvas(game->mlx, game->door_texture);
-	}
+	game->door_texture = destroy_canvas(game->mlx, game->door_texture);
 }
 
 int	destroy_game(t_game *game)
 {
 	clean_canvas(game);
+	destroy_minimap(game->mlx, &game->minimap);
+	destroy_animation(game, game->animation.sprites, &game->animation);
 	if (game->mlx && game->win)
 	{
 		mlx_destroy_window(game->mlx, game->win);
@@ -62,11 +62,8 @@ int	destroy_game(t_game *game)
 	}
 	clean_params(&game->params);
 	ft_free_matrix(game->map);
-	if (FEATURE_FLAG_DOOR && game->sprites.textures)
-	{
-		ft_free_matrix(game->sprites.textures);
-		ft_free_matrix(game->door_sprites.textures);
-	}
+	ft_free_matrix(game->sprites.textures);
+	ft_free_matrix(game->door_sprites.textures);
 	game->map = NULL;
 	free(game->animation.all_perpend);
 	return (0);

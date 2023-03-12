@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 02:55:32 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:24:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "feature_flags.h"
-#include "door.h"
 
 void	player_orientation(t_player *player, char orientation)
 {
@@ -37,18 +35,5 @@ void	player_orientation(t_player *player, char orientation)
 
 char	*start_map(t_game *game, int fd)
 {
-	if (FEATURE_FLAG_DOOR)
-		return (get_map_with_door(fd, &game->map_width, &game->map_height));
 	return (get_map(fd, &game->map_width, &game->map_height));
-}
-
-int	is_door_open(t_game *game)
-{
-	if (game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] == 'C'
-	|| game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] == 'C'
-	|| game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] == 'C'
-	|| game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] == 'C'
-	)
-		return (1);
-	return (0);
 }

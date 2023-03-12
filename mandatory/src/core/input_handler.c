@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 19:21:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 12:01:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:00:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ static void	strafe_input(t_player *player, t_control *control)
 		player->strafe_speed = 0;
 }
 
-static int	mouse_rotate_input(t_player *player, t_control *control)
-{
-	int	move_x;
-
-	move_x = control->mouse.x;
-	control->mouse.x = 0;
-	control->mouse.y = 0;
-	if (move_x > 0)
-		player->rotate_speed = move_x * control->fov_ratio;
-	else if (move_x < 0)
-		player->rotate_speed = move_x * control->fov_ratio;
-	else
-		return (1);
-	return (0);
-}
-
 static void	rotate_input(t_player *player, t_control *control)
 {
 	if (control->rotate_left && !control->rotate_right)
@@ -60,13 +44,7 @@ static void	rotate_input(t_player *player, t_control *control)
 
 void	input_handler(t_game *game)
 {
-	t_bool	incomplete_mouse;
-
-	incomplete_mouse = TRUE;
-	if (game->config.mouse)
-		incomplete_mouse = mouse_rotate_input(&game->player, &game->control);
-	if (incomplete_mouse)
-		rotate_input(&game->player, &game->control);
+	rotate_input(&game->player, &game->control);
 	moviment_input(&game->player, &game->control);
 	strafe_input(&game->player, &game->control);
 }

@@ -6,40 +6,12 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:43 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:42:17 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include "parser_bonus.h"
-
-char	*get_map(int fd, int *map_width, int *map_height)
-{
-	char	*row;
-	char	*buff;
-	char	*tmp;
-
-	row = ft_gnl(fd);
-	if (!row)
-		return (NULL);
-	while (is_reserved_ch(*row, "NSEWCF\n"))
-		if (!is_row_empty(&row, fd))
-			return (NULL);
-	buff = ft_strdup("");
-	while (row)
-	{
-		if (ft_strlen(row) > 1)
-			(*map_height)++;
-		(*map_width) = fmaxf(*map_width, ft_strlen(row));
-		tmp = buff;
-		buff = ft_strjoin(buff, row);
-		free(tmp);
-		free(row);
-		row = ft_gnl(fd);
-	}
-	(*map_width) = fmaxf(*map_width - 1, 0);
-	return (buff);
-}
 
 static char	**split_map(char *map_array, int map_width)
 {

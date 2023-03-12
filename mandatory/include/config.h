@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:05:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 13:38:35 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:15:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,5 @@
 
 // collision
 # define DIST_TO_WALL 0.3
-
-// sprite
-# define FRAMES_PER_SPRITE 30
 
 #endif

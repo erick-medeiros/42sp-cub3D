@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 09:16:06 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 16:24:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:18:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define XKEY_D 100
 # define XKEY_LEFT_ARROW 65361
 # define XKEY_RIGHT_ARROW 65363
-# define XKEY_M 109
-# define XKEY_SPACE 32
 
 # define FOV_RAD 0.66
 # define MOVEMENT_SPEED 0.04
@@ -81,8 +79,6 @@ typedef struct s_control
 	t_bool	strafe_right;
 	t_bool	rotate_left;
 	t_bool	rotate_right;
-	t_px	mouse;
-	double	fov_ratio;
 }	t_control;
 
 typedef struct s_player
@@ -96,20 +92,6 @@ typedef struct s_player
 	double		move_speed;
 	double		strafe_speed;
 }	t_player;
-
-typedef struct s_minimap
-{
-	t_px		pos;
-	int			scale;
-	t_img		*frame;
-	t_img		*map_2d;
-	t_img		*frame_fullscreen;
-	double		edge_distance;
-	t_px		pos_fullscreen;
-	t_px		middle_frame;
-	t_bool		fullscreen;
-	double		scale_full;
-}	t_minimap;
 
 typedef struct s_colors
 {
@@ -128,36 +110,7 @@ typedef struct s_params
 	t_argb		floor_color;
 	t_colors	floor;
 	t_colors	ceil;
-	char		*door_texture;
 }	t_params;
-
-typedef struct s_config
-{
-	t_bool	mouse;
-}	t_config;
-
-typedef struct s_sprite
-{
-	t_img		**textures;
-	int			num_texture;
-	t_vector	pos;
-	int			frames;
-}	t_sprite;
-
-typedef struct s_sprites
-{
-	char	**textures;
-}	t_sprites;
-
-typedef struct s_animation
-{
-	t_sprite	*sprites;
-	int			total_sprites;
-	double		*all_perpend;
-	double		inverse_determinant;
-	int			*sprite_order;
-	int			*sprite_distance;
-}	t_animation;
 
 typedef struct s_game
 {
@@ -177,16 +130,7 @@ typedef struct s_game
 	int			map_height;
 	t_control	control;
 	t_player	player;
-	t_minimap	minimap;
 	t_params	params;
-	t_config	config;
-	int			is_door;
-	int			door_range;
-	t_img		*door_texture;
-	t_img		*door_side_texture;
-	t_sprites	sprites;
-	t_sprites	door_sprites;
-	t_animation	animation;
 }	t_game;
 
 typedef struct s_rect

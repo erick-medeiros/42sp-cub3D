@@ -171,7 +171,6 @@ Test(keyboard, walk_up)
 
 	game.map = NULL;
 	game_init(&game);
-	game.config.mouse = FALSE;
 	create_map_10x10(&game);
 	game.player.pos = create_vector(5, 5);
 	player_orientation(&game.player, 'N');
@@ -189,7 +188,6 @@ Test(keyboard, walk_down)
 
 	game.map = NULL;
 	game_init(&game);
-	game.config.mouse = FALSE;
 	create_map_10x10(&game);
 	game.player.pos = create_vector(5, 5);
 	player_orientation(&game.player, 'N');
@@ -206,7 +204,6 @@ Test(keyboard, strafe_left)
 
 	game.map = NULL;
 	game_init(&game);
-	game.config.mouse = FALSE;
 	create_map_10x10(&game);
 	game.player.pos = create_vector(5, 5);
 	player_orientation(&game.player, 'N');
@@ -223,7 +220,6 @@ Test(keyboard, strafe_right)
 
 	game.map = NULL;
 	game_init(&game);
-	game.config.mouse = FALSE;
 	create_map_10x10(&game);
 	game.player.pos = create_vector(5, 5);
 	player_orientation(&game.player, 'N');
@@ -240,7 +236,6 @@ Test(keyboard, rotate_left)
 
 	game.map = NULL;
 	game_init(&game);
-	game.config.mouse = FALSE;
 	create_map_10x10(&game);
 	game.player.pos = create_vector(5, 5);
 	game.player.dir = create_vector(0, 1);
@@ -257,7 +252,6 @@ Test(keyboard, rotate_right)
 
 	game.map = NULL;
 	game_init(&game);
-	game.config.mouse = FALSE;
 	create_map_10x10(&game);
 	game.player.pos = create_vector(5, 5);
 	game.player.dir = create_vector(0, 1);

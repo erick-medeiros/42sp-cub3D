@@ -1,5 +1,5 @@
-#include "cub3d.h"
-#include "raycaster.h"
+#include "cub3d_bonus.h"
+#include "raycaster_bonus.h"
 #include <criterion/criterion.h>
 
 Test(mouse_bonus, mouse)
@@ -11,16 +11,16 @@ Test(mouse_bonus, mouse)
 	game_init(&game);
 	game.window_width = 10;
 	game.window_height = 10;
-	game_setup(&game);
 	game.map = calloc(4, sizeof(char *));
 	game.map[0] = strdup("111");
 	game.map[1] = strdup("1N1");
 	game.map[2] = strdup("111");
 	game.map_width = 3;
 	game.map_height = 3;
-	game.player.pos = create_vector(1.5, 1.5);
-	// rotate right
+	// game.player.pos = create_vector(1.5, 1.5);
+	game_setup(&game);
 	player_orientation(&game.player, 'N');
+	// rotate right
 	dir = game.player.dir;
 	fake_mouse.x = (game.canvas->width / 2) + 1;
 	fake_mouse.y = game.canvas->height / 2;
