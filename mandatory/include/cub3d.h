@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:23:36 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:06:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		save_canvas_background(t_img *canvas);
 void		reset_canvas(t_img *canvas);
 void		*destroy_canvas(void *mlx, t_img *canvas);
 void		mlx_put_image_pixel(t_img *img, int x, int y, int argb_color);
+t_argb		mlx_get_argb_image_pixel(t_img *img, int x, int y);
 void		mlx_copy_image_pixel(t_img *dst, t_px dst_px, t_img *src,
 				t_px src_px);
 

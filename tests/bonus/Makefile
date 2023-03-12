@@ -1,10 +1,10 @@
 NAME = tests.out
-CUB3D = ../cub3D
-CUB3D_DIR = ../bonus/
-LIBFT_DIR = ../libs/libft/
+CUB3D = ../../cub3D
+CUB3D_DIR = ../../bonus/
+LIBFT_DIR = ../../libs/libft/
 
 CC = gcc
-CFLAGS = -I$(CUB3D_DIR)include/ -I$(LIBFT_DIR) -g -fsanitize=address
+CFLAGS = -I$(CUB3D_DIR)include/ -I$(LIBFT_DIR) -g
 LDFLAGS = -L$(LIBFT_DIR)
 LDLIBS = -lft -lm -lmlx -lXext -lX11 -lcriterion
 RM = rm -rf
@@ -25,7 +25,7 @@ $(OBJ_DIR)%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(CUB3D):
-	@make -C ..
+	@make -C ../..
 
 $(NAME): $(CUB3D) $(OBJ_DIR) $(OBJ)
 	@$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJ) $(wildcard $(CUB3D_DIR)obj/*/*.o) $(LDLIBS)

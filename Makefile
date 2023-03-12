@@ -118,16 +118,26 @@ norm:
 	norminette mandatory/ bonus/ libs/libft/
 
 leaks:
-	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
+	$(VALGRIND) ./$(NAME_MAN) maps/square_10x10.cub
 
 leaks_bonus:
-	$(VALGRIND) ./$(NAME) maps/example_bonus.cub
+	$(VALGRIND) ./$(NAME_BONUS) maps/example_bonus.cub
 
 tests:
-	make bonus
-	@make -C tests/
+	@rm ./cub3D
+	make
+	@cp $(NAME_MAN) $(NAME)
+	@make -C tests/mandatory/
 	@echo
-	xvfb-run ./tests/tests.out
+	xvfb-run ./tests/mandatory/tests.out
+
+tests_bonus:
+	@rm ./cub3D
+	make bonus
+	@cp $(NAME_BONUS) $(NAME)
+	@make -C tests/bonus/
+	@echo
+	xvfb-run ./tests/bonus/tests.out
 
 debug:
 	make -e DEBUG=1

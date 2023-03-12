@@ -5,6 +5,18 @@
 
 #define RUNFOLDER "./"
 
+void _create_map_4x4(t_game *game)
+{
+	game->map = calloc(4, sizeof(char *));
+	game->map[0] = strdup("1111");
+	game->map[1] = strdup("1001");
+	game->map[2] = strdup("1001");
+	game->map[3] = strdup("1111");
+	game->map_width = 4;
+	game->map_height = 4;
+	player_orientation(&game->player, 'N');
+}
+
 Test(render, floor_and_ceiling)
 {
 	int    floor;
@@ -17,10 +29,10 @@ Test(render, floor_and_ceiling)
 	game_init(&game);
 	game.floor_color = separate_argb_color(floor);
 	game.ceilling_color = separate_argb_color(ceilling);
-	game.window_width = 2;
-	game.window_height = 2;
+	game.window_width = 100;
+	game.window_height = 100;
+	_create_map_4x4(&game);
 	game_setup(&game);
-	reset_canvas(game.canvas);
 	color = mlx_get_argb_image_pixel(game.canvas, 0, 0);
 	cr_assert_eq(color.argb, ceilling);
 	color = mlx_get_argb_image_pixel(game.canvas, 0, game.canvas->height - 1);
@@ -38,8 +50,9 @@ Test(render, load_textures)
 	t_argb      color;
 
 	game_init(&game);
-	game.window_width = 1;
-	game.window_height = 1;
+	game.window_width = 100;
+	game.window_height = 100;
+	_create_map_4x4(&game);
 	game_setup(&game);
 	game.north_texture = create_canvas_texture(game.mlx, (char *) north_texture);
 	color = mlx_get_argb_image_pixel(game.north_texture, 0, 0);
@@ -78,6 +91,7 @@ Test(render, render_textures)
 	game.map_height = 3;
 	game.ceilling_color = ceilling;
 	game.floor_color = floor;
+	// _create_map_4x4(&game);
 	game_setup(&game);
 	game.north_texture = create_canvas_texture(game.mlx, (char *) north_texture);
 	game.south_texture = create_canvas_texture(game.mlx, (char *) south_texture);

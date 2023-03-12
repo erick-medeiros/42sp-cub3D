@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:09:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:13:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:53:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static void	raycaster_get_texture(t_game *game, t_engine *engine)
 	if (engine->hit_side == HIT_X)
 	{
 		if (engine->step_x == 1)
-			engine->texture = game->south_texture;
+			engine->texture = game->east_texture;
 		else
-			engine->texture = game->north_texture;
+			engine->texture = game->west_texture;
 	}
 	else
 	{
 		if (engine->step_y == 1)
-			engine->texture = game->east_texture;
+			engine->texture = game->south_texture;
 		else
-			engine->texture = game->west_texture;
+			engine->texture = game->north_texture;
 	}
 }
 
