@@ -64,6 +64,22 @@ NAME_BONUS = bonus/cub3D_bonus
 
 FILES_BONUS = main_bonus.c
 
+FILES_BONUS += canvas/canvas_bonus.c canvas/color_bonus.c canvas/draw_bonus.c canvas/pixel_bonus.c
+FILES_BONUS += canvas/bresenham_bonus.c canvas/layer_bonus.c
+FILES_BONUS += core/game_bonus.c core/init_bonus.c core/handle_events_bonus.c core/render_bonus.c
+FILES_BONUS += core/utils_bonus.c core/cleanup_bonus.c core/input_handler_bonus.c
+FILES_BONUS += debug/print_bits_bonus.c debug/vector_bonus.c debug/print_map_bonus.c debug/engine_bonus.c debug/framerate_bonus.c
+FILES_BONUS += utils/utils_bonus.c utils/vector1_bonus.c utils/vector2_bonus.c utils/vector3_bonus.c
+FILES_BONUS += utils/math_bonus.c
+FILES_BONUS += validation/validation_bonus.c validation/parameters_bonus.c validation/colors_bonus.c validation/utils_bonus.c validation/map_bonus.c
+FILES_BONUS += validation/map_attributes_bonus.c validation/map_sides_bonus.c validation/map_rows_bonus.c validation/map_borders_bonus.c
+FILES_BONUS += parser/parser_bonus.c parser/colors_bonus.c parser/textures_bonus.c parser/utils_bonus.c
+FILES_BONUS += raycaster/raycaster_bonus.c raycaster/texture_bonus.c raycaster/sprite_bonus.c
+FILES_BONUS += raycaster/dda_algorithm_bonus.c raycaster/collision_bonus.c
+
+FILES_BONUS += bonus/minimap_bonus.c bonus/minimap_fullscreen_bonus.c bonus/door_bonus.c
+FILES_BONUS += bonus/door_file_bonus.c bonus/sprites_bonus.c bonus/map_bonus.c bonus/door_texture_bonus.c
+
 INC_DIR_BONUS = bonus/include/
 SRC_DIR_BONUS = bonus/src/
 OBJ_DIR_BONUS = bonus/obj/
@@ -77,7 +93,7 @@ $(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c
 	$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) -c $< -o $@
 
 $(NAME_BONUS): $(DIRS_BONUS) $(OBJ_BONUS) $(LIBFT)
-	$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) $(OBJ_BONUS) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) $(LDFLAGS) $(OBJ_BONUS) -o $(NAME_BONUS) $(LDLIBS)
 	@cp $(NAME_BONUS) $(NAME)
 
 $(DIRS_BONUS):
