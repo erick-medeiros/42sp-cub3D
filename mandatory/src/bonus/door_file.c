@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:52:50 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 15:56:00 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:56:16 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_config_params_with_door(t_game *game, char *filepath)
 	row = ft_gnl(fd);
 	if (!row)
 		return (0);
-	while (row && is_reserved_ch(*row, "NSEWFCD\n"))
+	while (row && is_reserved_ch(*row, "NSEWFCDA\n"))
 	{
 		if (is_empty_line(&row, fd))
 			continue ;
@@ -51,7 +51,7 @@ char	*get_map_with_door(int fd, int *map_width, int *map_height)
 	row = ft_gnl(fd);
 	if (!row)
 		return (NULL);
-	while (is_reserved_ch(*row, "NSEWCFD\n"))
+	while (is_reserved_ch(*row, "NSEWCFDA\n"))
 		if (!is_row_empty(&row, fd))
 			return (NULL);
 	buff = ft_strdup("");
