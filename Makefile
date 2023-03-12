@@ -121,7 +121,7 @@ leaks:
 	$(VALGRIND) ./$(NAME) maps/square_10x10.cub
 
 tests:
-	make
+	make bonus
 	@make -C tests/
 	@echo
 	xvfb-run ./tests/tests.out

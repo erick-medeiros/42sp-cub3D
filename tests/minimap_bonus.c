@@ -1,5 +1,5 @@
-#include "cub3d.h"
-#include "minimap.h"
+#include "minimap_bonus.h"
+#include "cub3d_bonus.h"
 #include <criterion/criterion.h>
 
 Test(minimap_bonus, screen_size)

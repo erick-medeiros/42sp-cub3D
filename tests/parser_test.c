@@ -1,5 +1,5 @@
-#include "cub3d.h"
-#include "parser.h"
+#include "cub3d_bonus.h"
+#include "parser_bonus.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 

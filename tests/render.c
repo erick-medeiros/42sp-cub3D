@@ -1,6 +1,6 @@
-#include "cub3d.h"
-#include "debug.h"
-#include "parser.h"
+#include "cub3d_bonus.h"
+#include "debug_bonus.h"
+#include "parser_bonus.h"
 #include <criterion/criterion.h>
 
 #define RUNFOLDER "./"

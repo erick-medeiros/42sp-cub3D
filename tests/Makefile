@@ -1,6 +1,6 @@
 NAME = tests.out
 CUB3D = ../cub3D
-CUB3D_DIR = ../mandatory/
+CUB3D_DIR = ../bonus/
 LIBFT_DIR = ../libs/libft/
 
 CC = gcc

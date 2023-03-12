@@ -1,5 +1,5 @@
-#include "cub3d.h"
-#include "raycaster.h"
+#include "cub3d_bonus.h"
+#include "raycaster_bonus.h"
 #include <criterion/criterion.h>
 
 Test(mouse_bonus, mouse)
