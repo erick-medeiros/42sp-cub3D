@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 21:39:05 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:39:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,47 @@ void	configure_sprite(void *mlx, t_sprite *sprite)
 	sprite->textures[6] = create_canvas_texture(mlx, FOX7);
 	sprite->num_texture = 0;
 	sprite->frames = 0;
-	sprite->pos = create_vector(5.5, 4.5);
+	sprite->pos = create_vector(0, 0);
 }
 
-void	destroy_sprite(void *mlx, t_sprite *sprite)
+t_sprite	*configure_animation(t_game *game, void *mlx)
 {
-	sprite->num_texture = 0;
-	while (sprite->textures && sprite->textures[sprite->num_texture])
+	t_sprite	*sprites;
+	int			total;
+
+	total = 2;
+	game->animation.total_sprites = total;
+	sprites = ft_calloc(total + 1, sizeof(t_sprite));
+	configure_sprite(mlx, &(sprites[0]));
+	sprites[0].pos = create_vector(5.5, 4.5);
+	configure_sprite(mlx, &(sprites[1]));
+	sprites[1].pos = create_vector(3.5, 3.5);
+	game->animation.sprite_order = ft_calloc(total, sizeof(int));
+	game->animation.sprite_distance = ft_calloc(total, sizeof(int));
+	return (sprites);
+}
+
+void	destroy_sprite(void *mlx, t_sprite *sprites, t_animation *animation)
+{
+	int	i;
+
+	i = 0;
+	while (sprites && sprites[i].textures)
 	{
-		sprite->textures[sprite->num_texture] = destroy_canvas(mlx,
-				sprite->textures[sprite->num_texture]);
-		sprite->num_texture++;
+		sprites[i].num_texture = 0;
+		while (sprites[i].textures
+			&& sprites[i].textures[sprites[i].num_texture])
+		{
+			sprites[i].textures[sprites[i].num_texture] = destroy_canvas(mlx,
+					sprites[i].textures[sprites[i].num_texture]);
+			sprites[i].num_texture++;
+		}
+		free(sprites[i].textures);
+		i++;
 	}
-	free(sprite->textures);
+	free(sprites);
+	free(animation->sprite_order);
+	free(animation->sprite_distance);
 }
 
 int	main(int argc, char *argv[])
@@ -66,12 +94,12 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	game_setup(&game);
-	configure_sprite(game.mlx, &game.sprite);
+	game.animation.sprites = configure_animation(&game, game.mlx);
 	if (FEATURE_FLAG_MINIMAP)
 		init_minimap(&game);
 	game_loop(&game);
 	if (FEATURE_FLAG_MINIMAP)
 		destroy_minimap(game.mlx, &game.minimap);
-	destroy_sprite(game.mlx, &game.sprite);
+	destroy_sprite(game.mlx, game.animation.sprites, &game.animation);
 	destroy_game(&game);
 }

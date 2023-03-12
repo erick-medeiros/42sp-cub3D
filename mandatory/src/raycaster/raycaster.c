@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 15:38:45 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:28:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	raycaster(t_game *game, t_img *img)
 	{
 		engine.ray_dir = raycaster_ray_dir(engine.frame, game->player, pixel);
 		raycaster_perform_dda(game, &engine);
-		game->all_perpend[pixel] = engine.perp_wall_dist;
+		game->animation.all_perpend[pixel] = engine.perp_wall_dist;
 		raycaster_draw_line(game, &engine, pixel);
 		if (FEATURE_FLAG_MINIMAP && game->minimap.frame)
 			draw_minimap_ray(game, &engine);

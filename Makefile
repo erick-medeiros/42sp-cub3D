@@ -24,7 +24,7 @@ NAME_MAN = mandatory/cub3D
 
 FILES = main.c
 FILES += canvas/canvas.c canvas/color.c canvas/draw.c canvas/pixel.c
-FILES += canvas/bresenham.c canvas/layer.c
+FILES += canvas/bresenham.c canvas/layer.c canvas/sprite.c
 FILES += core/game.c core/init.c core/handle_events.c core/render.c
 FILES += core/utils.c core/cleanup.c core/input_handler.c
 FILES += debug/print_bits.c debug/vector.c debug/print_map.c debug/engine.c debug/framerate.c

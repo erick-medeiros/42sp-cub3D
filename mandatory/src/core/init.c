@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 21:37:31 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:28:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	game_init(t_game *game)
 	game->control.mouse.y = 0;
 	game->config.mouse = FEATURE_FLAG_MINIMAP;
 	game->door_range = 0;
-	game->all_perpend = 0;
+	game->animation.all_perpend = 0;
 }
 
 void	init_player(t_game *game)
