@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:25:15 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 02:55:32 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:06:39 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	player_orientation(t_player *player, char orientation)
 
 char	*start_map(t_game *game, int fd)
 {
-	if (FEATURE_FLAG_DOOR)
-		return (get_map_with_door(fd, &game->map_width, &game->map_height));
 	return (get_map(fd, &game->map_width, &game->map_height));
 }
 

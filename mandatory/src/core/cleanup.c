@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 16:48:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:09:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,6 @@ void	clean_canvas(t_game *game)
 	game->canvas = destroy_canvas(game->mlx, game->canvas);
 	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
 	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
-	if (FEATURE_FLAG_DOOR)
-	{
-		game->door_texture = destroy_canvas(game->mlx, game->door_texture);
-	}
 }
 
 int	destroy_game(t_game *game)
@@ -62,11 +58,6 @@ int	destroy_game(t_game *game)
 	}
 	clean_params(&game->params);
 	ft_free_matrix(game->map);
-	if (FEATURE_FLAG_DOOR && game->sprites.textures)
-	{
-		ft_free_matrix(game->sprites.textures);
-		ft_free_matrix(game->door_sprites.textures);
-	}
 	game->map = NULL;
 	free(game->animation.all_perpend);
 	return (0);

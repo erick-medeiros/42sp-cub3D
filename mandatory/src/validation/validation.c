@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:47:13 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 15:56:27 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:07:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,7 @@ int	init_config_params(t_game *game, char *filepath)
 	fd = open(filepath, O_RDONLY);
 	if (!fd)
 		return (0);
-	if (FEATURE_FLAG_DOOR)
-	{
-		if (!validate_identifiers_with_door(filepath))
-			return (perr("invalid identifier"));
-	}
-	else if (!validate_identifiers(filepath))
+	if (!validate_identifiers(filepath))
 		return (perr("invalid identifier"));
 	row = ft_gnl(fd);
 	if (!row)
@@ -85,12 +80,7 @@ int	input_validation(t_game *game, int ac, char **av)
 {
 	if (!is_valid_input(ac, av))
 		return (0);
-	if (FEATURE_FLAG_DOOR)
-	{
-		if (!init_config_params_with_door(game, av[1]))
-			return (0);
-	}
-	else if (!init_config_params(game, av[1]))
+	if (!init_config_params(game, av[1]))
 		return (0);
 	return (1);
 }

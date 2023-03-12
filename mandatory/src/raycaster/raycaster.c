@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:30:12 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 22:28:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:01:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	update_input(t_game *game, t_player *player)
 				mult_vector_scalar(rotate_vector(player->dir, M_PI_2),
 					player->strafe_speed));
 	new_pos = add_vector(game->player.pos, movement);
-	if (FEATURE_FLAG_COLLISION)
-		collision = check_collision(game, game->player.pos, new_pos, movement);
-	else
-		collision = check_space_collision(game, new_pos);
+	collision = check_space_collision(game, new_pos);
 	movement = mult_vector_vector(movement, collision);
 	game->player.pos = add_vector(game->player.pos, movement);
 }
@@ -62,8 +59,6 @@ void	raycaster(t_game *game, t_img *img)
 	int			pixel;
 
 	update_input(game, &game->player);
-	if (FEATURE_FLAG_MINIMAP && game->minimap.frame)
-		draw_minimap(game);
 	engine.frame = img;
 	pixel = 0;
 	while (pixel < img->width)
@@ -72,9 +67,6 @@ void	raycaster(t_game *game, t_img *img)
 		raycaster_perform_dda(game, &engine);
 		game->animation.all_perpend[pixel] = engine.perp_wall_dist;
 		raycaster_draw_line(game, &engine, pixel);
-		if (FEATURE_FLAG_MINIMAP && game->minimap.frame)
-			draw_minimap_ray(game, &engine);
 		pixel++;
 	}
-	raycaster_sprites(game, &engine);
 }

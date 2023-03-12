@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_attributes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:12:39 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 04:03:03 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:05:26 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,7 @@ int	validate_map_attributes(char **map)
 {
 	if (!is_player_found(map))
 		return (perr("invalid number of players"));
-	if (FEATURE_FLAG_DOOR)
-	{
-		if (!is_valid_attributes_with_door(map))
-			return (perr("invalid map attribute"));
-	}
-	else if (!is_valid_attributes(map))
+	if (!is_valid_attributes(map))
 		return (perr("invalid map attribute"));
 	return (1);
 }

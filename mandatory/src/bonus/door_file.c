@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:52:50 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 17:03:04 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:09:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ int	init_config_params_with_door(t_game *game, char *filepath)
 	fd = open(filepath, O_RDONLY);
 	if (!fd)
 		return (0);
-	if (FEATURE_FLAG_DOOR)
-	{
-		if (!validate_identifiers_with_door(filepath))
-			return (perr("invalid identifier"));
-	}
-	else if (!validate_identifiers(filepath))
+	if (!validate_identifiers(filepath))
 		return (perr("invalid identifier"));
 	row = ft_gnl(fd);
 	if (!row)

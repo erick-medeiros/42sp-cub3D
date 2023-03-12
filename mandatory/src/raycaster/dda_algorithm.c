@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algorithm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:25:39 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 15:33:58 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:09:46 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ static int	check_hit(t_game *game, t_engine *engine)
 	int	hit;
 
 	hit = 0;
-	if (FEATURE_FLAG_DOOR)
-		game->is_door = 0;
 	if (engine->wall_hit.y < 0 || engine->wall_hit.y >= game->map_height)
 		hit = 1;
 	if (engine->wall_hit.x < 0 || engine->wall_hit.x >= game->map_width)
@@ -84,12 +82,6 @@ static int	check_hit(t_game *game, t_engine *engine)
 	{
 		if (game->map[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == '1')
 			hit = 1;
-		if (FEATURE_FLAG_DOOR && game->map
-			[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == 'D')
-		{
-			game->is_door = 1;
-			hit = 1;
-		}
 		if (game->map[(int)engine->wall_hit.y][(int)engine->wall_hit.x] == ' ')
 			hit = 1;
 	}
