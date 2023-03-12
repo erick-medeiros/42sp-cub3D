@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 16:33:53 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:48:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	clean_canvas(t_game *game)
 	if (FEATURE_FLAG_DOOR)
 	{
 		game->door_texture = destroy_canvas(game->mlx, game->door_texture);
-		game->door_side_texture = destroy_canvas(game->mlx,
-				game->door_side_texture);
 	}
 }
 

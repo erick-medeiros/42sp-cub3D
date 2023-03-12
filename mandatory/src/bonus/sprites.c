@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:56:07 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 16:07:49 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:05:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_animation(t_game *game)
 	t_px	px;
 	int		i;
 
+	get_door_side_texture(game);
 	i = count_char_in_map(game, 'A');
 	game->animation.total_sprites = i;
 	game->animation.sprites = ft_calloc(i + 1, sizeof(t_sprite));
@@ -105,7 +106,8 @@ void	init_animation(t_game *game)
 	}
 }
 
-void	destroy_animation(void *mlx, t_sprite *sprites, t_animation *animation)
+void	destroy_animation(t_game *game, t_sprite *sprites,
+	t_animation *animation)
 {
 	int	i;
 
@@ -116,8 +118,8 @@ void	destroy_animation(void *mlx, t_sprite *sprites, t_animation *animation)
 		while (sprites[i].textures
 			&& sprites[i].textures[sprites[i].num_texture])
 		{
-			sprites[i].textures[sprites[i].num_texture] = destroy_canvas(mlx,
-					sprites[i].textures[sprites[i].num_texture]);
+			sprites[i].textures[sprites[i].num_texture] = destroy_canvas(
+					game->mlx, sprites[i].textures[sprites[i].num_texture]);
 			sprites[i].num_texture++;
 		}
 		free(sprites[i].textures);
@@ -126,4 +128,5 @@ void	destroy_animation(void *mlx, t_sprite *sprites, t_animation *animation)
 	free(sprites);
 	free(animation->sprite_order);
 	free(animation->sprite_distance);
+	destroy_canvas(game->mlx, game->door_side_texture);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:52:50 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 22:56:16 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:03:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,19 @@ char	*get_map_with_door(int fd, int *map_width, int *map_height)
 	}
 	(*map_width) = fmaxf(*map_width - 1, 0);
 	return (buff);
+}
+
+void	get_door_side_texture(t_game *game)
+{
+	if (!game->door_sprites.textures)
+	{
+		game->door_side_texture = NULL;
+		return ;
+	}
+	if (game->door_sprites.textures[1])
+		game->door_side_texture = create_canvas_texture(game->mlx,
+				game->door_sprites.textures[1]);
+	else
+		game->door_side_texture = create_canvas_texture(game->mlx,
+				game->door_sprites.textures[0]);
 }

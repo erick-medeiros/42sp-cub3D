@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 02:55:49 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:53:05 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,10 @@ int			is_door_open(t_game *game);
 void		print_map(char **map);
 
 void		init_animation(t_game *game);
+void		get_door_side_texture(t_game *game);
 int			count_char_in_map(t_game *game, char c);
 void		load_sprite(t_game *game, t_sprite *sprite);
-void		destroy_animation(void *mlx, t_sprite *sprites,
+void		destroy_animation(t_game *game, t_sprite *sprites,
 				t_animation *animation);
 
 #endif
