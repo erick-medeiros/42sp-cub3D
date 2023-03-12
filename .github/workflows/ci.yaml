@@ -78,6 +78,8 @@ jobs:
         until xdotool search --name $WINDOW_NAME windowfocus &> /dev/null; do echo "trying to find window"; sleep 1; done
         xdotool key Escape
         wait $PID
+    - name: make bonus
+      run: make rebonus
     - name: run bonus
       env:
         DISPLAY: ":99"

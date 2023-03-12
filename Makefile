@@ -124,7 +124,7 @@ leaks_bonus:
 	$(VALGRIND) ./$(NAME_BONUS) maps/example_bonus.cub
 
 tests:
-	@rm ./cub3D
+	@$(RM) ./cub3D
 	make
 	@cp $(NAME_MAN) $(NAME)
 	@make -C tests/mandatory/
@@ -132,7 +132,7 @@ tests:
 	xvfb-run ./tests/mandatory/tests.out
 
 tests_bonus:
-	@rm ./cub3D
+	@$(RM) ./cub3D
 	make bonus
 	@cp $(NAME_BONUS) $(NAME)
 	@make -C tests/bonus/
