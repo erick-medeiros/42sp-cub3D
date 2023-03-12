@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 22:54:25 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:06:15 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ int	destroy_game(t_game *game)
 	if (FEATURE_FLAG_DOOR && game->sprites.textures)
 		ft_free_matrix(game->sprites.textures);
 	game->map = NULL;
+	free(game->animation.all_perpend);
 	return (0);
 }

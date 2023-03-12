@@ -6,7 +6,7 @@
 #    By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 17:12:17 by frosa-ma          #+#    #+#              #
-#    Updated: 2023/02/05 17:58:27 by eandre-f         ###   ########.fr        #
+#    Updated: 2023/03/11 22:51:24 by eandre-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,8 @@ SRCS	= \
 	ft_dlstadd_front.c \
 	ft_dlstlast.c \
 	ft_dlsthead.c \
-	ft_dlstnew.c
+	ft_dlstnew.c \
+	ft_swap.c
 
 OBJSDIR	= obj
 OBJS	= $(addprefix ${OBJSDIR}/, ${SRCS:%.c=%.o})

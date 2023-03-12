@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 08:22:21 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/02/05 15:40:09 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:43:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ t_dlist		*ft_dlstlast(t_dlist *lst);
 t_dlist		*ft_dlstnew(void *content);
 void		ft_dlstadd_front(t_dlist **lst, t_dlist *new);
 void		ft_dlstadd_back(t_dlist **lst, t_dlist *new);
+
+void		ft_swap(int *a, int *b);
 
 #endif

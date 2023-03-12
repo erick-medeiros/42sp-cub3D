@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:15:23 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/09 19:25:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:09:27 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define HIT_X 1
 # define HIT_Y 2
 
-typedef struct e_engine
+typedef struct s_engine
 {
 	t_vector	ray_dir;
 	double		delta_dist_x;
@@ -42,11 +42,23 @@ typedef struct e_engine
 	t_argb		color;
 }	t_engine;
 
+typedef struct s_sprite_casting
+{
+	t_vector	transform;
+	t_px		draw_start;
+	t_px		draw_end;
+	t_rect		dimension;
+	t_img		*texture;
+}	t_sprite_casting;
+
 void		update_input(t_game *game, t_player *player);
 t_vector	check_space_collision(t_game *game, t_vector new_pos);
 t_vector	check_collision(t_game *game, t_vector pos, t_vector new_pos,
 				t_vector movement);
 void		raycaster_perform_dda(t_game *game, t_engine *engine);
 void		raycaster_draw_line(t_game *game, t_engine *engine, int pixel);
+
+t_img		*get_sprite_texture(t_sprite *sprite);
+void		raycaster_sprites(t_game *game, t_engine *engine);
 
 #endif

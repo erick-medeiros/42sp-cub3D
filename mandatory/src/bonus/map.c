@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/03 11:05:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 13:38:35 by eandre-f         ###   ########.fr       */
+/*   Created: 2023/03/12 00:19:13 by eandre-f          #+#    #+#             */
+/*   Updated: 2023/03/12 00:20:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include "cub3d.h"
 
-// window settings
-# define WINDOW_NAME "cub3D"
-# define WINDOW_WIDTH 1024
-# define WINDOW_HEIGHT 768
+int	count_char_in_map(t_game *game, char c)
+{
+	t_px	px;
+	int		i;
 
-// player moves
-# define FOV_RAD 0.66
-# define MOVEMENT_SPEED 0.04
-# define STRAFE_SPEED 0.04
-# define ROTATE_SPEED_RAD 0.04
-
-// max map size
-# define MAX_MAP_SIZE 100
-
-// collision
-# define DIST_TO_WALL 0.3
-
-// sprite
-# define FRAMES_PER_SPRITE 30
-
-#endif
+	i = 0;
+	px.y = -1;
+	while (++px.y < game->map_height)
+	{
+		px.x = -1;
+		while (++px.x < game->map_width)
+			if (game->map[px.y][px.x] == c)
+				i++;
+	}
+	return (i);
+}

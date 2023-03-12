@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   feature_flags.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:28:53 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/11 15:57:26 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:17:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 
 # ifndef FEATURE_FLAG_DOOR
 #  define FEATURE_FLAG_DOOR 1
+# endif
+
+# ifndef FEATURE_FLAG_ANIMATION
+#  define FEATURE_FLAG_ANIMATION 1
 # endif
 
 #endif
