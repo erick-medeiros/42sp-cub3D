@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 03:56:01 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 02:47:52 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 10:53:58 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "debug.h"
 
 int	is_valid_attributes_with_door(char **map)
 {
@@ -56,26 +57,39 @@ int	validate_identifiers_with_door(char *filepath)
 
 void	close_door_and_update_matrix(t_game *game)
 {
-	if (game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] == 'C')
-		game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] = 'D';
-	if (game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] == 'C')
-		game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] = 'D';
-	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] == 'C')
-		game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] = 'D';
-	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] == 'C')
-		game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] = 'D';
+	t_px	pos;
+	int		custom;
+
+	pos.x = game->player.pos.x;
+	pos.y = game->player.pos.y;
+	custom = game->player.pos.y - DIST_TO_WALL - 1;
+	if (game->map[custom][pos.x] == 'C')
+		game->map[custom][pos.x] = 'D';
+	custom = game->player.pos.y + DIST_TO_WALL + 1;
+	if (game->map[custom][pos.x] == 'C')
+		game->map[custom][pos.x] = 'D';
+	custom = game->player.pos.x - DIST_TO_WALL - 1;
+	if (game->map[pos.y][custom] == 'C')
+		game->map[pos.y][custom] = 'D';
+	custom = game->player.pos.x + DIST_TO_WALL + 1;
+	if (game->map[pos.y][custom] == 'C')
+		game->map[pos.y][custom] = 'D';
 }
 
 void	open_door_and_update_matrix(t_game *game)
 {
-	if (game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] == 'D')
-		game->map[(int)game->player.pos.y - 1][(int)game->player.pos.x] = 'C';
-	if (game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] == 'D')
-		game->map[(int)game->player.pos.y + 1][(int)game->player.pos.x] = 'C';
-	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] == 'D')
-		game->map[(int)game->player.pos.y][(int)game->player.pos.x - 1] = 'C';
-	if (game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] == 'D')
-		game->map[(int)game->player.pos.y][(int)game->player.pos.x + 1] = 'C';
+	t_px	pos;
+
+	pos.x = game->player.pos.x;
+	pos.y = game->player.pos.y;
+	if (game->map[pos.y - 1][pos.x] == 'D')
+		game->map[pos.y - 1][pos.x] = 'C';
+	if (game->map[pos.y + 1][pos.x] == 'D')
+		game->map[pos.y + 1][pos.x] = 'C';
+	if (game->map[pos.y][pos.x - 1] == 'D')
+		game->map[pos.y][pos.x - 1] = 'C';
+	if (game->map[pos.y][pos.x + 1] == 'D')
+		game->map[pos.y][pos.x + 1] = 'C';
 }
 
 int	check_door_texture(t_game *game, char *row)
