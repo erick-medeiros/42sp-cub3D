@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 00:22:32 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/12 02:55:49 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char		*start_map(t_game *game, int fd);
 int			ft_max(int number1, int number2);
 int			ft_min(int number1, int number2);
 int			ft_constrain(int value, int min, int max);
+int			is_door_open(t_game *game);
 
 // debug
 void		print_map(char **map);

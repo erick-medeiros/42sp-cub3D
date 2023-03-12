@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 03:58:18 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 22:56:54 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/12 02:02:26 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	open_door_and_update_matrix(t_game *game);
 int		check_door_texture(t_game *game, char *row);
 char	*get_map_with_door(int fd, int *map_width, int *map_height);
 int		init_config_params_with_door(t_game *game, char *filepath);
+void	close_door_and_update_matrix(t_game *game);
 
 // sprites
 int		check_animated_texture(t_game *game, char *row);
