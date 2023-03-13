@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:54:54 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/13 19:28:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:06:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ int	get_width_map(int width, char *row)
 		return (width);
 	if (row[len - 1] == '\n')
 		len--;
-	return(ft_max(width, len));
+	return (ft_max(width, len));
 }
