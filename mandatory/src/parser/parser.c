@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 15:46:03 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:29:53 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ char	*get_map(int fd, int *map_width, int *map_height)
 	{
 		if (ft_strlen(row) > 1)
 			(*map_height)++;
-		(*map_width) = fmaxf(*map_width, ft_strlen(row));
+		(*map_width) = get_width_map(*map_width, row);
 		tmp = buff;
 		buff = ft_strjoin(buff, row);
 		free(tmp);
 		free(row);
 		row = ft_gnl(fd);
 	}
-	(*map_width) = fmaxf(*map_width - 1, 0);
 	return (buff);
 }
 
@@ -133,7 +132,7 @@ int	init_map(t_game *game, char **av)
 	if (!validate_map_attributes(game->map))
 		return (clean_map(game));
 	if (!validate_map(game, av[1]))
-		return (0);
+		return (clean_map(game));
 	find_player(game);
 	return (1);
 }

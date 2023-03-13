@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:52:50 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:36:28 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:32:13 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,13 @@ char	*get_map_with_door(int fd, int *map_width, int *map_height)
 	{
 		if (ft_strlen(row) > 1)
 			(*map_height)++;
-		(*map_width) = fmaxf(*map_width, ft_strlen(row));
+		(*map_width) = get_width_map(*map_width, row);
 		tmp = buff;
 		buff = ft_strjoin(buff, row);
 		free(tmp);
 		free(row);
 		row = ft_gnl(fd);
 	}
-	(*map_width) = fmaxf(*map_width - 1, 0);
 	return (buff);
 }
 

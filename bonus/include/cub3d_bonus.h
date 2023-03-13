@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:47:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:32:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int			is_row_empty(char **row, int fd);
 int			check_texture(t_game *game, char *row, char *cardinal,
 				char *err_msg);
 int			check_rgb_color(t_game *game, char *row, char ch, char *err_msg);
+int			get_width_map(int width, char *row);
 
 // utils
 t_vector	create_vector(double x, double y);
