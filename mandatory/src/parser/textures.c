@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 19:57:03 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/11 12:16:50 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:49:22 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ static char	*get_identifier(char *row)
 		return (NULL);
 	id = ft_strdup(matrix[0]);
 	if (ft_strlen(id) > 2)
+	{
+		free(id);
+		ft_free_matrix(matrix);
 		return (NULL);
+	}
 	ft_free_matrix(matrix);
 	return (id);
 }
@@ -107,7 +111,7 @@ int	check_texture(t_game *game, char *row, char *cardinal, char *err_msg)
 
 	id = get_identifier(row);
 	if (!id)
-		return (0);
+		return (perr("invalid config file"));
 	if (ft_strncmp(id, cardinal, 2) == 0 && ft_strlen(id) == 2)
 	{
 		matrix = get_matrix(row);
