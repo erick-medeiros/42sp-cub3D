@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:54:54 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 17:32:11 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/13 16:13:26 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 char	**get_matrix(char *row)
 {
 	char	**matrix;
+	int		i;
 
 	matrix = NULL;
 	if (ft_strchr(row, '\t'))
-		matrix = ft_split(row, '\t');
-	else
-		matrix = ft_split(row, ' ');
+	{
+		i = -1;
+		while (row[++i])
+			if (row[i] == '\t')
+				row[i] = ' ';
+	}
+	matrix = ft_split(row, ' ');
 	if (!matrix)
 		return (NULL);
 	return (matrix);
