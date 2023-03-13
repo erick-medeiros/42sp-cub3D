@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:20:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:28:06 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ int	destroy_game(t_game *game)
 		game->mlx = NULL;
 	}
 	clean_params(&game->params);
+	ft_free_matrix(game->map);
+	game->map = NULL;
+	return (0);
+}
+
+int	clean_map(t_game *game)
+{
 	ft_free_matrix(game->map);
 	game->map = NULL;
 	return (0);

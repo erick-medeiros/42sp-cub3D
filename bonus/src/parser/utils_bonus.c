@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:54:54 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/13 16:13:26 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:07:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,16 @@ int	is_empty_line(char **row, int fd)
 	return (1);
 }
 
-int	clean_map(t_game *game)
+int	get_width_map(int width, char *row)
 {
-	ft_free_matrix(game->map);
-	game->map = NULL;
-	return (0);
+	int	len;
+
+	if (!row)
+		return (width);
+	len = ft_strlen(row);
+	if (len == 0)
+		return (width);
+	if (row[len - 1] == '\n')
+		len--;
+	return (ft_max(width, len));
 }

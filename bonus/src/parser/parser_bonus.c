@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:31:37 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:42:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:34:13 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	init_map(t_game *game, char **av)
 	if (!validate_map_attributes(game->map))
 		return (clean_map(game));
 	if (!validate_map(game, av[1]))
-		return (0);
+		return (clean_map(game));
 	find_player(game);
 	return (1);
 }
