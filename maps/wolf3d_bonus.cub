@@ -1,13 +1,13 @@
-NO ./assets/penguin.xpm
-SO ./assets/penguin.xpm
-EA ./assets/penguin.xpm
-WE ./assets/penguin.xpm
+NO ./assets/wolftex/greystone.xpm
+SO ./assets/wolftex/greystone.xpm
+EA ./assets/wolftex/greystone.xpm
+WE ./assets/wolftex/greystone.xpm
 
 D ./assets/wolftex/door_0.xpm ./assets/wolftex/door_1.xpm
 A ./assets/fox/b1.xpm ./assets/fox/b2.xpm ./assets/fox/b3.xpm ./assets/fox/b4.xpm ./assets/fox/b5.xpm ./assets/fox/b6.xpm ./assets/fox/b7.xpm
 
-C 0,255,255
-F 255,0,255
+C 0,0,164
+F 112,112,112
 
         1111111111111111111111111
         1000000000110000000000001
