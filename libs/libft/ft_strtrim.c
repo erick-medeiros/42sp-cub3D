@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 14:36:43 by frosa-ma          #+#    #+#             */
-/*   Updated: 2022/04/27 12:16:25 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:57:56 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static int	ft__setoff(const char *set, const char ch)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	const char	*last;
+	const char	*start;
 
+	start = s1;
 	last = s1 + (ft_strlen(s1) - 1);
 	while (ft__setoff(set, *s1))
 		s1++;
-	while (ft__setoff(set, *last))
+	while (last != start && ft__setoff(set, *last))
 		last--;
 	if (s1 > last)
 		return (ft_strdup(""));
