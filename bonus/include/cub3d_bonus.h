@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/15 03:13:34 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/15 03:23:56 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int			ft_max(int number1, int number2);
 int			ft_min(int number1, int number2);
 int			ft_constrain(int value, int min, int max);
 int			is_door_open(t_game *game);
+int			is_valid_bonus_textures(t_game *game);
 
 // debug
 void		print_map(char **map);

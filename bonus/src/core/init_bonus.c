@@ -6,7 +6,7 @@
 /*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/15 02:57:52 by frosa-ma         ###   ########.fr       */
+/*   Updated: 2023/03/15 03:24:55 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,8 @@ void	init_params(t_game *game)
 	game->door_sprites.textures = NULL;
 }
 
-int	is_valid_texture_file(char *texture)
-{
-	int	fd;
-
-	fd = open(texture, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	close(fd);
-	return (1);
-}
-
 int	init_textures(t_game *game)
 {
-	int	i;
-
 	game->north_texture = create_canvas_texture(game->mlx,
 			game->params.north_texture);
 	game->south_texture = create_canvas_texture(game->mlx,
@@ -103,10 +90,8 @@ int	init_textures(t_game *game)
 			game->params.east_texture);
 	if (game->params.door_texture)
 	{
-		i = -1;
-		while (game->door_sprites.textures[++i])
-			if (!is_valid_texture_file(game->door_sprites.textures[i]))
-				return (perr("invalid door texture"));
+		if (!is_valid_bonus_textures(game))
+			return (0);
 		game->door_texture = create_canvas_texture(game->mlx,
 				game->params.door_texture);
 	}
