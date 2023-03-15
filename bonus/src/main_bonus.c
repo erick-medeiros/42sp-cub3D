@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:05:05 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/12 18:35:05 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/15 03:14:10 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int	main(int argc, char *argv[])
 		clean_params(&game.params);
 		return (1);
 	}
-	game_setup(&game);
+	if (!game_setup(&game))
+	{
+		destroy_partial_game(&game);
+		return (1);
+	}
 	game_loop(&game);
 	destroy_game(&game);
 }

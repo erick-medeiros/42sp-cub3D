@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:10:06 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/12 18:39:27 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/15 02:57:52 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,21 @@ void	init_params(t_game *game)
 	game->door_sprites.textures = NULL;
 }
 
-void	init_textures(t_game *game)
+int	is_valid_texture_file(char *texture)
 {
+	int	fd;
+
+	fd = open(texture, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	close(fd);
+	return (1);
+}
+
+int	init_textures(t_game *game)
+{
+	int	i;
+
 	game->north_texture = create_canvas_texture(game->mlx,
 			game->params.north_texture);
 	game->south_texture = create_canvas_texture(game->mlx,
@@ -90,7 +103,12 @@ void	init_textures(t_game *game)
 			game->params.east_texture);
 	if (game->params.door_texture)
 	{
+		i = -1;
+		while (game->door_sprites.textures[++i])
+			if (!is_valid_texture_file(game->door_sprites.textures[i]))
+				return (perr("invalid door texture"));
 		game->door_texture = create_canvas_texture(game->mlx,
 				game->params.door_texture);
 	}
+	return (1);
 }

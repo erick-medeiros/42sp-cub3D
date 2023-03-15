@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:50:28 by eandre-f          #+#    #+#             */
-/*   Updated: 2023/03/13 19:32:33 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/15 03:13:34 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		game_init(t_game *game);
 int			game_setup(t_game *game);
 int			game_loop(t_game *game);
 int			destroy_game(t_game *game);
+int			destroy_partial_game(t_game *game);
 
 int			render(t_game *game);
 
@@ -45,7 +46,7 @@ void		init_player(t_game *game);
 void		init_params(t_game *game);
 void		clean_params(t_params *params);
 void		clean_canvas(t_game *game);
-void		init_textures(t_game *game);
+int			init_textures(t_game *game);
 void		player_orientation(t_player *player, char orientation);
 
 // canvas

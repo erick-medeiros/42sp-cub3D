@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: frosa-ma <frosa-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:06:41 by frosa-ma          #+#    #+#             */
-/*   Updated: 2023/03/13 19:31:45 by eandre-f         ###   ########.fr       */
+/*   Updated: 2023/03/15 03:13:06 by frosa-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,29 @@ void	clean_canvas(t_game *game)
 	game->west_texture = destroy_canvas(game->mlx, game->west_texture);
 	game->east_texture = destroy_canvas(game->mlx, game->east_texture);
 	game->door_texture = destroy_canvas(game->mlx, game->door_texture);
+}
+
+int	destroy_partial_game(t_game *game)
+{
+	clean_canvas(game);
+	if (game->mlx && game->win)
+	{
+		mlx_destroy_window(game->mlx, game->win);
+		game->win = NULL;
+	}
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+		game->mlx = NULL;
+	}
+	clean_params(&game->params);
+	ft_free_matrix(game->map);
+	ft_free_matrix(game->sprites.textures);
+	ft_free_matrix(game->door_sprites.textures);
+	game->map = NULL;
+	free(game->animation.all_perpend);
+	return (0);
 }
 
 int	destroy_game(t_game *game)
